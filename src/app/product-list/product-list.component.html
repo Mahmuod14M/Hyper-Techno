@@ -1,0 +1,147 @@
+<div class="nav">
+  <h6>
+    <span class="text" routerLink="/home">Home ></span>
+    <span>  Tv & Home Theaters</span>
+  </h6>
+</div>
+<!-- section2 -->
+<section class="p-sec2">
+  <div class="text">
+  <h2>Tv & Home Theaters</h2>
+  <h5>Discover Our Best Deals From<span>Tv's & Home Theaters and Recivers </span> </h5>
+  </div>
+</section>
+<!-- section4 -->
+<div class="text-center">
+<h1>TELEVISIONS</h1>
+</div>
+<div class="all">
+
+  <section class="p-sec4" id="sec4">
+
+    <div class="price">
+      <h6>Filter By Price</h6>
+      <hr>
+      <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null)"></ng5-slider>
+    </div>
+
+    <div class="filter ">
+      <button class="btn " id="brands_Btn">Brands <i class="fas fa-angle-down  fa-rotate-270" id="icon"></i></button>
+      <hr>
+      <div class="check scroll" id="Check_List">
+        <div *ngFor="let x of filter.brands">
+          <h6><input type="checkbox" (change)="filterChange($event,null,null, x.id, null ,null)"> {{x.name}} ({{x.sum}}) </h6>
+          <!--[routerLink]="['/product/brand/',x.id]"-->
+          <div class="hr"></div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="filter ">
+      <button class="btn " id="discount_Btn">categories <i class="fas fa-angle-down  fa-rotate-270" id="icon1"></i>
+      </button>
+      <hr>
+      <div class="check scroll" id="offer_List">
+        <div *ngFor="let x of filter.categories">
+          <h6><input type="checkbox" (change)="filterChange($event,null,null,null, x.id ,null)"> {{x.name}} ({{x.sum}})</h6>
+          <div class="hr"></div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="filter" *ngFor="let x of filterCategoryAttributes" >
+      <button class="btn " id="screen_Btn">{{x.name}} ({{x.sum}})<i class="fas fa-angle-down  fa-rotate-270" id="icon2"></i>
+      </button>
+      <hr>
+      <div class="check" id="size_List">
+        <div *ngFor="let y of x.cat_attr_values">
+          <h6> <input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id)" > {{y.name}} ({{y.sum}}) </h6>
+          <div class="hr"></div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- section3 -->
+  <section class="p-sec3">
+
+
+    <div class="item" *ngFor="let item of items.product">
+      <div class="card" (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
+        <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
+          <div class="inner-card">
+            <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">
+            <h4><img src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART</h4>
+            <h5>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </h5>
+          </div>
+
+        </div>
+        <div class="save" *ngIf="item.reduction_percent != null">
+          <span>SAVE {{item.reduction_percent}}%</span>
+        </div>
+        <span class="heart"><i class="fas fa-heart"></i></span>
+        <img [src]="
+            'https://arafa.000webhostapp.com/Hyper/uploads/' + item.main_image
+          " class="img-fluid"/>
+        <p>{{ item.name | seeMore: 20 }}</p>
+        <div class="bttom">
+          <span class="stock"><i class="fas fa-circle"></i>In stock</span>
+          <div class="old-price" *ngIf="item.price != item.wholesale_price">
+            <span class="egp1 ">EGP</span>
+            <span class="old">{{ item.wholesale_price |currency:' ' }}</span>
+          </div>
+          <div class="new-price">
+            <span class="egp">EGP</span>
+            <span class="new">{{ item.price |currency:' ' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+</div>
+
+
+
+
+
+
+
+<div class="loading-masker">
+  <div class="white-widget grey-bg author-area">
+    <div class="auth-info row">
+      <div class="timeline-wrapper">
+        <div class="timeline-item">
+          <div class="animated-background">
+            <div class="background-masker header-top"></div>
+            <div class="background-masker header-left"></div>
+            <div class="background-masker header-right"></div>
+            <div class="background-masker header-bottom"></div>
+            <div class="background-masker subheader-left"></div>
+            <div class="background-masker subheader-right"></div>
+            <div class="background-masker subheader-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

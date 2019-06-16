@@ -1,0 +1,197 @@
+<div class="img_zoom">
+  <span>
+  <i class="fas fa-search-minus"></i>
+  </span>
+  <img class=" img-fluid" src="https://arafa.000webhostapp.com/Hyper/uploads/5c3cc17ec261b.jpg" />
+
+</div>
+
+<div class="sec1">
+  <div class="inner">
+    <h3>
+      <a href="#">Home </a> <span>> </span>
+      <a href="#">Larg </a> <span>> </span>
+      <a href="#">Refrigetores </a> <span>> </span>
+      <a href="#" class="item-name">Samsoung</a>
+    </h3>
+  </div>
+</div>
+<!-- section2 -->
+<section class="sec2 my-5">
+
+  <div class="item-img">
+    <div class="main-img">
+      <span><i class="fas fa-search-plus"></i></span>
+      <img class="frist img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+ itemDetails.product.main_image" />
+    </div>
+    <hr>
+    <div class="imgs">
+      <img class="second img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+img.image_url"
+       *ngFor="let img of itemDetails.product.images" (click)="imgChange(img.id)" />
+      
+    </div>
+  </div>
+
+  <div class="detalis">
+    <h5 id="itemName">{{itemDetails.product.name}}</h5>
+    <br>
+    <h6>{{itemDetails.product.price |currency:' '}} LE</h6>
+    <br>
+    <p>{{itemDetails.product.highlights}}</p>
+    <br>
+    <div>
+      <tweet class="btn twitter"><span><i class="fab fa-twitter"></i></span> Twitter</tweet>
+      <fb-like class="btn facebook"><span><i class="fab fa-facebook-f"></i></span> Facebook</fb-like>
+     
+      <pin-it class="btn pin"><span><i class="fab fa-pinterest-p"></i></span> Pin It</pin-it>
+    </div>
+    <br>
+    <br>
+    <div>
+      <h3 class=" free"><span><i class="fas fa-truck-moving"></i></span> Get FREE Delivery For this item till 30-7-2019</h3>
+
+      <div class="bottom">
+      <h3 class="add" (click)="addToCart(itemDetails.product)">
+        <span><i class="fas fa-shopping-basket">
+        </i></span>Add To Cart</h3>
+      <h3 class="proced"><span><i class="fas fa-shopping-basket"></i></span> Proced To Checkout</h3>
+    </div>  
+    </div>
+  </div>
+
+
+<div class="type">
+
+  <img class=" img-fluid" src="https://arafa.000webhostapp.com/Hyper/uploads/5b2e156c9a693.png" />
+
+  <h2 *ngIf="!isInStock"><i class="fas fa-check"></i> IN STOCK</h2>
+  <h2 *ngIf="isInStock"><i class="fas fa-times"></i> OUT OF STOCK</h2>
+  <div class="years">
+  <h3><i class="fas fa-star"></i> {{itemDetails.product.warranty|slice:0:1}} Years</h3>
+    <h5>Manufacturer's Warranty</h5>
+</div>
+</div>
+
+
+</section>
+
+
+ <!-- section3 -->
+ <section class="sec3 mb-5">
+<div class="btns">
+<button class="btn1">Discreption</button>
+<button class="btn2">Additional Information</button>
+<button class="btn3">Reviews</button>
+</div>
+
+<div class="Discreption" active>
+<h2>If product needs instllation, please call 19089</h2>
+
+  <p>  {{itemDetails.product.description}}</p>
+</div>
+
+<div class="Information">
+<h3>Features :-</h3>
+<table class="table text-center">
+
+<tbody>
+  <tr *ngFor="let x of itemDetails.product.features_en" >
+    <td>{{x.key}}</td>
+    <td>:</td>
+    <td *ngIf="x.value">{{x.value}}</td>
+    <td *ngIf="!x.value">No Value</td>
+  </tr>
+  
+
+</tbody>
+
+</table>
+
+
+
+  
+</div>
+
+<div class="Reviws">
+  
+<div *ngFor="let x of itemDetails.product.reviews" class="inner">
+
+    <div class="user_prof">  
+      <img class="img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+ x.user.profile_pic" />
+      
+      
+      <h5>
+        <span class="pr-2">{{x.user.first_name}}</span>
+        <span>{{x.user.last_name}}</span>
+      </h5>
+      
+      <h2>{{x.review}}</h2>
+    </div>
+      <h3>{{x.rate}}</h3>
+
+      <span class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+      </span>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+ </section>
+ <!-- section4 -->
+<div class="sec4">
+  <h3><span>B</span>rowse Related Products</h3>
+  <a href="#" class="view">VIEW ALL ></a>
+  <hr class="hr" />
+
+  <owl-carousel [options]=myCarouselOptions [items]="itemDetails.related" [carouselClasses]="['owl-theme', 'sliding']">
+    <div class="item" *ngFor="let items of itemDetails.related">
+        <div class="card" (mouseover)="items.hover=true" (mouseleave)="items.hover=false">
+          <div class="hover" [ngStyle]="{visibility: items.hover==true  ? 'visible' : 'hidden' }">
+            <div class="inner-card">
+              <img  src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]">
+              <h4> <img src="assets/img/icons/cart2.png" class="img-fluid two" >ADD TO CART</h4>            
+              <h5>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </h5>
+            </div>
+
+          </div>
+            <div class="save" *ngIf="items.reduction_percent != null">
+                <span >SAVE {{items.reduction_percent}}%</span>
+            </div>
+            <span class="heart"><i class="fas fa-heart"></i></span>
+            <img [src]="
+                'https://arafa.000webhostapp.com/Hyper/uploads/' + items.main_image
+              " class="img-fluid"  />
+            <p>{{ items.name | seeMore: 20 }}</p>
+            <div class="bttom">
+              <span class="stock"><i class="fas fa-circle"></i>In stock</span>
+              <div class="old-price" *ngIf="items.price != items.wholesale_price">
+                <span class="egp1 ">EGP</span>
+                <span class="old">{{ items.wholesale_price }}</span>
+              </div>
+              <div class="new-price">
+                <span class="egp">EGP</span>
+                <span class="new">{{ items.price }}</span>
+              </div>
+            </div>
+          </div>
+    </div>
+  </owl-carousel>
+</div>
