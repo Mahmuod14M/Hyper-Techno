@@ -1,0 +1,74 @@
+.nav{
+  background-image: url(../../assets/img/header.jpg);
+  height: 30px;
+}
+.nav h2{
+  width: 80%;
+  margin: auto;
+  font-size: 12px;
+  color: white;
+  font-weight: normal;
+}
+.nav h2 a{
+  color: white;
+}
+.nav h2 a:hover{
+  text-decoration: none;
+  color: white;
+}
+.nav h2 span{
+  color: yellow;
+}
+
+.sec1 {
+  height: 300px;
+  position: relative;
+  background-image: url(../../assets/img/policy.png);
+  width: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
+.sec1 .text {
+  position: absolute;
+  color: white;
+  left: 15%;
+  top: 30%;
+}
+
+.sec1 .text h2 {
+  font-size: 40px;
+  font-weight: 500;
+  text-shadow: 2px 2px black;
+}
+
+.sec1 .text h5 {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.sec1 span {
+  text-shadow: 2px 2px 4px #000000;
+}
+.policy{
+  width: 80%;
+  margin: auto;
+}
+.policy h3{
+  color: #ed2027;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-size: 20px;
+}
+.policy li{
+  color: #676767;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.policy ol {
+  padding: 10px;
+  margin-bottom: 25px;
+}

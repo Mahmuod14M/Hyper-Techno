@@ -182,6 +182,12 @@ export class NavbarComponent implements OnInit {
     $('.log').click(() => {
       $('#login').toggle();
     });
+    $('#Register').click(() => {
+      $('#login').toggle();
+    });
+    $('#password').click(() => {
+      $('#login').toggle();
+    });
     $('#btn').click(() => {
       $('#menu').toggle();
     });

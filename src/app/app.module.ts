@@ -29,6 +29,8 @@ import { SiginUpComponent } from './sigin-up/sigin-up.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ChangeColorDirective } from './change-color.directive';
+import { PolicyComponent } from './policy/policy.component';
+import { InstallmentsComponent } from './installments/installments.component';
 
 
 
@@ -40,7 +42,8 @@ const appRoutes: Routes =
     {path: 'contactUs', component: ContactUsComponent},
     {path: 'item/:id', component: ItemComponent},
     {path: 'product/:page/:id', component: ProductListComponent},
-    {path: 'siginUp', component: SiginUpComponent }
+    {path: 'siginUp', component: SiginUpComponent },
+    {path: 'policy', component: PolicyComponent }
   ];
 
 @NgModule({
@@ -56,7 +59,9 @@ const appRoutes: Routes =
     ProductListComponent,
     SiginUpComponent,
     NavbarComponent,
-    ChangeColorDirective
+    ChangeColorDirective,
+    PolicyComponent,
+    InstallmentsComponent
   ],
   imports: [
     BrowserModule,

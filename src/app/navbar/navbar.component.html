@@ -109,9 +109,9 @@
     <button type="submit" class="btn btn-dark">LOGIN</button>
   </form>
   <div class="password pt-2">
-    <a href="#">I forgot my password</a>
+    <a href="#" id="password">I forgot my password</a>
     <hr>
-    <a routerLink="/siginUp">Register Now ? Create an account </a>
+    <a routerLink="/siginUp" id="Register">Register Now ? Create an account </a>
   </div>
   <br>
 </section>
@@ -136,15 +136,17 @@
     </div>
 
     <div *ngFor="let x of itemlist" class="item_view" [id]="'cart_item_'+x.id">
+      <div class="innrt_cart">
       <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' +x.main_image" class="img-fluid">
       <h5>{{x.name}}</h5>
-      <h6>{{x.price |currency:' '}} LE</h6>
+      </div>
       <span (click)="removeItemFromCart(x.id)">
   <i class="fas fa-trash-alt"></i>
 </span>
     </div>
-
-
+  <div class="m-auto w-75">
+    <button class="btn">VIEW CART</button>
+  </div>
   </div>
 </section>
 
