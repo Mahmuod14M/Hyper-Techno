@@ -1,0 +1,116 @@
+<div class="nav">
+  <h2>
+    <a routerLink="/home">Home </a>
+    <span>> Cart</span>
+  </h2>
+</div>
+<div class="sec1">
+
+  <div class="text">
+    <h2>Cart</h2>
+    <h5>Manage your cart to proced checkout</h5>
+
+  </div>
+</div>
+
+<div class="cart_body">
+
+  <div class="products">
+  <table class="table">
+    <tr>
+      <th>PRODUCT</th>
+      <th>Wishlist</th>
+      <th>QTY</th>
+      <th>TOTAL</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let x of itemlist" [id]="finalProduct_" >
+      <td class="cart_item">
+        <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' +x.main_image" class="img-fluid">
+        <h5>{{x.name}}</h5>
+      </td>
+      <td>
+        <i class="fas fa-heart"></i>
+      </td>
+      <td>
+        <select>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </td>
+      <td>
+        <h5>{{x.price}}</h5>
+      </td>
+      <td style="color: red;cursor: pointer">
+        <i class="fas fa-times" (click)="removeItemFromCart(x.id)"></i>
+      </td>
+    </tr>
+
+  </table>
+
+  <div class="Voucher">
+    <h6>Have a Voucher<br>
+      Code ?</h6>
+  <input type="text" placeholder="  Voucher Code">
+    <button class="btn">Apply Code</button>
+
+  </div>
+
+  </div>
+
+  <div class="cart_totals">
+    <h4>Cart Totals</h4>
+    <div class="line"></div>
+    <div>
+      <h5>Price</h5>
+      <h3>EGP 1200</h3>
+    </div>
+    <div>
+      <h5>Vocher price</h5>
+      <h3>EGP 200</h3>
+    </div>
+    <div class="line"></div>
+    <div>
+      <h5>Subtotal</h5>
+      <h3>EGP 2100</h3>
+    </div>
+    <div>
+      <h5>Shipping</h5>
+      <h5>
+        <input type="radio" name="Shipping" value="localShipping" > local shipping from the store<br>
+        <input type="radio" name="Shipping" value="freeShipping" > Free shipping delivery<br>
+      </h5>
+    </div>
+    <div class="line"></div>
+    <div>
+      <h5>Calculate  Shipping</h5>
+      <h3>EGP 300</h3>
+    </div>
+    <div class="line"></div>
+    <div>
+      <h6 style="font-weight: 600">Total</h6>
+      <h2>EGP 2400</h2>
+    </div>
+    <div class="pt-3 pb-3">
+      <button class="btn update ">Update Cart</button>
+      <button class="btn proceed">Proceed to Checkout</button>
+    </div>
+    <div>
+      <h6> <img src="assets/img/icons/secure.png"> Secure online payments</h6>
+      <img src="assets/img/icons/visa-mcard.png" class="visa_img">
+    </div>
+    <div class="pt-3  text-center">
+      <p>  <img src="assets/img/icons/phone.png">
+        Need help with your order? Give our sales team a call on<br>
+        (040)3308300
+      </p>
+    </div>
+  </div>
+
+
+
+</div>
+

@@ -31,6 +31,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ChangeColorDirective } from './change-color.directive';
 import { PolicyComponent } from './policy/policy.component';
 import { InstallmentsComponent } from './installments/installments.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -43,7 +44,8 @@ const appRoutes: Routes =
     {path: 'item/:id', component: ItemComponent},
     {path: 'product/:page/:id', component: ProductListComponent},
     {path: 'siginUp', component: SiginUpComponent },
-    {path: 'policy', component: PolicyComponent }
+    {path: 'policy', component: PolicyComponent },
+    {path: 'cart', component: CartComponent }
   ];
 
 @NgModule({
@@ -61,7 +63,8 @@ const appRoutes: Routes =
     NavbarComponent,
     ChangeColorDirective,
     PolicyComponent,
-    InstallmentsComponent
+    InstallmentsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

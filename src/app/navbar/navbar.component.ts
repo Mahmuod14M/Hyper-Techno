@@ -198,6 +198,9 @@ export class NavbarComponent implements OnInit {
     $('.close').click(() => {
       $('.cart').toggle();
     });
+    $('#viewCart').click(() => {
+      $('.cart').toggle();
+    });
     $('.click').click(() => {
       $('.links').slideToggle(100);
     });
