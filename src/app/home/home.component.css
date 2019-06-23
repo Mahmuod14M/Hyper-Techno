@@ -76,12 +76,19 @@ body {
   border-top: 1px solid #f1f0f0;
  
 }
-
-.item {
-  width: 90%;
+.category{
+  width: 80%;
   margin: auto;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
+
+/*.item {*/
+/*  width: 90%;*/
+/*  margin: auto;*/
+
+/*}*/
 
 .sec2 .item .card {
   position: relative;
@@ -557,9 +564,9 @@ body {
 }
 
 .sec66 img {
-  width: 120px;
-  height: 80px;
-  background: #000;
+  width: 150px !important;
+  height: 80px !important;
+  margin: 15px !important;
   cursor: pointer;
 
 }

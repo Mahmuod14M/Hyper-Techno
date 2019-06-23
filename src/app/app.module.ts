@@ -25,14 +25,15 @@ import {JwSocialButtonsModule} from 'jw-angular-social-buttons';
 import {Ng5SliderModule} from 'ng5-slider';
 import {ProductListComponent} from './product-list/product-list.component';
 import {StorageService} from './storage.service';
-import { SiginUpComponent } from './sigin-up/sigin-up.component';
-import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ChangeColorDirective } from './change-color.directive';
-import { PolicyComponent } from './policy/policy.component';
-import { InstallmentsComponent } from './installments/installments.component';
-import { CartComponent } from './cart/cart.component';
-
+import {SiginUpComponent} from './sigin-up/sigin-up.component';
+import {FormsModule} from '@angular/forms';
+import {NavbarComponent} from './navbar/navbar.component';
+import {ChangeColorDirective} from './change-color.directive';
+import {PolicyComponent} from './policy/policy.component';
+import {InstallmentsComponent} from './installments/installments.component';
+import {CartComponent} from './cart/cart.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 
 const appRoutes: Routes =
@@ -43,11 +44,13 @@ const appRoutes: Routes =
     {path: 'contactUs', component: ContactUsComponent},
     {path: 'item/:id', component: ItemComponent},
     {path: 'product/:page/:id', component: ProductListComponent},
-    {path: 'siginUp', component: SiginUpComponent },
-    {path: 'policy', component: PolicyComponent },
-    {path: 'cart', component: CartComponent }
+    {path: 'siginUp', component: SiginUpComponent},
+    {path: 'policy', component: PolicyComponent},
+    {path: 'cart', component: CartComponent}
   ];
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,14 +78,15 @@ const appRoutes: Routes =
     BrowserAnimationsModule,
     CarouselModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {
+      onSameUrlNavigation: 'reload'
+    }),
     BrowserModule,
     OwlModule,
     JwSocialButtonsModule,
     Ng5SliderModule,
     FormsModule,
-
-
+    InfiniteScrollModule
   ],
 
   providers: [
@@ -94,3 +98,4 @@ const appRoutes: Routes =
 export class AppModule {
 }
 
+platformBrowserDynamic().bootstrapModule(AppModule);

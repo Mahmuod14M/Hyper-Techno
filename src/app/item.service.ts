@@ -21,8 +21,8 @@ export class ItemService {
   constructor(private httpClient: HttpClient) {
   }
 
-  hotProduct(pageId): Observable<any> {
-    return this.httpClient.get(BASE_URL + '/api/WebSite/get_hot_items?Page=' + pageId);
+  hotProduct(page): Observable<any> {
+    return this.httpClient.get(BASE_URL + '/api/WebSite/get_hot_items?Page=' + page);
   }
 
   homePageRequest(): Observable<any> {
@@ -78,9 +78,9 @@ export class ItemService {
     );
   }
 
-  search(payload): Observable<any> {
+  search(payload, page): Observable<any> {
     return this.httpClient.post(
-      BASE_URL + '/api/General/search?Page=1', payload, httpOptions
+      BASE_URL + '/api/General/search?Page=' + page, payload, httpOptions
     );
   }signUp(payload): Observable<any> {
     return this.httpClient.post(

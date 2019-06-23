@@ -13,8 +13,23 @@ declare var $: any;
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   router: Router = null;
+  /* Set the width of the side navigation to 250px */
+  openNav = function openNav() {
+    document.getElementById('mySidenav').style.width = '250px';
+    document.querySelector('body').style.marginLeft = '250px';
+  $('.sliderBG').fadeIn();
+  }
+
+  /* Set the width of the side navigation to 0 */
+  closeNav = function closeNav() {
+    document.getElementById('mySidenav').style.width = '0';
+    document.querySelector('body').style.marginLeft = '0';
+    $('.sliderBG').fadeOut();
+  };
+
+
+
 
   constructor(itemService: ItemService, router: Router, private storageService: StorageService) {
 

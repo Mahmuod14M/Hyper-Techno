@@ -148,6 +148,37 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
     }
   };
+  slider1 = {
+    items: 7,
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 1000,
+    autoplayHoverPause: true,
+    loop: true,
+    responsive: {
+      // breakpoint from 0 up
+      0: {
+        items: 1,
+      },
+      // breakpoint from 480 up
+      480: {
+        items: 2,
+      },
+      // breakpoint from 768 up
+      375: {
+        items: 3,
+      },
+      1024: {
+        items: 4,
+      },
+      1440: {
+        items: 7,
+      },
+      1920: {
+        items: 6,
+      },
+    }
+  };
 
 
   subscription = Subscription;

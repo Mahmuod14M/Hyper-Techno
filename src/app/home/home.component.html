@@ -47,7 +47,7 @@
     Browse a great range of high-quality appliances for every part of your House
   </p>
   <div class="category">
-    <div class="item ">
+
       <div class="card  m-2" *ngFor="let item of categories" style="width: 18rem;">
         <img class="card-img-top img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + item.image"
              alt="Card image cap"/>
@@ -55,7 +55,7 @@
           <h5 class="card-title" [routerLink]="['/product/mainCat/',item.id]">{{ item.name }}</h5>
         </div>
       </div>
-    </div>
+
   </div>
 </div>
 <!-- section3 -->
@@ -91,7 +91,7 @@
     </div>
 
   </div>
-  <!-- section4 -->
+</div>
   <div class="sec44">
     <h3><span>B</span>rowse Hot Products</h3>
     <a href="#" class="view" [routerLink]="['/product/hotProduct/',1]">VIEW ALL ></a>
@@ -144,7 +144,7 @@
   <a href="#" class="view" [routerLink]="['/product/newArrivales/',1]">VIEW ALL ></a>
     <hr class="hr2"/>
 
-    <owl-carousel [options]=myCarouselOptions [items]="products" [carouselClasses]="['owl-theme', 'sliding']">
+    <owl-carousel [options]=myCarouselOptions [items]="Arrivals" [carouselClasses]="['owl-theme', 'sliding']">
       <div class="item" *ngFor="let product of Arrivals">
         <div class="card" (mouseover)="product.hover=true" (mouseleave)="product.hover=false">
           <div class="hover" [ngStyle]="{visibility: product.hover==true  ? 'visible' : 'hidden' }" [routerLink]="['/item',product.id]">
@@ -193,7 +193,7 @@
     <a href="#" class="view" [routerLink]="['/product/mainCat/',1]">VIEW ALL ></a>
     <hr class="hr2"/>
 
-    <owl-carousel [options]=myCarouselOptions [items]="products" [carouselClasses]="['owl-theme', 'sliding']">
+    <owl-carousel [options]=myCarouselOptions [items]="mainCat" [carouselClasses]="['owl-theme', 'sliding']">
       <div class="item" *ngFor="let product of mainCat">
         <div class="card" (mouseover)="product.hover=true" (mouseleave)="product.hover=false">
           <div class="hover" [ngStyle]="{visibility: product.hover==true  ? 'visible' : 'hidden' }"  [routerLink]="['/item',product.id]">
@@ -240,7 +240,7 @@
   <div class="sec66">
     <h3><span>B</span>rowse By Brands</h3>
 
-    <owl-carousel [options]=myCarouselOptions [items]="products" [carouselClasses]="['owl-theme', 'sliding']">
+    <owl-carousel [options]=slider1 [items]="brands" [carouselClasses]="['owl-theme', 'sliding']">
       <div class="item" *ngFor="let brand of brands">
         <img [routerLink]="['/product/Brand/',brand.id]"
              [src]="
@@ -251,4 +251,4 @@
 
 
   </div>
-</div>
+

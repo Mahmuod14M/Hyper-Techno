@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../storage.service';
-
+declare var $: any;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
   itemlist: any[]=[];
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
-    $('#finalProduct_'+id).hide();
+    $('#finalProduct_').hide();
   }
   constructor(private storageService: StorageService) {
 

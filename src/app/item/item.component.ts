@@ -21,10 +21,6 @@ export class ItemComponent implements OnInit {
   constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {
     console.log(storageService);
   }
-
-  mySlideImages = [1, 2, 3, 4, 5].map((i) => `https://picsum.photos/640/480?image=${i}`);
-  myCarouselImages = [1, 2, 3, 4, 5, 6].map((i) => `https://picsum.photos/640/480?image=${i}`);
-  mySlideOptions = {items: 2, dots: true, nav: false};
   myCarouselOptions = {
     nav: true,
     navText: ['<img src=\'../../assets/img/icons/left.png\'>', '<img src=\'../../assets/img/icons/right.png\' >'],

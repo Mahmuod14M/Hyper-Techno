@@ -1,4 +1,32 @@
+<div class="sliderBG">
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+    <a routerLink="/home"> Home </a>
+    <hr>
+    <a routerLink="/aboutUs">About Us </a>
+    <hr>
+    <a routerLink="/contactUs"> Contect Us </a>
+    <hr>
+<div>
+  <h2 class="btn btn-light w-100">Categories</h2>
+  <div *ngFor="let x of subCategories">
+    <h3>{{x.parent.name}} <i class="fas fa-angle-right"></i></h3>
+    <hr>
 
+    <div class="showSlider" >
+      <div class="" [id]="'dropdown-content-'+x.parent.id">
+        <div class="kind">
+          <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">-{{x.name}}</h2>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+  </div>
+</div>
 
 <nav class="frist-nav">
   <div>
@@ -48,7 +76,7 @@
 
   <div class="containeer">
     <div class="nav-mobile">
-      <a id="nav-toggle" href="#!"><span></span></a>
+      <a id="nav-toggle"  (click)="openNav()"><span></span></a>
     </div>
     <div class="menu" id="menu">
       <div class="dropdown" (mouseenter)="handleMenuMouseEnter($event, x.parent.id)"
@@ -149,4 +177,12 @@
   </div>
   </div>
 </section>
+
+
+<!-- Use any element to open the sidenav -->
+
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+
+
 

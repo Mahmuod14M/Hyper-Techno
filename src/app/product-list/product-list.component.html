@@ -68,10 +68,14 @@
 
   </section>
   <!-- section3 -->
-  <section class="p-sec3">
+  <section class="p-sec3"  infiniteScroll
+           [infiniteScrollDistance]="0"
+           [infiniteScrollThrottle]="500"
+           [infiniteScrollDisabled]="disableScroll"
+           (scrolled)="onScroll()">
 
 
-    <div class="item" *ngFor="let item of items.product">
+    <div class="item" *ngFor="let item of items">
       <div class="card" (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
         <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
           <div class="inner-card">
@@ -108,7 +112,6 @@
         </div>
       </div>
     </div>
-
 
   </section>
 

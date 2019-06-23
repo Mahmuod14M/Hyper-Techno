@@ -3,6 +3,7 @@ import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
 import {query} from '@angular/animations';
+import {init} from 'protractor/built/launcher';
 
 
 declare var $: any;
@@ -15,6 +16,9 @@ declare var $: any;
 })
 export class ProductListComponent implements OnInit {
 
+  constructor(private itemService: ItemService, private route: ActivatedRoute) {
+  }
+
   minValue: number;
   maxValue: number;
   options: Options = {};
@@ -25,7 +29,15 @@ export class ProductListComponent implements OnInit {
   categoriesId: any[] = [];
   categoryAttrs: any[] = [];
   private text: string;
+  disableScroll = false;
+  pageCount = 1;
 
+  onScroll() {
+    this.disableScroll = true;
+    this.pageCount += 1;
+    this.init();
+    console.log('scrolled!!');
+  }
 
   filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
     if (event.currentTarget) {
@@ -67,12 +79,10 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute) {
-  }
-
   applyFilter = function(payload) {
     this.itemService.search(payload).subscribe(data => {
       this.items = data;
+      this.disableScroll = false;
       console.log(data.filter);
       if (data.filter.brands.length > this.filter.brands.length) {
         this.filter.brands = data.filter.brands;
@@ -101,13 +111,14 @@ export class ProductListComponent implements OnInit {
 
     });
   };
-  search = function (payload) {
-    this.itemService.search(payload).subscribe(data => {
+  search = function(payload) {
+    console.log('Page: ', this.pageCount);
+    this.itemService.search(payload, this.pageCount).subscribe(data => {
       this.items = data;
+      console.log('Data: ', data);
       this.filter = data.filter;
       this.maxValue = data.filter.max_price;
       this.minValue = data.filter.min_price;
-      console.log(data);
       this.options = {
         floor: data.filter.min_price,
         ceil: data.filter.max_price,
@@ -125,127 +136,60 @@ export class ProductListComponent implements OnInit {
 
     });
   };
+  pageData = function(data) {
+    console.log(data, this.pageCount);
+    for (const item of data.product) {
+      this.items.push(item);
+    }
+    this.disableScroll = data.product.length === 0;
+    this.filter = data.filter;
+    this.maxValue = data.filter.max_price;
+    this.minValue = data.filter.min_price;
+    this.options = {
+      floor: data.filter.min_price,
+      ceil: data.filter.max_price,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          case LabelType.Low:
+            return 'LE ' + value;
+          case LabelType.High:
+            return 'LE ' + value;
+          default:
+            return '';
+        }
+      }
+    };
+  };
 
-  ngOnInit() {
+  init = function() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      const page = params.get('page');
-      switch (page.toLowerCase()) {
+      switch (params.get('page').toLowerCase()) {
         case 'maincat':
-          this.itemService.main_cat_items(id).subscribe(data => {
-            this.items = data;
-            this.filter = data.filter;
-            this.maxValue = data.filter.max_price;
-            this.minValue = data.filter.min_price;
-            this.options = {
-              floor: data.filter.min_price,
-              ceil: data.filter.max_price,
-              translate: (value: number, label: LabelType): string => {
-                switch (label) {
-                  case LabelType.Low:
-                    return 'LE ' + value;
-                  case LabelType.High:
-                    return 'LE ' + value;
-                  default:
-                    return '';
-                }
-              }
-            };
-
+          this.itemService.main_cat_items(this.pageCount).subscribe(data => {
+            this.pageData(data);
           });
           break;
         case 'hotproduct':
-          this.itemService.hotProduct(id).subscribe(data => {
-            this.items = data;
-            this.filter = data.filter;
-            this.maxValue = data.filter.max_price;
-            this.minValue = data.filter.min_price;
-            this.options = {
-              floor: data.filter.min_price,
-              ceil: data.filter.max_price,
-              translate: (value: number, label: LabelType): string => {
-                switch (label) {
-                  case LabelType.Low:
-                    return 'LE ' + value;
-                  case LabelType.High:
-                    return 'LE ' + value;
-                  default:
-                    return '';
-                }
-              }
-            };
-
+          this.itemService.hotProduct(this.pageCount).subscribe(data => {
+            this.pageData(data);
           });
           break;
         case 'newarrivales':
-          this.itemService.newArrivales(id).subscribe(data => {
-            this.items = data;
-            this.filter = data.filter;
-            this.maxValue = data.filter.max_price;
-            this.minValue = data.filter.min_price;
-            this.options = {
-              floor: data.filter.min_price,
-              ceil: data.filter.max_price,
-              translate: (value: number, label: LabelType): string => {
-                switch (label) {
-                  case LabelType.Low:
-                    return 'LE ' + value;
-                  case LabelType.High:
-                    return 'LE ' + value;
-                  default:
-                    return '';
-                }
-              }
-            };
+          this.itemService.newArrivales(this.pageCount).subscribe(data => {
+            this.pageData(data);
 
           });
           break;
         case 'brand':
-          this.itemService.top_items_by_brand(id).subscribe(data => {
-            this.items = data;
-            this.filter = data.filter;
-            this.maxValue = data.filter.max_price;
-            this.minValue = data.filter.min_price;
-            this.options = {
-              floor: data.filter.min_price,
-              ceil: data.filter.max_price,
-              translate: (value: number, label: LabelType): string => {
-                switch (label) {
-                  case LabelType.Low:
-                    return 'LE ' + value;
-                  case LabelType.High:
-                    return 'LE ' + value;
-                  default:
-                    return '';
-                }
-              }
-            };
-
+          this.itemService.top_items_by_brand(this.pageCount).subscribe(data => {
+            this.pageData(data);
           });
           break;
 
         case 'subcat':
-          this.itemService.get_sub_cat_items_id(id).subscribe(data => {
-            this.items = data;
-            this.filter = data.filter;
-            this.maxValue = data.filter.max_price;
-            this.minValue = data.filter.min_price;
-
-            this.options = {
-              floor: data.filter.min_price,
-              ceil: data.filter.max_price,
-              translate: (value: number, label: LabelType): string => {
-                switch (label) {
-                  case LabelType.Low:
-                    return 'LE ' + value;
-                  case LabelType.High:
-                    return 'LE ' + value;
-                  default:
-                    return '';
-                }
-              }
-            };
-
+          this.itemService.get_sub_cat_items_id(this.pageCount).subscribe(data => {
+            this.pageData(data);
           });
           break;
         case 'search':
@@ -261,7 +205,13 @@ export class ProductListComponent implements OnInit {
 
 
     });
+  };
 
+  ngOnInit() {
+    console.log('ngOnInit');
+    this.pageCount = 1;
+    this.items = [];
+    this.init();
 
     $('#brands_Btn').click(() => {
       $('#Check_List').slideToggle();
@@ -278,5 +228,4 @@ export class ProductListComponent implements OnInit {
       $('#icon2').toggleClass('fa-rotate-270');
     });
   }
-
 }

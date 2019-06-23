@@ -52,6 +52,7 @@ h1{
   font-size: 28px;
 }
 .p-sec3 {
+  height: 100%;
   width: 70%;
   display: flex;
   flex-wrap: wrap;
@@ -519,4 +520,10 @@ align-items: baseline;
 .background-masker.content-third-end {
   left: 300px;
   top: 88px;
+}
+
+
+.search-results {
+  height: 20rem;
+  overflow: scroll;
 }
