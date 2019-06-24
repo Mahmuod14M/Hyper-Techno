@@ -25,6 +25,8 @@ body {
 .nav {
   height: 37px;
   display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
   justify-content: space-evenly;
   align-items: center;
   background-image: linear-gradient(to right, #F20C0C, #D93636, #F20C0C);

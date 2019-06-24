@@ -84,7 +84,7 @@ export class ItemService {
     );
   }signUp(payload): Observable<any> {
     return this.httpClient.post(
-      BASE_URL + '/api/General/search?Page=1', payload, httpOptions
+      BASE_URL + '/api/User/user_signup', payload, httpOptions
     );
   }
 }

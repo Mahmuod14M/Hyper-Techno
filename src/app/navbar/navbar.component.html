@@ -1,22 +1,24 @@
 <div class="sliderBG">
+</div>
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-    <a routerLink="/home"> Home </a>
+    <a routerLink="/home" (click)="closeNav()"> Home </a>
     <hr>
-    <a routerLink="/aboutUs">About Us </a>
+    <a routerLink="/aboutUs" (click)="closeNav()">About Us </a>
     <hr>
-    <a routerLink="/contactUs"> Contect Us </a>
+    <a routerLink="/contactUs" (click)="closeNav()"> Contact Us </a>
     <hr>
 <div>
   <h2 class="btn btn-light w-100">Categories</h2>
   <div *ngFor="let x of subCategories">
-    <h3>{{x.parent.name}} <i class="fas fa-angle-right"></i></h3>
+    <h3 (click)="showCatgs($event,x.parent.id)">{{x.parent.name}} <i class="fas fa-angle-right"></i></h3>
     <hr>
 
-    <div class="showSlider" >
-      <div class="" [id]="'dropdown-content-'+x.parent.id">
+    <div class="" >
+      <div class="showSlider" [id]="'dropdown-content-'+x.parent.id">
         <div class="kind">
-          <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">-{{x.name}}</h2>
+          <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]" (click)="closeNav()">-{{x.name}}</h2>
+
         </div>
       </div>
     </div>
@@ -26,7 +28,7 @@
   </div>
 </div>
   </div>
-</div>
+
 
 <nav class="frist-nav">
   <div>
@@ -72,12 +74,9 @@
 
 
 
-  <!-- dropdwon -->
+  <div class="containeer" id="containeer">
+    <img src="assets/img/logo menu minimize.png" routerLink="/home" id="navbarLogo">
 
-  <div class="containeer">
-    <div class="nav-mobile">
-      <a id="nav-toggle"  (click)="openNav()"><span></span></a>
-    </div>
     <div class="menu" id="menu">
       <div class="dropdown" (mouseenter)="handleMenuMouseEnter($event, x.parent.id)"
            (mouseleave)="handleMenuMouseEnter($event, x.parent.id)" *ngFor="let x of subCategories">
@@ -111,15 +110,17 @@
          <img src="assets/img/icons/cart.png" id="cart" (click)="addItem()">
           <span class="counter2">{{itemlist.length}}</span>
         </div>
-        <h5 class="card_text">card</h5>
-        <h5 class="wishlist_text">wishlist</h5>
-        <h5 class="profile_text">profile</h5>
+
       </div>
 
       <div class="item-count">
         <h6>{{itemlist.length}} ITEMS</h6>
         <h5><i class="fas fa-pound-sign"></i> 0.00</h5>
       </div>
+      <div class="nav-mobile" (click)="openNav()">
+        <a id="nav-toggle"  ><span></span></a>
+      </div>
+
     </div>
   </div>
 

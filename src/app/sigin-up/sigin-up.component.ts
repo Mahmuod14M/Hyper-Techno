@@ -15,7 +15,8 @@ export class SiginUpComponent implements OnInit {
       password: form.value.password,
     };
     this.itemService.signUp(signUpData).subscribe(data=> {
-      console.log(form.value);
+      console.log(data);
+      localStorage.setItem('signUpData', data.user.id);
     } );
   }
   constructor(private itemService: ItemService) {}

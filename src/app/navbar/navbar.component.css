@@ -34,7 +34,6 @@ ul li {
 }
 #main-img img {
   width: 240px;
-
 }
 #naav {
   display: flex;
@@ -534,35 +533,15 @@ $breakpoint determines at which width the media query breakpoint will take effec
 .nav-dropdown {
   position: absolute;
   z-index: 1;
-  /* Guarantees that the dropdown will display on top of any content. */
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
   display: none;
 }
 
 .nav-mobile {
-  /*display: none;*/
-  /*position: absolute;*/
-  /*top: -11px;*/
-  /*left: 0;*/
   background: #fff;
-  height: 70px;
   width: 70px;
-}
-
-@media only screen and (max-width: 850px) {
-  .nav-mobile {
-    display: block;
-  }
-
-
-
-}
-#nav-toggle {
-  position: absolute;
-  left: 18px;
-  top: 22px;
+  display: none;
   cursor: pointer;
-  padding: 10px 35px 16px 0px;
 }
 #nav-toggle span,
 #nav-toggle span:before,
@@ -596,11 +575,7 @@ $breakpoint determines at which width the media query breakpoint will take effec
   transform: rotate(-45deg);
 }
 
-@media screen and (min-width: 800px) {
-  .nav-list {
-    display: block !important;
-  }
-}
+
 /*
 .navigation – the outer wrapper for the navbar. Specifies the height and color, and will stretch the full width of the viewport.
 */
@@ -630,45 +605,39 @@ $breakpoint determines at which width the media query breakpoint will take effec
   color: #463f3f;
   text-decoration: none;
 }
-@media only screen and (max-width: 850px){
-  .main-nav{
-    height: auto;
-  }
-  #main-img{
-    width: 100%;
-    text-align: center;
-  }
-  #naav {
+@media only screen and (max-width: 800px){
+  .nav-mobile{
     display: block;
   }
-  .right{
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
+  .frist-nav{
+    display: none;
   }
   .menu{
-    flex-direction: column;
-    justify-content: flex-start;
-    display: none ;
-    position: absolute;
-    left: 5px;
-    top: 60px;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    z-index: 6;
-    padding: 15px;
-    border-radius: 0 13px;
-    border: 1px solid #7a7a7a !important;
+    display: none;
   }
-
-  .containeer button{
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid #7a7a7a;
+  .right{
+    display: none;
   }
-  .dropdown-content{
-    width: 90%;
+  .main-nav hr{
+    display: none;
+  }
+  .main-nav{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    background: #f3f3f3;
+  }
+  .containeer{
+    justify-content: flex-end ;
+    width: 50%;
+  }
+  #main-img img {
+    width: 190px;
+    z-index: 16;
+  }
+  .login{
+    top: 39px;
   }
 }
 
@@ -721,6 +690,7 @@ $breakpoint determines at which width the media query breakpoint will take effec
 }
 .sidenav hr{
   background: #cd1b1f;
+  height: 0px;
 }
 .sidenav h3{
   font-size: 13px;
@@ -728,24 +698,36 @@ $breakpoint determines at which width the media query breakpoint will take effec
   margin-left: 10px;
   height: 30px;
   font-weight: 600;
+  cursor: pointer;
 }
 .sliderBG{
   position: fixed;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.4);
-  z-index: 3;
+  z-index: 30;
   display: none;
 }
 .showSlider{
   width: 100%;
   height: auto;
+  display: none;
 }
 .showSlider .kind{
  display: inline-block;
   background: #fff;
-  font-size: 12px;
-  font-weight: 500;
   color: #cd1b1f;
   width: 100%;
+
+}
+.showSlider .kind h2{
+  font-size: 12px;
+  font-weight: 500;
+  width: 100%;
+  margin: 10px 0;
+  height: 20px;
+  box-shadow: 0 2px 2px -2px #cd1b1f;
+}
+#navbarLogo{
+  display: none;
 }

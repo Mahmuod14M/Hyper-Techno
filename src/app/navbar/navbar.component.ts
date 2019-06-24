@@ -12,24 +12,9 @@ declare var $: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
+
 export class NavbarComponent implements OnInit {
   router: Router = null;
-  /* Set the width of the side navigation to 250px */
-  openNav = function openNav() {
-    document.getElementById('mySidenav').style.width = '250px';
-    document.querySelector('body').style.marginLeft = '250px';
-  $('.sliderBG').fadeIn();
-  }
-
-  /* Set the width of the side navigation to 0 */
-  closeNav = function closeNav() {
-    document.getElementById('mySidenav').style.width = '0';
-    document.querySelector('body').style.marginLeft = '0';
-    $('.sliderBG').fadeOut();
-  };
-
-
-
 
   constructor(itemService: ItemService, router: Router, private storageService: StorageService) {
 
@@ -68,9 +53,6 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  mySlideImages = [1, 2, 3, 4, 5].map((i) => `https://picsum.photos/640/480?image=${i}`);
-  myCarouselImages = [1, 2, 3, 4, 5, 6].map((i) => `https://picsum.photos/640/480?image=${i}`);
-  mySlideOptions = {items: 2, dots: true, nav: false};
   myCarouselOptions = {
     navClass: ['owl-prev', 'owl-next'],
     items: 5,
@@ -113,6 +95,22 @@ export class NavbarComponent implements OnInit {
   subCategories: any[] = [];
   itemlist: any[] = [];
   text: any = '';
+
+  /* Set the width of the side navigation to 250px */
+  openNav = function openNav() {
+    document.getElementById('mySidenav').style.width = '250px';
+    const elem = document.querySelector('body');
+    elem.style.position = 'relative';
+    elem.style.left = '250px';
+    $('.sliderBG').fadeIn();
+  };
+
+  /* Set the width of the side navigation to 0 */
+  closeNav = function closeNav() {
+    document.getElementById('mySidenav').style.width = '0';
+    document.querySelector('body').style.left = '0';
+    $('.sliderBG').fadeOut();
+  };
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
   }
@@ -136,33 +134,22 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  showCatgs(event: Event, categoryId: number) {
+    $('#dropdown-content-' + categoryId).slideToggle();
+  }
 
-    // tslint:disable-next-line:only-arrow-functions
-    $(function() { // DOM ready
-      // If a link has a dropdown, add sub menu toggle.
+  ngOnInit() {
+    $('.sliderBG').click(() => {
+      document.getElementById('mySidenav').style.width = '0';
+      document.querySelector('body').style.left = '0';
+      $('.sliderBG').fadeOut();
+    });
+    $(() => {
       $('nav ul li a:not(:only-child)').click(function(e) {
         $(this).siblings('.nav-dropdown').toggle();
         // Close one dropdown when selecting another
         $('.nav-dropdown').not($(this).siblings()).hide();
         e.stopPropagation();
-      });
-      // Clicking away from dropdown will remove the dropdown class
-      // tslint:disable-next-line:only-arrow-functions
-      // $('html').click(function() {
-      //   $('#menu').hide();
-      // });
-      // Toggle open and close nav styles on click
-      // tslint:disable-next-line:only-arrow-functions
-      $('#nav-toggle').click(function() {
-        $('#menu').slideToggle('medium', function() {
-          if ($(this).is(':visible'))
-            $(this).css('display','flex');
-        });
-      });
-      // Hamburger to X toggle
-      $('#nav-toggle').on('click', function() {
-        this.classList.toggle('active');
       });
     });
     $('#cart').mouseover(() => {
@@ -234,6 +221,30 @@ export class NavbarComponent implements OnInit {
         }
       });
     }
+  }
+}
+window.onscroll = () => {scrollFunction();};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    const elem = document.getElementById('containeer');
+    elem.style.position = 'fixed';
+    elem.style.top = '0';
+    elem.style.width = '100%';
+    elem.style.height= '75px';
+    elem.style.boxShadow= '0px 15px 10px -15px #111';
+    elem.style.background = '#fff';
+    elem.style.justifyContent = 'space-between';
+    elem.style.zIndex = '5';
+    $('#navbarLogo').show();
+  } else {
+    const elem= document.getElementById('containeer');
+    elem.style.position = 'relative';
+    elem.style.height= 'auto';
+    elem.style.boxShadow= 'none';
+    elem.style.justifyContent = 'space-evenly';
+    elem.style.background = 'transparent';
+    $('#navbarLogo').hide();
   }
 }
 
