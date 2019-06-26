@@ -23,7 +23,7 @@
 .sec1 {
   height: 300px;
   position: relative;
-  background-image: url(../../assets/img/login.png);
+  background-image: url(../../assets/img/policy.png);
   width: 100%;
   background-attachment: fixed;
   background-size: cover;
@@ -36,7 +36,10 @@
   position: absolute;
   color: white;
   left: 15%;
-  top: 30%;
+  top: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .sec1 .text h2 {
@@ -44,7 +47,9 @@
   font-weight: 500;
   text-shadow: 2px 2px black;
 }
-
+.sec1 .text img{
+  width: 100px;
+}
 .sec1 .text h5 {
   font-size: 22px;
   font-weight: 300;
@@ -53,24 +58,13 @@
 .sec1 span {
   text-shadow: 2px 2px 4px #000000;
 }
-.sec{
-  width: 84%;
-  margin: auto;
-}
-.sec h2{
-  color: #d93232;
-  font-size: 20px;
-  margin: 15px 0;
+.editText{
+  text-align: center;
+  color: #ff1119;
+  font-size: 18px;
   font-weight: 400;
-}
-.card-body h2{
-  color: #d93232;
-  font-size: 20px;
   margin: 15px 0;
-  font-weight: 400;
 }
-
-
 form input{
   background: #f1f1f1;
 
@@ -79,9 +73,21 @@ form .name{
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+
+}
+.editForm form{
+  width: 75%;
+  margin: auto;
+  padding-bottom: 30px;
 }
 .name label{
   color: #939393;
+  display: block;
+}
+.name img{
+  width: 50px;
+  height:auto;
+  margin-right: 10px;
 }
 form button{
   background: #ff0009;
@@ -90,47 +96,3 @@ form button{
   text-decoration: underline;
   border-radius: 0px;
 }
-form a{
-  color: goldenrod;
-  text-decoration: underline;
-}
-from a :hover{
-  color: goldenrod;
-  text-decoration: underline;
-}
- img{
-  width: 50px;
-  height:auto;
-   margin-right: 10px;
-}
-.divider-text {
-  position: relative;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.divider-text span {
-  padding: 7px;
-  font-size: 12px;
-  position: relative;
-  z-index: 2;
-}
-.divider-text:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-  top: 55%;
-  left: 0;
-  z-index: 1;
-}
-
-.btn-facebook {
-  background-color: #405D9D;
-  color: #fff;
-}
-.btn-twitter {
-  background-color: #42AEEC;
-  color: #fff;
-}
-

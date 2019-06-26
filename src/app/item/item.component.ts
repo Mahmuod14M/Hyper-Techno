@@ -58,26 +58,9 @@ export class ItemComponent implements OnInit {
 
   itemList: any[] = [];
   idList: any[] = [];
+  isItemDetailsReady = false;
   addToCart = function (product) {
-    this.storageService.addToCart(product.id);
-    if (localStorage.getItem('cart_items') !== null) {
-      this.itemList = JSON.parse(localStorage.getItem('cart_items'));
-    }
-
-
-    for (const item of this.itemList.length) {
-      const id = item.id;
-      this.idList.push(id);
-
-    }
-    const idFound = this.idList.includes(product.id);
-
-    if (idFound === false) {
-      this.itemList.push(product);
-      localStorage.setItem('cart_items', JSON.stringify(this.itemList));
-
-
-    }
+    this.storageService.addToCart(product);
   };
  imgChange(id) {
    const img = $('.imgs img');
@@ -87,8 +70,12 @@ export class ItemComponent implements OnInit {
      $('.main-img img').attr('src', imgsrc);
    });
  }
-  ngOnInit() {
+  itemHover() {
+    window.scrollTo(0, 0);
 
+  }
+  ngOnInit() {
+    window.scrollTo(0, 0);
     this.route.paramMap.subscribe(params => {
 
       const id = params.get('id');
@@ -100,7 +87,12 @@ export class ItemComponent implements OnInit {
         this.isInStock = data.product.out_of_stock;
 
       });
-
+      this.isItemDetailsReady= true;
+      if (this.isItemDetailsReady ) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(3000);
+        $('.data').show();
+      }
 
     });
 
@@ -145,7 +137,7 @@ export class ItemComponent implements OnInit {
         'background-color': 'white',
         'padding-top': '15px',
         'border-bottom': '1px solid #fff',
-        'z-index': '6'
+        'z-index': '2'
       });
       $('.btn1').css({
         'background-color': '#e4e2e2',
@@ -168,7 +160,7 @@ export class ItemComponent implements OnInit {
         'background-color': 'white',
         'padding-top': '15px',
         'border-bottom': '1px solid #fff',
-        'z-index': '6'
+        'z-index': '2'
       });
       $('.btn2').css({
         'background-color': '#e4e2e2',

@@ -1,3 +1,11 @@
+
+<div id="loading">
+  <div class="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+  </div>
+</div>
+<div class="data">
 <div class="img_zoom">
   <span>
   <i class="fas fa-search-minus"></i>
@@ -158,9 +166,9 @@
   <owl-carousel [options]=myCarouselOptions [items]="itemDetails.related" [carouselClasses]="['owl-theme', 'sliding']">
     <div class="item" *ngFor="let items of itemDetails.related">
         <div class="card" (mouseover)="items.hover=true" (mouseleave)="items.hover=false">
-          <div class="hover" [ngStyle]="{visibility: items.hover==true  ? 'visible' : 'hidden' }">
+          <div class="hover" [ngStyle]="{visibility: items.hover==true  ? 'visible' : 'hidden' }" (click)="itemHover()" [routerLink]="['/item',items.id]">
             <div class="inner-card">
-              <img  src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]">
+              <img  src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]" >
               <h4> <img src="assets/img/icons/cart2.png" class="img-fluid two" >ADD TO CART</h4>            
               <h5>
                 <i class="fa fa-star"></i>
@@ -194,4 +202,5 @@
           </div>
     </div>
   </owl-carousel>
+</div>
 </div>

@@ -24,7 +24,7 @@
       <th>TOTAL</th>
       <th></th>
     </tr>
-    <tr *ngFor="let x of itemlist" [id]="finalProduct_" >
+    <tr *ngFor="let x of itemlist" [id]="x.id" class="productCart" >
       <td class="cart_item">
         <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' +x.main_image" class="img-fluid">
         <h5>{{x.name}}</h5>
@@ -33,16 +33,12 @@
         <i class="fas fa-heart"></i>
       </td>
       <td>
-        <select>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select id="select">
+          <option [value]="i+1" class="quantity" *ngFor='let in of counter(x.quantity) ;let i = index'>{{i+1}}</option>
         </select>
       </td>
       <td>
-        <h5>{{x.price}}</h5>
+        <h5>{{x.price|currency:' '}}</h5>
       </td>
       <td style="color: red;cursor: pointer">
         <i class="fas fa-times" (click)="removeItemFromCart(x.id)"></i>
@@ -66,7 +62,7 @@
     <div class="line"></div>
     <div>
       <h5>Price</h5>
-      <h3>EGP 1200</h3>
+      <h3> {{finalPrice|currency:'EGP '}}</h3>
     </div>
     <div>
       <h5>Vocher price</h5>
@@ -75,28 +71,40 @@
     <div class="line"></div>
     <div>
       <h5>Subtotal</h5>
-      <h3>EGP 2100</h3>
+      <h3> {{subtotal|currency:'EGP '}}</h3>
     </div>
     <div>
       <h5>Shipping</h5>
       <h5>
         <input type="radio" name="Shipping" value="localShipping" > local shipping from the store<br>
-        <input type="radio" name="Shipping" value="freeShipping" > Free shipping delivery<br>
+        <input type="radio" name="Shipping" value="freeShipping" checked="checked" > Free shipping delivery<br>
       </h5>
     </div>
     <div class="line"></div>
     <div>
       <h5>Calculate  Shipping</h5>
-      <h3>EGP 300</h3>
+      <h3>EGP 0</h3>
+    </div>
+    <div class="line"></div>
+    <div class="UserAddress">
+      <h5>Choose Your Address</h5>
+        <div>
+        <button class="btn btn-info " routerLink="/address"  *ngIf="!addresses" >Enter Your Address</button>
+          <select *ngIf="addresses">
+            <option  class="option" [value]="x.id" *ngFor="let x of addresses.addresses">{{x.building_num}} {{x.street_name}},{{x.city_name}},{{x.country_name}} </option>
+
+          </select>
+        </div>
+
     </div>
     <div class="line"></div>
     <div>
       <h6 style="font-weight: 600">Total</h6>
-      <h2>EGP 2400</h2>
+      <h2>{{totalPrice|currency:'EGP '}}</h2>
     </div>
     <div class="pt-3 pb-3">
       <button class="btn update ">Update Cart</button>
-      <button class="btn proceed">Proceed to Checkout</button>
+      <button class="btn proceed" (click)="checkout()">Proceed to Checkout</button>
     </div>
     <div>
       <h6> <img src="assets/img/icons/secure.png"> Secure online payments</h6>

@@ -1,0 +1,95 @@
+<div class="nav">
+  <h2>
+    <a routerLink="/home">Home </a>
+    <span>>Address book</span>
+  </h2>
+</div>
+<div class="sec1">
+
+  <div class="text">
+    <h2>Address Book</h2>
+
+  </div>
+</div>
+
+<h2 class="text">Select Your Address Book</h2>
+<div class="iframe">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.580205088777!2d31.025531785096508!3d30.758291291451943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7c92de8c58b2d%3A0xad21108b98a604e9!2z2YfYp9mK2KjYsSDYqtmD2YbZiA!5e0!3m2!1sar!2seg!4v1561458545642!5m2!1sar!2seg"
+     width="100%" height="300"    frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+<div class="addressBook">
+  <form (ngSubmit)="address(myform)" #myform="ngForm">
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>First Name*</label>
+        <input name="Fname" class="form-control" type="text" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label>Last Name*</label>
+        <input name="Lname" class="form-control" type="text" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Country*</label>
+        <input name="country" class="form-control" type="text" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label> City*</label>
+        <input name="City" class="form-control" type="text" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Street*</label>
+        <input name="Street" class="form-control" type="text" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label>Building Number*</label>
+        <input name="buildNum" class="form-control" type="number" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Floor Number</label>
+        <input name="FloorNumber" class="form-control" type="number" ngModel >
+      </div>
+      <div style="width: 45%">
+        <label>Apartment Number</label>
+        <input name="ApartmentNum" class="form-control" type="number" ngModel >
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Nearst Landmark</label>
+        <input name="NearstLandmark" class="form-control" type="text" ngModel >
+      </div>
+      <div style="width: 45%">
+        <label>Location Type</label>
+        <input name="LocationType" class="form-control" type="text" ngModel >
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Mobile Number*</label>
+        <input name="MobileNumber" class="form-control" type="text" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label>Landline Number</label>
+        <input name="LandlineNumber" class="form-control" type="number" ngModel >
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Preferred Delivery Time</label>
+        <input name="PreferredDeliveryTime" class="form-control" type="text" ngModel >
+      </div>
+      <div style="width: 45%">
+        <label>Shipping Notes</label>
+        <input name="Notes" class="form-control" type="text" ngModel >
+      </div>
+    </div>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+
+</div>

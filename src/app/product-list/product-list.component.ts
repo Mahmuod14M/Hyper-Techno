@@ -19,8 +19,8 @@ export class ProductListComponent implements OnInit {
   constructor(private itemService: ItemService, private route: ActivatedRoute) {
   }
 
-  minValue: number;
-  maxValue: number;
+  minValue = 0;
+  maxValue = 0;
   options: Options = {};
   items: any[] = [];
   filter = {};
@@ -31,6 +31,9 @@ export class ProductListComponent implements OnInit {
   private text: string;
   disableScroll = false;
   pageCount = 1;
+  isApplyFilterReady = false;
+  isSearchReady = false;
+  isInitReady = false;
 
   onScroll() {
     this.disableScroll = true;
@@ -83,7 +86,7 @@ export class ProductListComponent implements OnInit {
     this.itemService.search(payload).subscribe(data => {
       this.items = data;
       this.disableScroll = false;
-      console.log(data.filter);
+      console.log('FilterData', data.filter);
       if (data.filter.brands.length > this.filter.brands.length) {
         this.filter.brands = data.filter.brands;
       }
@@ -93,7 +96,8 @@ export class ProductListComponent implements OnInit {
       this.filterCategoryAttributes = data.filter.category_attributes;
       this.maxValue = data.filter.max_price;
       this.minValue = data.filter.min_price;
-      console.log(data);
+      console.log('Data', data);
+      console.log('MaxValue', this.maxValue);
       this.options = {
         floor: data.filter.min_price,
         ceil: data.filter.max_price,
@@ -108,7 +112,12 @@ export class ProductListComponent implements OnInit {
           }
         }
       };
-
+      this.isApplyFilterReady = true;
+      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show();
+      }
     });
   };
   search = function(payload) {
@@ -133,11 +142,15 @@ export class ProductListComponent implements OnInit {
           }
         }
       };
-
+      this.isSearchReady = true;
+      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show();
+      }
     });
   };
   pageData = function(data) {
-    console.log(data, this.pageCount);
     for (const item of data.product) {
       this.items.push(item);
     }
@@ -159,6 +172,9 @@ export class ProductListComponent implements OnInit {
         }
       }
     };
+
+    console.log('MaxValue: ', this.maxValue);
+    console.log('Filter: ', this.filter);
   };
 
   init = function() {
@@ -202,16 +218,21 @@ export class ProductListComponent implements OnInit {
         default:
           break;
       }
-
-
+      // this.isInitReady = true;
+      // if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady) {
+      //   $(window).scrollTop();
+      //   $('#loading').fadeOut(2000);
+      //   $('.data').show();
+      // }
     });
+
   };
 
   ngOnInit() {
-    console.log('ngOnInit');
+    this.init();
+    window.scrollTo(0, 0);
     this.pageCount = 1;
     this.items = [];
-    this.init();
 
     $('#brands_Btn').click(() => {
       $('#Check_List').slideToggle();

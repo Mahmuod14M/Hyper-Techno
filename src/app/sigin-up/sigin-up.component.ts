@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ItemService} from '../item.service';
+import {StorageService} from '../storage.service';
 
 @Component({
   selector: 'app-sigin-up',
@@ -7,21 +8,20 @@ import {ItemService} from '../item.service';
   styleUrls: ['./sigin-up.component.css']
 })
 export class SiginUpComponent implements OnInit {
+  logIn: any ;
   register(form) {
-    const signUpData= {
-      email: form.value.Umail,
-      last_name: form.value.Lname,
-      first_name: form.value.Lname,
-      password: form.value.password,
-    };
-    this.itemService.signUp(signUpData).subscribe(data=> {
-      console.log(data);
-      localStorage.setItem('signUpData', data.user.id);
-    } );
+    this.storageService.register(form);
   }
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService,private storageService: StorageService) {
+    this.storageService.getUserObservable().subscribe({
+      next : logIn => {
+        this.logIn =logIn;
+      }
+    });
+  }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
   }
 
 }

@@ -1,0 +1,68 @@
+<div class="nav">
+  <h2>
+    <a routerLink="/home">Home </a>
+    <span>> Edit My Profile</span>
+  </h2>
+</div>
+<div class="sec1">
+
+  <div class="text">
+    <img src="assets/img/man.png">
+<!--    <h2>{{UserDetails.user.first_name}}</h2>-->
+
+  </div>
+</div>
+
+<h2 class="editText">Edit My Profile</h2>
+
+<div class="editForm">
+  <form>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>First Name</label>
+        <input name="Fname" class="form-control" type="text" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label>Last Name</label>
+        <input name="Lname" class="form-control" type="text" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>E-mail</label>
+        <input name="Umail" class="form-control" type="email" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label>Current Password</label>
+        <input name="oldPassword" class="form-control" type="password" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>New Password</label>
+        <input name="password" class="form-control" type="password" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <label> Confirm New Password</label>
+        <input name="password" class="form-control" type="password" ngModel required>
+      </div>
+    </div>
+    <div class="name">
+      <div style="width: 45%;margin-right: 30px">
+        <label>Mobile Number</label>
+        <input name="phoneNum" class="form-control" type="number" ngModel required>
+      </div>
+      <div style="width: 45%">
+        <p>
+          <label>Add to your Accounts</label>
+          <a href="" class=""><img src="assets/img/facebook.png"> </a>
+          <a href="" class=""> <img src="assets/img/google.png"> </a>
+        </p>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn">Submit</button>
+
+  </form>
+</div>

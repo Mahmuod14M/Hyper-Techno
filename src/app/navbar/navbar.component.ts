@@ -15,44 +15,7 @@ declare var $: any;
 
 export class NavbarComponent implements OnInit {
   router: Router = null;
-
-  constructor(itemService: ItemService, router: Router, private storageService: StorageService) {
-
-    this.router = router;
-    if (localStorage.getItem('cart_items') !== null) {
-      this.itemlist = JSON.parse(localStorage.getItem('cart_items'));
-    }
-    this.storageService.getCartObservable().subscribe({
-      next: cartList => {
-        console.log(cartList);
-        this.itemlist = cartList;
-      },
-      error: err => {
-        console.log('Subscribe error');
-        console.log(err);
-      }
-    });
-
-    itemService.brands().subscribe(data => {
-      this.imgs = data.brand;
-    });
-    itemService.brands().subscribe(data => {
-      this.brands = data.brand;
-    });
-
-    itemService.Categ().subscribe(data => {
-      this.Categorys = data.category;
-      data.category.forEach(mainCategory => {
-        itemService.sub_catg(mainCategory.id).subscribe(subData => {
-          this.subCategories.push({
-            parent: mainCategory,
-            categories: subData.category
-          });
-        });
-      });
-    });
-  }
-
+  logIn: any = false;
   myCarouselOptions = {
     navClass: ['owl-prev', 'owl-next'],
     items: 5,
@@ -96,7 +59,51 @@ export class NavbarComponent implements OnInit {
   itemlist: any[] = [];
   text: any = '';
 
-  /* Set the width of the side navigation to 250px */
+  logIN(form) {
+    this.storageService.logIN(form);
+  }
+
+  removeId() {
+    this.storageService.removeId();
+  }
+
+  constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
+
+    this.router = router;
+
+    if (localStorage.getItem('cart_items') !== null) {
+      this.itemlist = JSON.parse(localStorage.getItem('cart_items'));
+    }
+    this.storageService.getCartObservable().subscribe({
+      next: cartList => {
+        this.itemlist = cartList;
+      },
+      error: err => {
+        console.log('Subscribe error');
+        console.log(err);
+      }
+    });
+
+    itemService.brands().subscribe(data => {
+      this.imgs = data.brand;
+    });
+    itemService.brands().subscribe(data => {
+      this.brands = data.brand;
+    });
+
+    itemService.Categ().subscribe(data => {
+      this.Categorys = data.category;
+      data.category.forEach(mainCategory => {
+        itemService.sub_catg(mainCategory.id).subscribe(subData => {
+          this.subCategories.push({
+            parent: mainCategory,
+            categories: subData.category
+          });
+        });
+      });
+    });
+  }
+
   openNav = function openNav() {
     document.getElementById('mySidenav').style.width = '250px';
     const elem = document.querySelector('body');
@@ -125,7 +132,13 @@ export class NavbarComponent implements OnInit {
     const docH = $('.containeer').height();
     const docW = $('.containeer').width();
     const isEntirelyVisible = (l + w <= docW);
-
+    // console.log('elm', elm);
+    // console.log('off', off);
+    // console.log('target', target.offsetWidth);
+    // console.log('l', l);
+    // console.log('w', w);
+    // console.log('docW', docW);
+    // console.log('isEntirelyVisible', isEntirelyVisible);
     if (!isEntirelyVisible) {
       target.classList.add('edge');
     } else {
@@ -139,6 +152,18 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.storageService.getUserObservable().subscribe({
+      next: logIn => {
+        this.logIn = JSON.parse(logIn);
+        console.log('navBar');
+        console.log(this.logIn);
+      },
+      error: err => {
+        console.log('has Error');
+        console.log(err);
+      }
+    });
+    this.logIn = this.storageService.getUserData();
     $('.sliderBG').click(() => {
       document.getElementById('mySidenav').style.width = '0';
       document.querySelector('body').style.left = '0';
@@ -152,30 +177,6 @@ export class NavbarComponent implements OnInit {
         e.stopPropagation();
       });
     });
-    $('#cart').mouseover(() => {
-      $('.card_text').fadeIn({queue: false, duration: 100});
-      $('.card_text').animate({top: '40px'}, 100);
-    });
-    $('#cart').mouseleave(() => {
-      $('.card_text').fadeOut({queue: false, duration: 100});
-      $('.card_text').animate({top: '30px'}, 100);
-    });
-    $('#wishList').mouseover(() => {
-      $('.wishlist_text').fadeIn({queue: false, duration: 100});
-      $('.wishlist_text').animate({top: '40px'}, 100);
-    });
-    $('#wishList').mouseleave(() => {
-      $('.wishlist_text').fadeOut({queue: false, duration: 100});
-      $('.wishlist_text').animate({top: '30px'}, 100);
-    });
-    $('#profile').mouseover(() => {
-      $('.profile_text').fadeIn({queue: false, duration: 100});
-      $('.profile_text').animate({top: '40px'}, 100);
-    });
-    $('#profile').mouseleave(() => {
-      $('.profile_text').fadeOut({queue: false, duration: 100});
-      $('.profile_text').animate({top: '30px'}, 100);
-    });
     const self = this;
     $('#search_btn').click(() => {
       self.text = $('input[name=search]').val();
@@ -185,10 +186,12 @@ export class NavbarComponent implements OnInit {
       $('#login').toggle();
     });
     $('#Register').click(() => {
+      alert('Register');
       $('#login').toggle();
     });
-    $('#password').click(() => {
-      $('#login').toggle();
+    $('.forgotPassword').click(() => {
+      alert('forgotPassword');
+      $('#login').hide();
     });
     $('#btn').click(() => {
       $('#menu').toggle();
@@ -223,7 +226,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 }
-window.onscroll = () => {scrollFunction();};
+
+window.onscroll = () => {
+  scrollFunction();
+};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -231,17 +237,17 @@ function scrollFunction() {
     elem.style.position = 'fixed';
     elem.style.top = '0';
     elem.style.width = '100%';
-    elem.style.height= '75px';
-    elem.style.boxShadow= '0px 15px 10px -15px #111';
+    elem.style.height = '75px';
+    elem.style.boxShadow = '0px 15px 10px -15px #111';
     elem.style.background = '#fff';
     elem.style.justifyContent = 'space-between';
     elem.style.zIndex = '5';
     $('#navbarLogo').show();
   } else {
-    const elem= document.getElementById('containeer');
+    const elem = document.getElementById('containeer');
     elem.style.position = 'relative';
-    elem.style.height= 'auto';
-    elem.style.boxShadow= 'none';
+    elem.style.height = 'auto';
+    elem.style.boxShadow = 'none';
     elem.style.justifyContent = 'space-evenly';
     elem.style.background = 'transparent';
     $('#navbarLogo').hide();

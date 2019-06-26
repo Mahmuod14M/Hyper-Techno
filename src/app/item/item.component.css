@@ -320,7 +320,7 @@ hr {
 .sec3 .btns .btn1 {
   position: relative;
   right: -15px;
-  z-index: 5;
+  z-index: 3;
 }
 
 .sec3 .btns .btn2 {

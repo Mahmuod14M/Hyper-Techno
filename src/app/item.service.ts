@@ -82,9 +82,39 @@ export class ItemService {
     return this.httpClient.post(
       BASE_URL + '/api/General/search?Page=' + page, payload, httpOptions
     );
-  }signUp(payload): Observable<any> {
+  }
+
+  signUp(payload): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/User/user_signup', payload, httpOptions
+    );
+  }
+
+  signIn(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/User/user_login', payload, httpOptions
+    );
+  }
+
+  address(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Address/add_edit_user_address', payload, httpOptions
+    );
+  }
+
+  get_address(id): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Address/get_user_addresses?UserID=' + id, null, httpOptions
+    );
+  }
+  makeOrder(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Order/make_order', payload, httpOptions
+    );
+  }
+  getBroductById(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Eslam/fav_cart', payload, httpOptions
     );
   }
 }

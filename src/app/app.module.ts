@@ -7,7 +7,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {HomeComponent} from './home/home.component';
 import {NgbModule, NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +33,8 @@ import {InstallmentsComponent} from './installments/installments.component';
 import {CartComponent} from './cart/cart.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AddAdressComponent } from './add-adress/add-adress.component';
 
 
 const appRoutes: Routes =
@@ -46,7 +47,9 @@ const appRoutes: Routes =
     {path: 'product/:page/:id', component: ProductListComponent},
     {path: 'siginUp', component: SiginUpComponent},
     {path: 'policy', component: PolicyComponent},
-    {path: 'cart', component: CartComponent}
+    {path: 'Installments', component: InstallmentsComponent},
+    {path: 'cart', component: CartComponent},
+    {path: 'address', component: AddAdressComponent},
   ];
 
 // @ts-ignore
@@ -54,7 +57,6 @@ const appRoutes: Routes =
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     HomeComponent,
     SeemorePipe,
@@ -67,7 +69,9 @@ const appRoutes: Routes =
     ChangeColorDirective,
     PolicyComponent,
     InstallmentsComponent,
-    CartComponent
+    CartComponent,
+    EditProfileComponent,
+    AddAdressComponent
   ],
   imports: [
     BrowserModule,

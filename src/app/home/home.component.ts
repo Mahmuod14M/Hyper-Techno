@@ -16,7 +16,6 @@ declare var $: any;
 export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private itemService: ItemService, private storageService: StorageService) {
-    console.log(storageService);
     itemService.hotProduct(1).subscribe(data => {
       this.products = data.product;
 
@@ -25,7 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
       this.isHotProductReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop(0);
         $('#loading').fadeOut(2000);
+        $('.data').show();
       }
 
     });
@@ -39,7 +40,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.offersFour = data.promotions[3];
       this.isHomePageReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
         $('#loading').fadeOut(2000);
+        $('.data').show();
       }
     });
 
@@ -47,7 +50,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.categories = data.categories;
       this.isCategoryReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
         $('#loading').fadeOut(2000);
+        $('.data').show();
       }
     });
 
@@ -56,7 +61,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.Arrivals = data.product;
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
         $('#loading').fadeOut(2000);
+        $('.data').show();
       }
 
     });
@@ -64,7 +71,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.mainCat = data.product;
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
         $('#loading').fadeOut(2000);
+        $('.data').show(2200);
       }
 
     });
@@ -74,7 +83,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.brands = data.brand;
       this.isBrandsReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
         $('#loading').fadeOut(2000);
+        $('.data').show();
       }
     });
 
@@ -191,7 +202,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
-
+    window.scrollTo(0, 0);
     $( '.owl-prev').css({
       position:'absolute',
       top: '30px',
