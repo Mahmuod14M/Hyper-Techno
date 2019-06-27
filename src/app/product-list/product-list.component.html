@@ -33,7 +33,7 @@
         <h6>Filter By Price</h6>
         <hr>
         <!--      <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null)"></ng5-slider>-->
-        <ng5-slider value="100" highValue="10000" options="floor: 100, ceil: 10000" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null)"></ng5-slider>
+        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null)"></ng5-slider>
       </div>
 
       <div class="filter ">
@@ -64,7 +64,7 @@
         </div>
 
       </div>
-      <div class="filter" *ngFor="let x of filterCategoryAttributes">
+      <div class="filter" *ngFor="let x of filter.category_attributes">
         <button class="btn " id="screen_Btn">{{x.name}} ({{x.sum}})<i class="fas fa-angle-down  fa-rotate-270"
                                                                       id="icon2"></i>
         </button>

@@ -60,9 +60,9 @@ export class ItemService {
     );
   }
 
-  main_cat_items(mainId): Observable<any> {
+  main_cat_items(id, page): Observable<any> {
     return this.httpClient.get(
-      BASE_URL + '/api/Category/get_main_cat_items_by_id?SubCatID=' + mainId + '&Page=1', httpOptions
+      BASE_URL + '/api/Category/get_main_cat_items_by_id?SubCatID=' + id + '&Page=' + page, httpOptions
     );
   }
 
@@ -72,9 +72,9 @@ export class ItemService {
     );
   }
 
-  get_sub_cat_items_id(mainId): Observable<any> {
+  get_sub_cat_items_id(id, page): Observable<any> {
     return this.httpClient.get(
-      BASE_URL + '/api/Category/get_sub_cat_items_by_id?SubCatID=' + mainId + '&Page=1', httpOptions
+      BASE_URL + '/api/Category/get_sub_cat_items_by_id?SubCatID=' + id + '&Page=' + page, httpOptions
     );
   }
 

@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
+import {Product} from '../Models';
 import 'bootstrap';
 
 declare var $: any;
@@ -51,12 +52,11 @@ export class NavbarComponent implements OnInit {
   };
 
   imgs: any[] = [];
-
   brands: any[] = [];
   Categorys: any[] = [];
   Categories: any[] = [];
   subCategories: any[] = [];
-  itemlist: any[] = [];
+  itemlist: Product[] = this.storageService.getCartItems();
   text: any = '';
 
   logIN(form) {
@@ -70,10 +70,6 @@ export class NavbarComponent implements OnInit {
   constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
 
     this.router = router;
-
-    if (localStorage.getItem('cart_items') !== null) {
-      this.itemlist = JSON.parse(localStorage.getItem('cart_items'));
-    }
     this.storageService.getCartObservable().subscribe({
       next: cartList => {
         this.itemlist = cartList;
@@ -163,7 +159,7 @@ export class NavbarComponent implements OnInit {
         console.log(err);
       }
     });
-    this.logIn = this.storageService.getUserData();
+    this.logIn = StorageService.getUserData();
     $('.sliderBG').click(() => {
       document.getElementById('mySidenav').style.width = '0';
       document.querySelector('body').style.left = '0';

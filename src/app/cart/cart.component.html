@@ -90,7 +90,7 @@
       <h5>Choose Your Address</h5>
         <div>
         <button class="btn btn-info " routerLink="/address"  *ngIf="!addresses" >Enter Your Address</button>
-          <select *ngIf="addresses">
+          <select *ngIf="addresses" id="addressSelector">
             <option  class="option" [value]="x.id" *ngFor="let x of addresses.addresses">{{x.building_num}} {{x.street_name}},{{x.city_name}},{{x.country_name}} </option>
 
           </select>

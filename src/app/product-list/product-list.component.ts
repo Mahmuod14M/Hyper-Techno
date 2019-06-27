@@ -19,9 +19,12 @@ export class ProductListComponent implements OnInit {
   constructor(private itemService: ItemService, private route: ActivatedRoute) {
   }
 
-  minValue = 0;
-  maxValue = 0;
-  options: Options = {};
+  minValue: number;
+  maxValue: number;
+  options: Options = {
+    floor: 0,
+    ceil: 500
+  };
   items: any[] = [];
   filter = {};
   filterCategoryAttributes = [];
@@ -77,15 +80,20 @@ export class ProductListComponent implements OnInit {
     console.log(this.brandsId);
     console.log(this.categoriesId);
     this.applyFilter({
-      brands: this.brandsId, cats: this.categoriesId, query: this.text, cat_attrs_values: this.categoryAttrs,
+      brands: this.brandsId, cats: this.categoriesId, query: this.text ? this.text : '', cat_attrs_values: this.categoryAttrs,
       max_price: this.maxValue, min_price: this.minValue
     });
   }
 
   applyFilter = function(payload) {
-    this.itemService.search(payload).subscribe(data => {
-      this.items = data;
+    console.log('payload', payload);
+    this.itemService.search(payload, this.pageCount).subscribe(data => {
+      this.items = [];
+      for (const item of data.product) {
+        this.items.push(item);
+      }
       this.disableScroll = false;
+      console.log('Data', data);
       console.log('FilterData', data.filter);
       if (data.filter.brands.length > this.filter.brands.length) {
         this.filter.brands = data.filter.brands;
@@ -93,7 +101,8 @@ export class ProductListComponent implements OnInit {
       if (data.filter.categories.length > this.filter.categories.length) {
         this.filter.categories = data.filter.categories;
       }
-      this.filterCategoryAttributes = data.filter.category_attributes;
+      this.filter.category_attributes = data.filter.category_attributes ? data.filter.category_attributes : [];
+      console.log('category_attributes: ', this.filterCategoryAttributes);
       this.maxValue = data.filter.max_price;
       this.minValue = data.filter.min_price;
       console.log('Data', data);
@@ -179,10 +188,12 @@ export class ProductListComponent implements OnInit {
 
   init = function() {
     this.route.paramMap.subscribe(params => {
+      this.items = [];
+      this.pageCount = 1;
       const id = params.get('id');
       switch (params.get('page').toLowerCase()) {
         case 'maincat':
-          this.itemService.main_cat_items(this.pageCount).subscribe(data => {
+          this.itemService.main_cat_items(id, this.pageCount).subscribe(data => {
             this.pageData(data);
           });
           break;
@@ -204,7 +215,7 @@ export class ProductListComponent implements OnInit {
           break;
 
         case 'subcat':
-          this.itemService.get_sub_cat_items_id(this.pageCount).subscribe(data => {
+          this.itemService.get_sub_cat_items_id(id, this.pageCount).subscribe(data => {
             this.pageData(data);
           });
           break;

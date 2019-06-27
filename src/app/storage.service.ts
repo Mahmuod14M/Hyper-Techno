@@ -9,23 +9,16 @@ export class StorageService {
   constructor(private itemService: ItemService) {
   }
 
-  private static instant: StorageService = null;
   private cart = new Subject<any>();
-  cartList: any[] = [];
-  idList: any[] = [];
-  public userData = JSON.parse(localStorage.getItem('signData'));w
+  public userData = JSON.parse(localStorage.getItem('signData'));
   private log = new Subject<any>();
 
-  getUserData() {
-    return localStorage.getItem('signData');
+  static getUserData() {
+    return JSON.parse(localStorage.getItem('signData'));
   }
 
   getUserObservable() {
     return this.log.asObservable();
-  }
-
-  getCartObservable() {
-    return this.cart.asObservable();
   }
 
   register(form) {
@@ -90,40 +83,49 @@ export class StorageService {
     this.userData = localStorage.getItem('signData');
     this.log.next(this.userData);
   }
+
+  // CART
   addToCart(product) {
-    const self = this;
-    if (localStorage.getItem('cart_items') !== null) {
-      self.cartList = JSON.parse(localStorage.getItem('cart_items'));
+    if (localStorage) {
+      let cart = [];
+      if (localStorage.cartID) {
+        cart = JSON.parse(localStorage.cartID);
+      }
+      if (!cart.includes(product.id)) {
+        cart.push(product.id);
+      }
+      localStorage.cartID = JSON.stringify(cart);
+      this.getCartItems(cart);
     }
-
-    for (const item of self.cartList) {
-      self.idList.push(item.id);
-    }
-    console.log('self.idList',self.idList);
-    console.log('product.id',product.id);
-    const idFound = self.idList.includes(product.id);
-
-    if (!idFound) {
-      self.cartList.push(product);
-      console.log('product', product);
-      localStorage.setItem('cart_items', JSON.stringify(self.cartList));
-    }
-    this.cart.next(this.cartList);
   }
 
   removeFromCart(product) {
-    const itemsArry = JSON.parse(localStorage.getItem('cart_items'));
-
+    const itemsArry = JSON.parse(localStorage.cartID);
     for (let index = 0; index < itemsArry.length; index++) {
-
-      if (itemsArry[index].id === product) {
-
+      if (itemsArry[index].id === product.id) {
         itemsArry.splice(index, 1);
-        localStorage.setItem('cart_items', JSON.stringify(itemsArry));
+        localStorage.cartID = JSON.stringify(itemsArry);
         $('#cart_item_' + product).fadeOut();
       }
-
     }
-    this.cart.next(itemsArry);
+    this.getCartItems(itemsArry);
+  }
+
+  getCartObservable() {
+    return this.cart.asObservable();
+  }
+
+  getCartItems(ids = null) {
+    if (!ids) {
+      ids = JSON.parse(localStorage.cartID);
+    }
+    return this.itemService.getBroductById({ids}).subscribe(data => {
+      console.log('Response :', data);
+      if (!data.error) {
+        this.cart.next(data.products);
+      } else {
+        return [];
+      }
+    });
   }
 }

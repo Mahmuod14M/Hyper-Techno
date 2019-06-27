@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
 
     });
-    itemService.main_cat_items(1).subscribe(data => {
+    itemService.main_cat_items(1, 1).subscribe(data => {
       this.mainCat = data.product;
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {

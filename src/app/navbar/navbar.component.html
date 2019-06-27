@@ -1,43 +1,43 @@
 <div class="sliderBG">
 </div>
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-    <a routerLink="/home" (click)="closeNav()"> Home </a>
-    <hr>
-    <a routerLink="/aboutUs" (click)="closeNav()">About Us </a>
-    <hr>
-    <a routerLink="/contactUs" (click)="closeNav()"> Contact Us </a>
-    <hr>
-<div>
-  <h2 class="btn btn-light w-100">Categories</h2>
-  <div *ngFor="let x of subCategories">
-    <h3 (click)="showCatgs($event,x.parent.id)">{{x.parent.name}} <i class="fas fa-angle-right"></i></h3>
-    <hr>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a routerLink="/home" (click)="closeNav()"> Home </a>
+  <hr>
+  <a routerLink="/aboutUs" (click)="closeNav()">About Us </a>
+  <hr>
+  <a routerLink="/contactUs" (click)="closeNav()"> Contact Us </a>
+  <hr>
+  <div>
+    <h2 class="btn btn-light w-100">Categories</h2>
+    <div *ngFor="let x of subCategories">
+      <h3 (click)="showCatgs($event,x.parent.id)">{{x.parent.name}} <i class="fas fa-angle-right"></i></h3>
+      <hr>
 
-    <div class="" >
-      <div class="showSlider" [id]="'dropdown-content-'+x.parent.id">
-        <div class="kind">
-          <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]" (click)="closeNav()">-{{x.name}}</h2>
+      <div class="">
+        <div class="showSlider" [id]="'dropdown-content-'+x.parent.id">
+          <div class="kind">
+            <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]" (click)="closeNav()">
+              -{{x.name}}</h2>
 
+          </div>
         </div>
       </div>
+
+
     </div>
-
-
-
   </div>
 </div>
-  </div>
 
 
 <nav class="frist-nav">
   <div>
     <ul class="frist-ul" id="first-ul">
-      <li ><a routerLink="/home"> Home </a></li>
+      <li><a routerLink="/home"> Home </a></li>
       <li><a routerLink="/aboutUs">About Us </a></li>
       <li class="mr-5"><a routerLink="/contactUs"> Contect Us </a></li>
 
-      <li><a> <img src="assets/img/flag.png" class="img-fluid" alt="egypt">  |  &nbsp;العربيه </a></li>
+      <li><a> <img src="assets/img/flag.png" class="img-fluid" alt="egypt"> | &nbsp;العربيه </a></li>
     </ul>
   </div>
 </nav>
@@ -73,14 +73,14 @@
   <hr>
 
 
-
   <div class="containeer" id="containeer">
     <img src="assets/img/logo menu minimize.png" routerLink="/home" id="navbarLogo">
 
     <div class="menu" id="menu">
       <div class="dropdown" (mouseenter)="handleMenuMouseEnter($event, x.parent.id)"
            (mouseleave)="handleMenuMouseEnter($event, x.parent.id)" *ngFor="let x of subCategories">
-        <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]">{{x.parent.name}} <i class="fas fa-angle-down"></i> </button>
+        <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]">{{x.parent.name}} <i
+          class="fas fa-angle-down"></i></button>
         <div class="dropdown-content " [id]="'dropdown-content-'+x.parent.id">
           <h5>Select by Brand</h5>
 
@@ -107,7 +107,7 @@
           <span class="counter1" style="right: 12px">{{itemlist.length}}</span>
         </div>
         <div style="position: relative">
-         <img src="assets/img/icons/cart.png" id="cart" (click)="addItem()">
+          <img src="assets/img/icons/cart.png" id="cart" (click)="addItem()">
           <span class="counter2">{{itemlist.length}}</span>
         </div>
 
@@ -118,7 +118,7 @@
         <h5><i class="fas fa-pound-sign"></i> 0.00</h5>
       </div>
       <div class="nav-mobile" (click)="openNav()">
-        <a id="nav-toggle"  ><span></span></a>
+        <a id="nav-toggle"><span></span></a>
       </div>
 
     </div>
@@ -143,8 +143,8 @@
     <input type="password" placeholder="Password" name="password" class="form-control" ngModel required>
 
     <button type="submit" class="btn btn-dark">LOGIN</button>
-  </form >
-  <div class="password pt-2" *ngIf="!logIn" >
+  </form>
+  <div class="password pt-2" *ngIf="!logIn">
     <a routerLink="/siginUp" class="forgotPassword">I forgot my password</a>
     <hr>
     <a routerLink="/siginUp" id="Register">Register Now ? Create an account </a>
@@ -154,7 +154,7 @@
 
 
 <section class="cart">
-  <div class="inner-cart">
+  <div class="inner-cart" *ngIf="itemlist">
     <img src="assets/img/icons/cart.png" class="market">
 
     <span class="text">Shopping Cart</span>
@@ -173,16 +173,16 @@
 
     <div *ngFor="let x of itemlist" class="item_view" [id]="'cart_item_'+x.id">
       <div class="innrt_cart">
-      <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' +x.main_image" class="img-fluid">
-      <h5>{{x.name}}</h5>
+        <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' +x.main_image" class="img-fluid">
+        <h5>{{x.name}}</h5>
       </div>
       <span (click)="removeItemFromCart(x.id)">
   <i class="fas fa-trash-alt"></i>
 </span>
     </div>
-  <div class="m-auto w-75">
-    <button class="btn" routerLink="/cart" id="viewCart">VIEW CART</button>
-  </div>
+    <div class="m-auto w-75">
+      <button class="btn" routerLink="/cart" id="viewCart">VIEW CART</button>
+    </div>
   </div>
 </section>
 

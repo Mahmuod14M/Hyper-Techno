@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {StorageService} from '../storage.service';
+import {Product} from '../Models';
 
 declare var $: any;
 
@@ -14,12 +15,12 @@ declare var $: any;
 
 export class ItemComponent implements OnInit {
 
-  itemDetails: any[] = [];
+  productDetails: Product;
+  relatedProducts: Product[];
 
   isInStock = false;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {
-    console.log(storageService);
   }
   myCarouselOptions = {
     nav: true,
@@ -55,9 +56,6 @@ export class ItemComponent implements OnInit {
       },
     }
   };
-
-  itemList: any[] = [];
-  idList: any[] = [];
   isItemDetailsReady = false;
   addToCart = function (product) {
     this.storageService.addToCart(product);
@@ -80,7 +78,8 @@ export class ItemComponent implements OnInit {
 
       const id = params.get('id');
       this.itemService.item_details(id).subscribe(data => {
-        this.itemDetails = data;
+        this.productDetails = data.product;
+        this.relatedProducts = data.related;
 
       });
       this.itemService.item_details(id).subscribe(data => {
