@@ -35,8 +35,23 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AddAdressComponent } from './add-adress/add-adress.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 
-
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('Google-OAuth-Client-Id')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('Facebook-App-Id')
+  }
+]);
+export function provideConfig() {
+  return config;
+}
 const appRoutes: Routes =
   [
     {path: '', component: HomeComponent},
@@ -50,6 +65,7 @@ const appRoutes: Routes =
     {path: 'Installments', component: InstallmentsComponent},
     {path: 'cart', component: CartComponent},
     {path: 'address', component: AddAdressComponent},
+    {path: 'EditProfile', component: EditProfileComponent},
   ];
 
 // @ts-ignore
@@ -81,6 +97,7 @@ const appRoutes: Routes =
     NgbPaginationModule,
     BrowserAnimationsModule,
     CarouselModule,
+    SocialLoginModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
       onSameUrlNavigation: 'reload'
@@ -90,10 +107,15 @@ const appRoutes: Routes =
     JwSocialButtonsModule,
     Ng5SliderModule,
     FormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ReactiveFormsModule
   ],
 
   providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
     NgbDropdownConfig,
     StorageService
   ],

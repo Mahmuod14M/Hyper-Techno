@@ -11,6 +11,7 @@ const httpOptions = {
 };
 
 const BASE_URL = 'https://hyper-techno-stage.herokuapp.com';
+// const BASE_URL = 'http://hyper-testing.herokuapp.com';
 
 // const BASE_URL = "http://192.168.1.10:5000"
 
@@ -115,6 +116,11 @@ export class ItemService {
   getBroductById(payload): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/Eslam/fav_cart', payload, httpOptions
+    );
+  }
+  UserImage(id): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/User/edit_user_image?UserID='+ id, null, httpOptions
     );
   }
 }

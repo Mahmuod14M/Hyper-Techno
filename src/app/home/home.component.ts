@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
 import 'bootstrap';
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -15,10 +16,10 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private itemService: ItemService, private storageService: StorageService) {
+  constructor(private itemService: ItemService, private storageService: StorageService , private router: Router) {
     itemService.hotProduct(1).subscribe(data => {
       this.products = data.product;
-
+      console.log(data);
       for (let i = 0; i < 8; i++) {
         this.item.push(data.product[i]);
       }
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.offersThree = data.promotions[2];
       this.offersFour = data.promotions[3];
       this.isHomePageReady = true;
+
       if (this.isCategoryReady && this.isHotProductReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
@@ -159,6 +161,21 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
     }
   };
+
+  routerLink(photo: any) {
+    const index = this.homePhoto.indexOf(photo);
+    if (this.homePhoto[index].id_brand != null) {
+      const ids = this.homePhoto[index].id_brand;
+      this.router.navigate(['/product/Brand/'+ids]);
+    } else if (this.homePhoto[index].id_category != null) {
+      const ids = this.homePhoto[index].id_category;
+      this.router.navigate(['/product/mainCat/'+ids]);
+    } else if (this.homePhoto[index].id_product != null) {
+      const ids = this.homePhoto[index].id_product;
+      this.router.navigate(['/item/'+ids]);
+    } else {
+    }
+  }
   slider1 = {
     items: 7,
     dots: false,

@@ -57,7 +57,7 @@ export class ItemComponent implements OnInit {
     }
   };
   isItemDetailsReady = false;
-  addToCart = function (product) {
+  addToCart = function(product) {
     this.storageService.addToCart(product);
   };
  imgChange(id) {

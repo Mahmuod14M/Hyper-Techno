@@ -116,8 +116,10 @@ export class StorageService {
   }
 
   getCartItems(ids = null) {
-    if (!ids) {
+    if (ids) {
       ids = JSON.parse(localStorage.cartID);
+    } else {
+      ids=[];
     }
     return this.itemService.getBroductById({ids}).subscribe(data => {
       console.log('Response :', data);

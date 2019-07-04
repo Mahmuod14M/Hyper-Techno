@@ -1,7 +1,7 @@
 
-
 body {
   font-family: 'Raleway', sans-serif;
+  overflow-x: hidden;
 }
 
 .sec11 .img {
@@ -15,10 +15,11 @@ body {
   width: 100%;
   height: 250px;
 }
-.hr{
+
+.hr {
   width: 100%;
   height: 1px;
-  
+
   background-color: yellow;
 }
 
@@ -76,9 +77,10 @@ body {
   height: 0px;
   border: 0;
   border-top: 1px solid #f1f0f0;
- 
+
 }
-.category{
+
+.category {
   width: 80%;
   margin: auto;
   display: flex;
@@ -105,10 +107,11 @@ body {
   justify-content: space-around;
 }
 
-.category .card{
+.category .card {
   width: 240px;
   height: 214px;
 }
+
 .category .card h5 {
   position: absolute;
   bottom: 50px;
@@ -119,7 +122,8 @@ body {
   display: inherit;
   cursor: pointer;
 }
-.card-img-top{
+
+.card-img-top {
   height: 214px;
 }
 
@@ -140,7 +144,8 @@ body {
   font-size: 32px;
 }
 
-.sec33 p {}
+.sec33 p {
+}
 
 .offers {
   width: 80%;
@@ -151,34 +156,43 @@ body {
   padding-bottom: 10px;
   justify-content: space-between;
 }
-.offers .hot{
+
+.offers .hot {
   width: 49%;
 }
-.offers .rest{
+
+.offers .rest {
   width: 49%;
 }
-.offers .rest_up{
+
+.offers .rest_up {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.offers .rest_up .large{
+
+.offers .rest_up .large {
   width: 49%;
 }
-.offers .rest_up .small{
+
+.offers .rest_up .small {
   width: 49%;
 }
-.offers .rest .homeTheaters{
+
+.offers .rest .homeTheaters {
   width: 100%;
 }
-@media only screen and (max-width: 1024px){
-  .offers .hot{
+
+@media only screen and (max-width: 1024px) {
+  .offers .hot {
     width: 100%;
   }
-  .offers .rest{
+
+  .offers .rest {
     width: 100%;
   }
 }
+
 .sec44 {
   width: 95%;
   margin: auto;
@@ -209,8 +223,6 @@ body {
   text-decoration: none;
 
 }
-
-
 
 
 .sec44 .card {
@@ -294,7 +306,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.sec44 .item p{
+
+.sec44 .item p {
   font-size: 12px;
 }
 
@@ -303,7 +316,8 @@ body {
   margin: auto;
   height: 120px;
 }
-.sec44 .card .hover{
+
+.sec44 .card .hover {
   position: absolute;
   width: 160px !important;
   height: 220px;
@@ -312,31 +326,37 @@ body {
   z-index: 20;
 }
 
-.sec44 .card .hover .inner-card{
+.sec44 .card .hover .inner-card {
   position: relative;
   text-align: center;
   width: 160px !important;
   height: 220px;
 }
 
-.hide-me { display: none !important;}
+.hide-me {
+  display: none !important;
+}
 
-.show-me { display: inline-block !important; }
+.show-me {
+  display: inline-block !important;
+}
 
-.sec44 .card .hover .inner-card .one{
+.sec44 .card .hover .inner-card .one {
   position: absolute;
-  top:60px;
+  top: 60px;
   right: 50px;
   width: 60px;
   height: 60px;
 }
-.sec44 .card .hover .inner-card .two{
+
+.sec44 .card .hover .inner-card .two {
   width: 20px;
   height: 20px;
   margin-right: 5px;
   display: inline-block;
 }
-.sec44 .card .hover .inner-card  h4{
+
+.sec44 .card .hover .inner-card h4 {
   position: absolute;
   top: 160px;
   background: #ee0000;
@@ -349,17 +369,17 @@ body {
   z-index: 2000000000;
   cursor: pointer;
 }
-.sec44 .card .hover .inner-card  h5{
+
+.sec44 .card .hover .inner-card h5 {
   background: #a30202;
   color: white;
 
   width: 160px;
   height: 30px;
   position: absolute;
-  top:190px;
+  top: 190px;
   z-index: 20;
 }
-
 
 
 .sec55 {
@@ -370,7 +390,6 @@ body {
   position: relative;
   text-align: center;
 }
-
 
 
 .sec55 h3 {
@@ -394,8 +413,6 @@ body {
   text-decoration: none;
 
 }
-
-
 
 
 .sec55 .card {
@@ -479,7 +496,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.sec55 .item p{
+
+.sec55 .item p {
   font-size: 12px;
 }
 
@@ -488,7 +506,8 @@ body {
   margin: auto;
   height: 120px;
 }
-.sec55 .card .hover{
+
+.sec55 .card .hover {
   position: absolute;
   width: 160px !important;
   height: 220px;
@@ -497,31 +516,37 @@ body {
   z-index: 20;
 }
 
-.sec55 .card .hover .inner-card{
+.sec55 .card .hover .inner-card {
   position: relative;
   text-align: center;
   width: 160px !important;
   height: 220px;
 }
 
-.hide-me { display: none !important;}
+.hide-me {
+  display: none !important;
+}
 
-.show-me { display: inline-block !important; }
+.show-me {
+  display: inline-block !important;
+}
 
-.sec55 .card .hover .inner-card .one{
+.sec55 .card .hover .inner-card .one {
   position: absolute;
-  top:60px;
+  top: 60px;
   right: 50px;
   width: 60px;
   height: 60px;
 }
-.sec55 .card .hover .inner-card .two{
+
+.sec55 .card .hover .inner-card .two {
   width: 20px;
   height: 20px;
   margin-right: 5px;
   display: inline-block;
 }
-.sec55 .card .hover .inner-card  h4{
+
+.sec55 .card .hover .inner-card h4 {
   position: absolute;
   top: 160px;
   background: #ee0000;
@@ -534,17 +559,17 @@ body {
   z-index: 2000000000;
   cursor: pointer;
 }
-.sec55 .card .hover .inner-card  h5{
+
+.sec55 .card .hover .inner-card h5 {
   background: #a30202;
   color: white;
 
   width: 160px;
   height: 30px;
   position: absolute;
-  top:190px;
+  top: 190px;
   z-index: 20;
 }
-
 
 
 .sec66 {
@@ -574,10 +599,7 @@ body {
 }
 
 
-
-
-
-#loading{
+#loading {
   width: 100%;
   height: 300px;
   top: 0;
@@ -594,7 +616,7 @@ body {
   height: 40px;
   position: relative;
   text-align: center;
-  
+
   -webkit-animation: sk-rotate 2.0s infinite linear;
   animation: sk-rotate 2.0s infinite linear;
 }
@@ -607,7 +629,7 @@ body {
   top: 0;
   background-color: #F20C0C;
   border-radius: 100%;
-  
+
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
@@ -618,29 +640,43 @@ body {
   -webkit-animation-delay: -1.0s;
   animation-delay: -1.0s;
 }
-.data{
+
+.data {
   display: none;
 }
 
-@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
-@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+@-webkit-keyframes sk-rotate {
+  100% {
+    -webkit-transform: rotate(360deg)
+  }
+}
+
+@keyframes sk-rotate {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg)
+  }
+}
 
 @-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
+  0%, 100% {
+    -webkit-transform: scale(0.0)
+  }
+  50% {
+    -webkit-transform: scale(1.0)
+  }
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
+  0%, 100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 50% { 
+  }
+  50% {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
 }
-
-
 
 
 .owl-nav .owl-prev {
@@ -649,26 +685,31 @@ body {
   left: -7px;
   outline: none;
 }
-.owl-nav .owl-prev img{
+
+.owl-nav .owl-prev img {
   width: 30px;
   height: 75px;
-  background:none;
+  background: none;
 }
 
-.owl-theme .owl-nav [class*=owl-]:hover{
+.owl-theme .owl-nav [class*=owl-]:hover {
   background-color: transparent;
 }
-.owl-nav .owl-prev{
+
+.owl-nav .owl-prev {
   background: none;
 }
-.owl-nav .owl-next{
+
+.owl-nav .owl-next {
   background: none;
 }
-.owl-nav .owl-next img{
+
+.owl-nav .owl-next img {
   width: 30px;
   height: 75px;
-  background:none;
+  background: none;
 }
+
 .owl-nav .owl-next {
   position: absolute;
   top: 50px;

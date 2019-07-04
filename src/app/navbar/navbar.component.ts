@@ -56,15 +56,39 @@ export class NavbarComponent implements OnInit {
   Categorys: any[] = [];
   Categories: any[] = [];
   subCategories: any[] = [];
-  itemlist: Product[] = this.storageService.getCartItems();
+  itemlist = this.storageService.getCartItems();
   text: any = '';
 
   logIN(form) {
     this.storageService.logIN(form);
+    this.storageService.getUserObservable().subscribe({
+      next: logIn => {
+        this.logIn = JSON.parse(logIn);
+        console.log(this.logIn.user.profile_pic);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+          '+ this.logIn.user.profile_pic)';
+        console.log(document.getElementById('imagePreview'));
+        console.log((`https://arafa.000webhostapp.com/Hyper/uploads/` + this.logIn.user.profile_pic));
+      },
+      error: err => {
+      }
+    });
   }
 
   removeId() {
     this.storageService.removeId();
+    this.storageService.getUserObservable().subscribe({
+      next: logIn => {
+        this.logIn = JSON.parse(logIn);
+        console.log(this.logIn.user.profile_pic);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+          '+ this.logIn.user.profile_pic)';
+        console.log(document.getElementById('imagePreview'));
+        console.log((`https://arafa.000webhostapp.com/Hyper/uploads/` + this.logIn.user.profile_pic));
+      },
+      error: err => {
+      }
+    });
   }
 
   constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
@@ -116,7 +140,7 @@ export class NavbarComponent implements OnInit {
   };
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
-  }
+  };
 
 
   handleMenuMouseEnter(event: Event, categoryId: number) {
@@ -147,16 +171,54 @@ export class NavbarComponent implements OnInit {
     $('#dropdown-content-' + categoryId).slideToggle();
   }
 
+  edit() {
+    $('#Edit').show(500);
+  }
+
+  edit2() {
+    $('#Edit').hide(500);
+  }
+  close() {
+    $('.cart').toggle();
+  }
+  closeLonIn() {
+    $('#login').hide();
+  }
   ngOnInit() {
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          $('#imagePreview').css('background-image', 'url(' + reader.result + ')');
+          $('#imagePreview').hide();
+          $('#imagePreview').fadeIn(650);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $('#imageUpload').change(function() {
+      readURL(this);
+    });
+
+    $('.profileImg').mouseenter(() => {
+      $('#Edit').show();
+    });
+    $('.profileImg').mouseleave(() => {
+      $('#Edit').show();
+    });
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
+
         this.logIn = JSON.parse(logIn);
-        console.log('navBar');
-        console.log(this.logIn);
+        console.log(this.logIn.user.profile_pic);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+          '+ this.logIn.user.profile_pic)';
+        console.log(document.getElementById('imagePreview'));
+        console.log((`https://arafa.000webhostapp.com/Hyper/uploads/` + this.logIn.user.profile_pic));
       },
       error: err => {
-        console.log('has Error');
-        console.log(err);
       }
     });
     this.logIn = StorageService.getUserData();
@@ -173,6 +235,7 @@ export class NavbarComponent implements OnInit {
         e.stopPropagation();
       });
     });
+
     const self = this;
     $('#search_btn').click(() => {
       self.text = $('input[name=search]').val();
@@ -181,14 +244,7 @@ export class NavbarComponent implements OnInit {
     $('.log').click(() => {
       $('#login').toggle();
     });
-    $('#Register').click(() => {
-      alert('Register');
-      $('#login').toggle();
-    });
-    $('.forgotPassword').click(() => {
-      alert('forgotPassword');
-      $('#login').hide();
-    });
+
     $('#btn').click(() => {
       $('#menu').toggle();
     });
@@ -197,7 +253,7 @@ export class NavbarComponent implements OnInit {
 
     });
     $('.close').click(() => {
-      $('.cart').toggle();
+
     });
     $('#viewCart').click(() => {
       $('.cart').toggle();
@@ -221,6 +277,8 @@ export class NavbarComponent implements OnInit {
       });
     }
   }
+
+
 }
 
 window.onscroll = () => {

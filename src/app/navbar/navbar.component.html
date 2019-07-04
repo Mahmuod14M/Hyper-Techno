@@ -128,14 +128,27 @@
 </nav>
 
 <section class="login" id="login">
-  <div class="text-center" *ngIf="logIn">
-    <img src="assets/img/man.png">
-    <h2>mahmoud</h2>
+  <div id="LOGOUT" class="text-center" *ngIf="logIn">
+    <div class="container">
+      <div class="avatar-upload">
+        <div class="avatar-edit">
+          <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"/>
+          <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+          <div id="imagePreview" class="imagePreview" >
+            <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + logIn.user.profile_pic" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 *ngIf="logIn">{{logIn.user.first_name}} {{logIn.user.last_name}}</h2>
+    <a routerLink="/EditProfile">Edit Profile</a>
     <button class="btn btn-danger" (click)="removeId()">log out</button>
   </div>
 
 
-  <form #myForm="ngForm" (ngSubmit)="logIN(myForm)" *ngIf="!logIn" class="form-group">
+  <form #myForm="ngForm" (ngSubmit)="logIN(myForm)" id="SINGUPFORM" class="form-group" *ngIf="!logIn">
     <h3>LOGIN NOW</h3>
     <hr>
     <input type="email" placeholder="Your Email" name="email" class="form-control" ngModel required>
@@ -144,10 +157,10 @@
 
     <button type="submit" class="btn btn-dark">LOGIN</button>
   </form>
-  <div class="password pt-2" *ngIf="!logIn">
-    <a routerLink="/siginUp" class="forgotPassword">I forgot my password</a>
+  <div id="RIGISTER" class="password pt-2" *ngIf="!logIn">
+    <a routerLink="/siginUp" class="forgotPassword" (click)="closeLonIn()">I forgot my password</a>
     <hr>
-    <a routerLink="/siginUp" id="Register">Register Now ? Create an account </a>
+    <a routerLink="/siginUp" id="Register" (click)="closeLonIn()">Register Now ? Create an account </a>
   </div>
   <br>
 </section>
@@ -158,7 +171,7 @@
     <img src="assets/img/icons/cart.png" class="market">
 
     <span class="text">Shopping Cart</span>
-    <img class="close" src="assets/img/icons/close.png">
+    <img class="close" src="assets/img/icons/close.png" (click)="close()">
 
     <div class="main-view">
       <img class="big_cart" src="assets/img/icons/big cart.png">
