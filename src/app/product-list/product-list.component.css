@@ -527,3 +527,7 @@ align-items: baseline;
   height: 20rem;
   overflow: scroll;
 }
+.seeMoreBtn{
+  width: 100%;
+  padding-top: 30px;
+}

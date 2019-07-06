@@ -86,7 +86,7 @@ export class ProductListComponent implements OnInit {
       max_price: this.maxValue, min_price: this.minValue
     });
     this.isFilterChangeReady = true;
-    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady &&  this.isFilterChangeReady &&this.isDataReady) {
+    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
       console.log('this.isFilterChangeReady');
       $(window).scrollTop();
       $('#loading').fadeOut(2000);
@@ -131,8 +131,8 @@ export class ProductListComponent implements OnInit {
         }
       };
       this.isApplyFilterReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady &&  this.isFilterChangeReady &&this.isDataReady) {
-        console.log( 'this.isApplyFilterReady');
+      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
+        console.log('this.isApplyFilterReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
         $('.data').show();
@@ -162,7 +162,7 @@ export class ProductListComponent implements OnInit {
         }
       };
       this.isSearchReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady &&  this.isFilterChangeReady &&this.isDataReady) {
+      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
         console.log('this.isSearchReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
@@ -192,8 +192,8 @@ export class ProductListComponent implements OnInit {
         }
       }
     };
-    this.isDataReady= true;
-    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady &&  this.isFilterChangeReady &&this.isDataReady) {
+    this.isDataReady = true;
+    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
       console.log('this.isDataReady');
       $(window).scrollTop();
       $('#loading').fadeOut(2000);
@@ -204,10 +204,17 @@ export class ProductListComponent implements OnInit {
     console.log('Filter: ', this.filter);
   };
 
-  init = function() {
+  seeMore() {
+    this.pageCount += 1;
+    this.init(false);
+  }
+
+  init = function(first: boolean = true) {
     this.route.paramMap.subscribe(params => {
-      this.items = [];
-      this.pageCount = 1;
+      if (first) {
+        this.items = [];
+        this.pageCount = 1;
+      }
       const id = params.get('id');
       switch (params.get('page').toLowerCase()) {
         case 'maincat':
@@ -248,7 +255,7 @@ export class ProductListComponent implements OnInit {
           break;
       }
       this.isInitReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady &&  this.isFilterChangeReady && this.isDataReady) {
+      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
         console.log(' this.isInitReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
