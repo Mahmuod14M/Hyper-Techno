@@ -381,6 +381,23 @@ margin: 0;
 }
 .login h2{
   color: #d93232;
+  font-size: 18px;
+  font-weight: 600;
+}
+.login h4{
+  color: #8c8c8c;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  outline: none;
+}
+.line{
+  width: 80%;
+  margin: auto;
+  height: 2px;
+  background: #e9e7e7;
+  border-radius: 100%;
 }
 .login input {
   margin: 10px 0px;
@@ -795,7 +812,14 @@ h1 small {
 .avatar-upload {
   position: relative;
   max-width: 205px;
-  margin: 50px auto;
+  margin:  auto;
+}
+.upperBackground{
+  width: 100%;
+  position: absolute;
+  height: 80px;
+  border-radius: 0 13px 0 0 ;
+  background: #eae9e9;
 }
 .avatar-upload .avatar-edit {
   position: absolute;
@@ -835,8 +859,9 @@ h1 small {
   margin: auto;
 }
 .avatar-upload .avatar-preview {
-  width: 192px;
-  height: 192px;
+  width: 130px;
+  height: 130px;
+  margin: auto;
   position: relative;
   border-radius: 100%;
   border: 6px solid #F8F8F8;
@@ -858,8 +883,8 @@ h1 small {
 
 }
 .imagePreview img{
-  width: 180px;
-  height: 180px;
+  width: 130px;
+  height: 120px;
   border-radius: 50%;
 }
 #return-to-top {

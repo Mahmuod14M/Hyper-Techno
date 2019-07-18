@@ -1,0 +1,28 @@
+<div class="nav">
+  <h2>
+    <a routerLink="/home">Home </a>
+    <span>> Track your order</span>
+  </h2>
+</div>
+<div class="sec1">
+
+  <div class="text">
+    <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + UserDetails.user.profile_pic" class="img-fluid">
+    <h2>{{UserDetails.user.first_name}} {{UserDetails.user.last_name}}</h2>
+
+  </div>
+</div>
+<section class="orderTrack">
+  <div class="navigator">
+    <h2 id="myOrders" [routerLink]="['/Account/',MyOrders]"><i class="fas fa-receipt"></i>My Orders</h2>
+    <hr>
+    <h2 id="myAddresses" [routerLink]="['/Account/',MyAddresses]"><i class="fas fa-map-marker-alt"></i>My Addresses</h2>
+    <hr>
+    <h2 id="accountSetting" [routerLink]="['/Account/',MyProfile]"><i class="fas fa-cog"></i>Account Setting</h2>
+  </div>
+  <div class="bigOrder">
+    <app-order-details id="orderDetailsComponent"></app-order-details>
+    <app-shipping-address id="sippingAddressComponent"></app-shipping-address>
+    <app-account-setting id="accountSettingComponent"></app-account-setting>
+  </div>
+</section>

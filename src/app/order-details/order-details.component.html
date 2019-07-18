@@ -1,0 +1,65 @@
+<h2>Track your Orders</h2>
+<div class="order " *ngFor="let order of orderDetails.orders ">
+
+  <div class="orderTitle">
+    <ul>
+      <li>Order Placed on :{{order.date_add * 1000 |date}} </li>
+      <li>Order ID : #{{order.id}}</li>
+      <li>Order details</li>
+    </ul>
+    <ul>
+      <li>Recipient : {{order.address.first_name}} {{order.address.last_name}}</li>
+      <li>Payment method : cash on Delivery (COD)</li>
+      <li>80,000 LE</li>
+    </ul>
+  </div>
+  <hr>
+
+  <div (click)="changeStats(order.id)" [id]="'shippingstat-'+order.id" class="shippingStat py-3">
+    <h6 [ngClass]="{'ready': order.current_state.id > 1}" id="ready"><i class="fas fa-check-circle "></i> Ready for
+      shipping</h6>
+    <div class="betweenLine " [ngClass]="{'readyLine': order.current_state.id>1}"></div>
+    <h6 [ngClass]="{'ready': order.current_state.id>2}"><i class="fas fa-check-circle"></i> In Transit</h6>
+    <div class="betweenLine" [ngClass]="{'readyLine': order.current_state.id>2}"></div>
+    <h6 [ngClass]="{'ready': order.current_state.id>3}"><i class="fas fa-check-circle"></i> Delivered</h6>
+  </div>
+  <div class="orderDetails" *ngFor="let x of order.cart ">
+    <div class="review" [id]="'review-'+x.id">
+      <h2>Rate your Experience</h2>
+      <h6>
+      <i class="far fa-times-circle" (click)="closeReview(x.id)"></i>
+      </h6>
+      <div class="innerReview">
+        <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + x.product_image" class="img-fluid mx-2">
+        <div>
+          <h2>{{x.product_name}}</h2>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <form (ngSubmit)="review(myForm)" #myForm="ngForm">
+          <textarea name="review" cols="30" rows="5"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="itemDetails">
+      <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + x.product_image" class="img-fluid mx-2">
+      <div>
+        <h2>{{x.product_name}}</h2>
+        <h3>Price: <span>{{x.product_wholesale_price * x.quantity |currency:'LE '}}</span></h3>
+        <h3>Quantity: <span>{{x.quantity}}</span></h3>
+      </div>
+    </div>
+    <div class="rate">
+      <h4 [id]="'rate'+x.id" (click)="showView(x.id)">Rate Our Product</h4>
+      <h6>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </h6>
+    </div>
+  </div>
+</div>

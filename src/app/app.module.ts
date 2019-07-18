@@ -34,10 +34,14 @@ import {CartComponent} from './cart/cart.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { AddAdressComponent } from './add-adress/add-adress.component';
+import { AddAddressComponent } from './add-adress/add-address.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { TrackOrderComponent } from './track-order/track-order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 let config = new AuthServiceConfig([
   {
@@ -64,8 +68,10 @@ const appRoutes: Routes =
     {path: 'policy', component: PolicyComponent},
     {path: 'Installments', component: InstallmentsComponent},
     {path: 'cart', component: CartComponent},
-    {path: 'address', component: AddAdressComponent},
+    {path: 'address', component: AddAddressComponent},
+    {path: 'address/:id', component: AddAddressComponent},
     {path: 'EditProfile', component: EditProfileComponent},
+    {path: 'Account/:pageName', component: TrackOrderComponent},
   ];
 
 // @ts-ignore
@@ -87,7 +93,11 @@ const appRoutes: Routes =
     InstallmentsComponent,
     CartComponent,
     EditProfileComponent,
-    AddAdressComponent
+    AddAddressComponent,
+    TrackOrderComponent,
+    OrderDetailsComponent,
+    ShippingAddressComponent,
+    AccountSettingComponent
   ],
   imports: [
     BrowserModule,

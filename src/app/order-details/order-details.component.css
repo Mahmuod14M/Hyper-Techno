@@ -1,0 +1,134 @@
+h2{
+  color: #6b6b6b;
+  font-weight: 400;
+  font-size: 22px;
+}
+.order{
+  width: 100%;
+  margin:30px auto;
+  background: #f7f7f7;
+  color: #7f7f7f;
+  border: 1px solid #adacac;
+  border-radius: 0 13px 0 13px;
+
+}
+.order hr{
+  margin: 0;
+  background: #adacac;
+}
+.orderTitle{
+  width: 95%;
+  margin: 10px 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.orderTitle ul{
+  list-style: none;
+}
+.shippingStat{
+  width: 80%;
+  margin:  auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shippingStat h6{
+  color: #717171;
+}
+.betweenLine{
+  width: 150px;
+  height: 2px;
+  background: #b7b7b7;
+}
+.shippingStat .ready{
+  color: #db0d19 ;
+}
+.readyLine{
+  background: #db0d19;
+}
+.orderDetails{
+  width: 80%;
+  margin:  auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemDetails{
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemDetails img{
+  width: 150px;
+  height: 100px;
+}
+.itemDetails h2{
+  font-size: 18px;
+  font-weight: 700;
+}
+.itemDetails h3{
+  font-size: 18px;
+  font-weight: 500;
+}
+.itemDetails h3 span{
+  color: #e20d18;
+  font-weight: 600;
+}
+.rate h4{
+  font-size: 14px;
+  font-weight: 500;
+}
+.rate h6{
+  font-size: 20px;
+}
+.review{
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  background: #f7f7f7;
+  border: 1px solid #676767;
+  border-radius:0 13px 0 13px ;
+  width: 40%;
+  display: none;
+  padding: 20px;
+}
+.review img{
+  width: 150px;
+  height: 100px;
+}
+.review h6{
+  position: absolute;
+  top: 20px ;
+  right: 30px;
+}
+.innerReview{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.review h2{
+  color: #676767;
+  font-size: 16px;
+  font-weight: 600;
+}
+.innerReview textarea{
+  width: 90%;
+  border: 1px solid #676767;
+  border-radius: 0 13px 0 13px ;
+}
+.innerReview button{
+  margin-left: 20%;
+  background-color: #019d0a;
+  border: none;
+  height: 40px;
+  color: #fff;
+  border-radius: 0 13px 0 13px ;
+}
+.innerReview button:hover{
+  background-color: #019d0a;
+  border: none;
+  height: 40px;
+  color: #fff;
+}

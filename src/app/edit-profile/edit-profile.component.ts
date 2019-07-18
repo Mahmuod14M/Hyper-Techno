@@ -13,11 +13,17 @@ UserDetails: any ;
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    // this shit is not working
     this.storageService.getUserObservable().subscribe({
-      next : logIn => {
-        this.UserDetails= JSON.parse(logIn);
-        alert('hi');
-        console.log(logIn);
+      next: logIn => {
+        this.UserDetails = JSON.parse(logIn);
+        console.log(this.UserDetails.user.profile_pic);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+          '+ this.logIn.user.profile_pic)';
+        console.log(document.getElementById('imagePreview'));
+        console.log((`https://arafa.000webhostapp.com/Hyper/uploads/` + this.UserDetails.user.profile_pic));
+      },
+      error: err => {
       }
     });
   }

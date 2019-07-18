@@ -17,6 +17,10 @@ export class StorageService {
     return JSON.parse(localStorage.getItem('signData'));
   }
 
+  getUserData() {
+    return JSON.parse(localStorage.getItem('signData'));
+  }
+
   getUserObservable() {
     return this.log.asObservable();
   }
@@ -35,10 +39,18 @@ export class StorageService {
     });
   }
 
-  address(form) {
+  address(id, form) {
     const user = JSON.parse(localStorage.getItem('signData'));
     if (user) {
+      console.log(form);
+      for (const key in form.value) {
+        const value = form.value[key];
+        if (value === '') {
+          form.value[key] = null;
+        }
+      }
       const AddAddress = {
+        address_id: id,
         area_name: form.value.City,
         location_type: form.value.LocationType,
         apartment_num: form.value.ApartmentNum,
@@ -67,15 +79,26 @@ export class StorageService {
   }
 
   logIN(form) {
-    const signInData = {
-      email: form.value.email,
-      password: form.value.password,
-    };
-    this.itemService.signIn(signInData).subscribe(data => {
-      localStorage.setItem('signData', JSON.stringify(data));
-      this.userData = localStorage.getItem('signData');
-      this.log.next(this.userData);
-    });
+    const filter = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const password = form.value.password;
+    const passwordValidator = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    // at least one number, one lowercase and one uppercase letter
+    // at least six characters
+    const emailValidator = form.value.email;
+    console.log(emailValidator.value);
+    if (filter.test(emailValidator)) {
+      const signInData = {
+        email: form.value.email,
+        password: form.value.password,
+      };
+      this.itemService.signIn(signInData).subscribe(data => {
+        localStorage.setItem('signData', JSON.stringify(data));
+        this.userData = localStorage.getItem('signData');
+        this.log.next(this.userData);
+      });
+    } else {
+      alert('Your mail is wrong');
+    }
   }
 
   removeId() {
@@ -119,7 +142,7 @@ export class StorageService {
     if (ids) {
       ids = JSON.parse(localStorage.cartID);
     } else {
-      ids=[];
+      ids = [];
     }
     return this.itemService.getBroductById({ids}).subscribe(data => {
       console.log('Response :', data);

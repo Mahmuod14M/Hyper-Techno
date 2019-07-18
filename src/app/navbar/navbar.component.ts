@@ -58,6 +58,9 @@ export class NavbarComponent implements OnInit {
   subCategories: any[] = [];
   itemlist = this.storageService.getCartItems();
   text: any = '';
+  MyOrders = 'MyOrders';
+  MyAddresses = 'MyAddresses';
+  MyProfile = 'MyProfile';
 
   logIN(form) {
     this.storageService.logIN(form);
@@ -73,6 +76,7 @@ export class NavbarComponent implements OnInit {
       error: err => {
       }
     });
+    $('#login').toggle();
   }
 
   removeId() {
@@ -89,6 +93,7 @@ export class NavbarComponent implements OnInit {
       error: err => {
       }
     });
+    $('#login').toggle();
   }
 
   constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
@@ -140,7 +145,7 @@ export class NavbarComponent implements OnInit {
   };
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
-  };
+  }
 
 
   handleMenuMouseEnter(event: Event, categoryId: number) {
@@ -183,6 +188,9 @@ export class NavbarComponent implements OnInit {
   }
   closeLonIn() {
     $('#login').hide();
+  }
+  hideLogin() {
+      $('#login').toggle();
   }
   ngOnInit() {
     $(window).scroll(function() {
@@ -252,9 +260,18 @@ export class NavbarComponent implements OnInit {
       self.text = $('input[name=search]').val();
       self.router.navigate(['product/search/', self.text]);
     });
+    $('#search-input').keypress(e => {
+      const key = e.which;
+      if(key === 13) {
+        self.text = $('input[name=search]').val();
+        self.router.navigate(['product/search/', self.text]);
+        return false;
+      }
+    });
     $('.log').click(() => {
       $('#login').toggle();
     });
+
 
     $('#btn').click(() => {
       $('#menu').toggle();

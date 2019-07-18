@@ -80,19 +80,15 @@ export class ItemComponent implements OnInit {
       this.itemService.item_details(id).subscribe(data => {
         this.productDetails = data.product;
         this.relatedProducts = data.related;
-
-      });
-      this.itemService.item_details(id).subscribe(data => {
         this.isInStock = data.product.out_of_stock;
-
+        console.log('data_details');
+        this.isItemDetailsReady= true;
+        if (this.isItemDetailsReady) {
+          $(window).scrollTop();
+          $('.data').show();
+          $('#loading').fadeOut(3000);
+        }
       });
-      this.isItemDetailsReady= true;
-      if (this.isItemDetailsReady ) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(3000);
-        $('.data').show();
-      }
-
     });
 
 

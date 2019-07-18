@@ -129,6 +129,7 @@
 
 <section class="login" id="login">
   <div id="LOGOUT" class="text-center" *ngIf="logIn">
+    <div class="upperBackground"></div>
     <div class="container">
       <div class="avatar-upload">
         <div class="avatar-edit">
@@ -136,15 +137,21 @@
           <label for="imageUpload"></label>
         </div>
         <div class="avatar-preview">
-          <div id="imagePreview" class="imagePreview" >
+          <div id="imagePreview" class="imagePreview">
             <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + logIn.user.profile_pic" class="img-fluid">
           </div>
         </div>
       </div>
     </div>
     <h2 *ngIf="logIn">{{logIn.user.first_name}} {{logIn.user.last_name}}</h2>
-    <a routerLink="/EditProfile">Edit Profile</a>
-    <button class="btn btn-danger" (click)="removeId()">log out</button>
+    <div class="line"></div>
+    <h4 [routerLink]="['/Account/',MyOrders]" (click)="hideLogin()">My Orders</h4>
+    <div class="line"></div>
+    <h4 [routerLink]="['/Account/',MyAddresses]" (click)="hideLogin()">My Addresses</h4>
+    <div class="line"></div>
+    <h4 [routerLink]="['/Account/',MyProfile]" (click)="hideLogin()">Edit Profile</h4>
+    <div class="line"></div>
+    <h4 (click)="removeId()">log out</h4>
   </div>
 
 

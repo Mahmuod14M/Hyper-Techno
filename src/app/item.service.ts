@@ -113,14 +113,24 @@ export class ItemService {
       BASE_URL + '/api/Order/make_order', payload, httpOptions
     );
   }
+  get_user_orders(id): Observable<any> {
+    return this.httpClient.get(
+      BASE_URL + '/api/Order/get_user_orders?UserID='+id, httpOptions
+    );
+  }
+  get_user_address_By_id(id): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Address/get_user_addresse_by_id?AddressID='+id, null,httpOptions
+    );
+  }
+  add_review(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/Order/AddReview', payload,httpOptions
+    );
+  }
   getBroductById(payload): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/Eslam/fav_cart', payload, httpOptions
-    );
-  }
-  UserImage(id): Observable<any> {
-    return this.httpClient.post(
-      BASE_URL + '/api/User/edit_user_image?UserID='+ id, null, httpOptions
     );
   }
 }

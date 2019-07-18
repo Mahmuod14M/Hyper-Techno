@@ -18,75 +18,75 @@
      width="100%" height="300"    frameborder="0" style="border:0" allowfullscreen></iframe>
 </div>
 <div class="addressBook">
-  <form (ngSubmit)="address(myform)" #myform="ngForm">
+  <form (ngSubmit)="address(myForm)" #myForm="ngForm">
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>First Name*</label>
-        <input name="Fname" class="form-control" type="text" ngModel required>
+        <input name="Fname" class="form-control" type="text" ngModel required [value]="addressDetails?.first_name">
       </div>
       <div style="width: 45%">
         <label>Last Name*</label>
-        <input name="Lname" class="form-control" type="text" ngModel required>
+        <input name="Lname" class="form-control" type="text" ngModel required [value]="addressDetails?.last_name">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Country*</label>
-        <input name="country" class="form-control" type="text" ngModel required>
+        <input name="country" class="form-control" type="text" ngModel required [value]="addressDetails?.country_name">
       </div>
       <div style="width: 45%">
         <label> City*</label>
-        <input name="City" class="form-control" type="text" ngModel required>
+        <input name="City" class="form-control" type="text" ngModel required [value]="addressDetails?.city_name">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Street*</label>
-        <input name="Street" class="form-control" type="text" ngModel required>
+        <input name="Street" class="form-control" type="text" ngModel required [value]="addressDetails?.street_name">
       </div>
       <div style="width: 45%">
         <label>Building Number*</label>
-        <input name="buildNum" class="form-control" type="number" ngModel required>
+        <input name="buildNum" class="form-control" type="number" ngModel required [value]="addressDetails?.building_num">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Floor Number</label>
-        <input name="FloorNumber" class="form-control" type="number" ngModel >
+        <input name="FloorNumber" class="form-control" type="number" ngModel [value]="addressDetails?.floor_num">
       </div>
       <div style="width: 45%">
         <label>Apartment Number</label>
-        <input name="ApartmentNum" class="form-control" type="number" ngModel >
+        <input name="ApartmentNum" class="form-control" type="number" ngModel [value]="addressDetails?.apartment_num">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Nearst Landmark</label>
-        <input name="NearstLandmark" class="form-control" type="text" ngModel >
+        <input name="NearstLandmark" class="form-control" type="text" ngModel [value]="addressDetails?.landmark">
       </div>
       <div style="width: 45%">
         <label>Location Type</label>
-        <input name="LocationType" class="form-control" type="text" ngModel >
+        <input name="LocationType" class="form-control" type="text" ngModel [value]="addressDetails?.location_type">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Mobile Number*</label>
-        <input name="MobileNumber" class="form-control" type="text" ngModel required>
+        <input name="MobileNumber" class="form-control" type="text" ngModel required [value]="addressDetails?.phone?.mobile">
       </div>
       <div style="width: 45%">
         <label>Landline Number</label>
-        <input name="LandlineNumber" class="form-control" type="number" ngModel >
+        <input name="LandlineNumber" class="form-control" type="number" ngModel [value]="addressDetails?.phone?.landline">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Preferred Delivery Time</label>
-        <input name="PreferredDeliveryTime" class="form-control" type="text" ngModel >
+        <input name="PreferredDeliveryTime" class="form-control" type="text" ngModel [value]="addressDetails?.preferred_time">
       </div>
       <div style="width: 45%">
         <label>Shipping Notes</label>
-        <input name="Notes" class="form-control" type="text" ngModel >
+        <input name="Notes" class="form-control" type="text" ngModel [value]="addressDetails?.notes">
       </div>
     </div>
     <button type="submit" class="btn">Submit</button>

@@ -1,0 +1,16 @@
+<div class="addressHead">
+  <h2>Shipping Addresses</h2>
+  <button routerLink="/address">CREAT A NEW ADDRESS</button>
+</div>
+<div class="addressBody" *ngFor="let address of addressesDetails ">
+
+  <input type="radio">
+  <h3>{{address.first_name}} {{address.last_name}}</h3>
+
+  <h4>{{address.area_name}},{{address.building_num}}{{address.street_name}} st, floor {{address.floor_num}}
+    ,{{address.city_name}},{{address.country_name}}
+  </h4>
+
+  <h4>{{address.phone.mobile}}</h4>
+  <h5 [routerLink]="['/address/',address.id]">Edit</h5>
+</div>
