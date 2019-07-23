@@ -37,7 +37,7 @@
       </div>
 
       <div class="filter ">
-        <button class="btn " id="brands_Btn">Brands <i class="fas fa-angle-down  fa-rotate-270" id="icon"></i></button>
+        <button class="btn " id="brands_Btn" (click)="showBrands()">Brands <i class="fas fa-angle-down  fa-rotate-270" id="icon"></i></button>
         <hr>
         <div class="check scroll" id="Check_List">
           <div *ngFor="let x of filter.brands">
@@ -51,7 +51,7 @@
 
       </div>
       <div class="filter ">
-        <button class="btn " id="discount_Btn">categories <i class="fas fa-angle-down  fa-rotate-270" id="icon1"></i>
+        <button class="btn " id="discount_Btn" (click)="showDiscount()">categories <i class="fas fa-angle-down  fa-rotate-270" id="icon1"></i>
         </button>
         <hr>
         <div class="check scroll" id="offer_List">
@@ -65,11 +65,11 @@
 
       </div>
       <div class="filter" *ngFor="let x of filter.category_attributes">
-        <button class="btn " id="screen_Btn">{{x.name}} ({{x.sum}})<i class="fas fa-angle-down  fa-rotate-270"
-                                                                      id="icon2"></i>
+        <button class="btn " id="screen_Btn" (click)="showScreen(x.id)">{{x.name}} ({{x.sum}}) <i class="fas fa-angle-down  fa-rotate-270"
+                                                                                                  [id]="'icon2'+x.id"></i>
         </button>
         <hr>
-        <div class="check" id="size_List">
+        <div class="check" [id]="'size_List'+x.id">
           <div *ngFor="let y of x.cat_attr_values">
             <h6><input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id)"> {{y.name}} ({{y.sum}})
             </h6>
@@ -91,7 +91,10 @@
           <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
             <div class="inner-card">
               <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">
-              <h4><img src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART</h4>
+              <h4 *ngIf="itemListIDS.includes(item.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(item)"  [id]="'addToCart'+item.id" *ngIf="!itemListIDS.includes(item.id)"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
+              </h4>
               <h5>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>

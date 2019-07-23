@@ -77,25 +77,29 @@
     <img src="assets/img/logo menu minimize.png" routerLink="/home" id="navbarLogo">
 
     <div class="menu" id="menu">
-      <div class="dropdown" (mouseenter)="handleMenuMouseEnter($event, x.parent.id)"
-           (mouseleave)="handleMenuMouseEnter($event, x.parent.id)" *ngFor="let x of subCategories">
-        <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]">{{x.parent.name}} <i
-          class="fas fa-angle-down"></i></button>
-        <div class="dropdown-content " [id]="'dropdown-content-'+x.parent.id">
-          <h5>Select by Brand</h5>
+      <div class="menu">
+        <div class="dropdown" (mouseenter)="showCard(x.parent.id)"
+             (mouseleave)="hideCard(x.parent.id)" *ngFor="let x of subCategories">
+          <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]">{{x.parent.name}} <i
+            class="fas fa-angle-down"></i></button>
+          <div class="dropdown-content " [id]="'dropCard'+x.parent.id"  (mouseenter)="mouseOver(x.parent.id)"
+               (mouseleave)="mouseLeave(x.parent.id)">
+            <h5>Select by Brand</h5>
 
-          <owl-carousel [options]=myCarouselOptions [items]="imgs" [carouselClasses]="['owl-theme', 'sliding']">
-            <div class="owl_img" *ngFor="let brand of imgs">
-              <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + brand.image"
-                   class="img-fluid owl-carousel-img"/>
+            <owl-carousel [options]=myCarouselOptions [items]="imgs" [carouselClasses]="['owl-theme', 'sliding']">
+              <div class="owl_img" *ngFor="let brand of imgs">
+                <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + brand.image"
+                     class="img-fluid owl-carousel-img" [routerLink]="['/product/Brand/',brand.id]"/>
+              </div>
+            </owl-carousel>
+
+            <h5>Select by kind</h5>
+            <div class="kind">
+              <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">>{{x.name}}</h2>
             </div>
-          </owl-carousel>
-
-          <h5>Select by kind</h5>
-          <div class="kind">
-            <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">>{{x.name}}</h2>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -107,7 +111,7 @@
           <span class="counter1" style="right: 12px">{{itemlist.length}}</span>
         </div>
         <div style="position: relative">
-          <img src="assets/img/icons/cart.png" id="cart" (click)="addItem()">
+          <img src="assets/img/icons/cart.png" id="cart">
           <span class="counter2">{{itemlist.length}}</span>
         </div>
 
@@ -201,10 +205,13 @@
 </span>
     </div>
     <div class="m-auto w-75">
-      <button class="btn" routerLink="/cart" id="viewCart">VIEW CART</button>
+      <button class="btn" routerLink="/cart" id="viewCart" (click)="close()">VIEW CART</button>
     </div>
   </div>
 </section>
 
 
 <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i></a>
+
+
+

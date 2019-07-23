@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
+import {StorageService} from '../storage.service';
 import {query} from '@angular/animations';
 import {init} from 'protractor/built/launcher';
 
@@ -16,7 +17,7 @@ declare var $: any;
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute) {
+  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService ) {
   }
 
   minValue: number;
@@ -39,7 +40,7 @@ export class ProductListComponent implements OnInit {
   isInitReady = false;
   isFilterChangeReady = false;
   isDataReady = false;
-
+  itemListIDS: any[] = [];
   onScroll() {
     this.disableScroll = true;
     this.pageCount += 1;
@@ -264,26 +265,34 @@ export class ProductListComponent implements OnInit {
     });
 
   };
-
+  addToCart = function(product) {
+    this.storageService.addToCart(product);
+  };
   ngOnInit() {
+    this.storageService.getCartItems();
+    this.storageService.getCartObservable().subscribe(data => {
+      for (const product of data) {
+        this.itemListIDS.push(product.id);
+      }
+    });
     this.init();
     window.scrollTo(0, 0);
     this.pageCount = 1;
     this.items = [];
-
-    $('#brands_Btn').click(() => {
-      $('#Check_List').slideToggle();
-      $('#icon').toggleClass('fa-rotate-270');
-    });
-
-    $('#discount_Btn').click(() => {
-      $('#offer_List').slideToggle();
-      $('#icon1').toggleClass('fa-rotate-270');
-    });
-
     $('#screen_Btn').click(() => {
-      $('#size_List').slideToggle();
-      $('#icon2').toggleClass('fa-rotate-270');
+
     });
+  }
+  showBrands() {
+    $('#Check_List').slideToggle();
+    $('#icon').toggleClass('fa-rotate-270');
+  }
+  showDiscount() {
+    $('#offer_List').slideToggle();
+    $('#icon1').toggleClass('fa-rotate-270');
+  }
+  showScreen(id) {
+    $('#size_List'+id).slideToggle();
+    $('#icon2'+id).toggleClass('fa-rotate-270');
   }
 }

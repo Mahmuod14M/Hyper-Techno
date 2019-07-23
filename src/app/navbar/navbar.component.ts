@@ -48,7 +48,6 @@ export class NavbarComponent implements OnInit {
         items: 6,
       },
     }
-
   };
 
   imgs: any[] = [];
@@ -56,11 +55,12 @@ export class NavbarComponent implements OnInit {
   Categorys: any[] = [];
   Categories: any[] = [];
   subCategories: any[] = [];
-  itemlist = this.storageService.getCartItems();
+  itemlist: any[] = [];
   text: any = '';
   MyOrders = 'MyOrders';
   MyAddresses = 'MyAddresses';
   MyProfile = 'MyProfile';
+  mouseHover= false;
 
   logIN(form) {
     this.storageService.logIN(form);
@@ -99,15 +99,7 @@ export class NavbarComponent implements OnInit {
   constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
 
     this.router = router;
-    this.storageService.getCartObservable().subscribe({
-      next: cartList => {
-        this.itemlist = cartList;
-      },
-      error: err => {
-        console.log('Subscribe error');
-        console.log(err);
-      }
-    });
+
 
     itemService.brands().subscribe(data => {
       this.imgs = data.brand;
@@ -143,32 +135,48 @@ export class NavbarComponent implements OnInit {
     document.querySelector('body').style.left = '0';
     $('.sliderBG').fadeOut();
   };
-  removeItemFromCart = product => {
-    this.storageService.removeFromCart(product);
+  removeItemFromCart = productID => {
+    this.storageService.removeFromCart(productID);
+    console.log('removeItemFromCart', productID);
+  };
+
+  showCard(id) {
+    $('#dropCard' + id).show();
+    $('#dropCard' + id).mouseover(()=> {
+      this.mouseHover= true;
+    } );
+  }
+  mouseOver(id) {
+
+    $('#dropCard' + id).show();
+
+  }
+  mouseLeave(id) {
+    $('#dropCard' + id).delay(3000).hide();
+  }
+  hideCard(id) {
+    // if (this.mouseHover === true) {
+    //   $('#dropCard' + id).show();
+    // }
+    $('#dropCard' + id).hide();
+    // setTimeout( ,  5000);
   }
 
-
-  handleMenuMouseEnter(event: Event, categoryId: number) {
-    const elm = $('#dropdown-content-' + categoryId);
-    const target = event.target as HTMLSelectElement;
-    const off = elm.offset();
-    const l = off.left;
-    const w = elm.width();
-    const docH = $('.containeer').height();
-    const docW = $('.containeer').width();
-    const isEntirelyVisible = (l + w <= docW);
-    // console.log('elm', elm);
-    // console.log('off', off);
-    // console.log('target', target.offsetWidth);
-    // console.log('l', l);
-    // console.log('w', w);
-    // console.log('docW', docW);
-    // console.log('isEntirelyVisible', isEntirelyVisible);
-    if (!isEntirelyVisible) {
-      target.classList.add('edge');
-    } else {
-      target.classList.remove('edge');
-    }
+  handleMenuMouseEnter(event: Event, id: number) {
+    const elm = $('#dropdown-content-' + id);
+    elm.show();
+    // const target = event.target as HTMLSelectElement;
+    // const off = elm.offset();
+    // const l = off.left;
+    // const w = elm.width();
+    // const docH = $('.containeer').height();
+    // const docW = $('.containeer').width();
+    // const isEntirelyVisible = (l + w <= docW);
+    // if (!isEntirelyVisible) {
+    //   target.classList.add('edge');
+    // } else {
+    //   target.classList.remove('edge');
+    // }
 
   }
 
@@ -183,16 +191,31 @@ export class NavbarComponent implements OnInit {
   edit2() {
     $('#Edit').hide(500);
   }
+
   close() {
     $('.cart').toggle();
   }
+
   closeLonIn() {
     $('#login').hide();
   }
+
   hideLogin() {
-      $('#login').toggle();
+    $('#login').toggle();
   }
+
   ngOnInit() {
+    this.storageService.getCartObservable().subscribe({
+      next: cartList => {
+        this.itemlist = cartList;
+        console.log('itemList', this.itemlist);
+      },
+      error: err => {
+        console.log('Subscribe error');
+        alert(err);
+      }
+    });
+    this.storageService.getCartItems();
     $(window).scroll(function() {
       if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
         $('#return-to-top').fadeIn(200);    // Fade in the arrow
@@ -202,9 +225,10 @@ export class NavbarComponent implements OnInit {
     });
     $('#return-to-top').click(() => {      // When arrow is clicked
       $('body,html').animate({
-        scrollTop : 0                       // Scroll to top of body
+        scrollTop: 0                       // Scroll to top of body
       }, 500);
     });
+
     function readURL(input) {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -262,7 +286,7 @@ export class NavbarComponent implements OnInit {
     });
     $('#search-input').keypress(e => {
       const key = e.which;
-      if(key === 13) {
+      if (key === 13) {
         self.text = $('input[name=search]').val();
         self.router.navigate(['product/search/', self.text]);
         return false;
@@ -279,12 +303,6 @@ export class NavbarComponent implements OnInit {
     $('#cart').click(() => {
       $('.cart').toggle();
 
-    });
-    $('.close').click(() => {
-
-    });
-    $('#viewCart').click(() => {
-      $('.cart').toggle();
     });
     $('.click').click(() => {
       $('.links').slideToggle(100);
@@ -334,5 +352,6 @@ function scrollFunction() {
     elem.style.background = 'transparent';
     $('#navbarLogo').hide();
   }
+
 }
 

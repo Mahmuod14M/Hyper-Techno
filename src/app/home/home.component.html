@@ -105,9 +105,11 @@
                >
             <div class="inner-card">
               <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',product.id]">
-              <h4 (click)="addToCart(product)" (click)="onClickCart(product.id)" id="addToCart"><img
+              <h4 *ngIf="itemListIDS.includes(product.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(product)"  [id]="'addToCart'+product.id" *ngIf="!itemListIDS.includes(product.id)"><img
                 src="assets/img/icons/cart2.png" class="img-fluid two">{{card}}
               </h4>
+
               <h5>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -154,8 +156,11 @@
                >
             <div class="inner-card">
               <img src="assets/img/icons/show.png" class="img-fluid one"  [routerLink]="['/item',product.id]">
-              <h4 (click)="addToCart(product)"><img src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
+              <h4 *ngIf="itemListIDS.includes(product.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(product)"  [id]="'addToCart'+product.id" *ngIf="!itemListIDS.includes(product.id)"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">{{card}}
               </h4>
+
               <h5>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -200,12 +205,14 @@
     <owl-carousel [options]=myCarouselOptions [items]="mainCat" [carouselClasses]="['owl-theme', 'sliding']">
       <div class="item" *ngFor="let product of mainCat">
         <div class="card" (mouseover)="product.hover=true" (mouseleave)="product.hover=false">
-          <div class="hover" [ngStyle]="{visibility: product.hover==true  ? 'visible' : 'hidden' }"
-              >
+          <div class="hover" [ngStyle]="{visibility: product.hover==true  ? 'visible' : 'hidden' }">
             <div class="inner-card">
               <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',product.id]" >
-              <h4 (click)="addToCart(product)"><img src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
+              <h4 *ngIf="itemListIDS.includes(product.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(product)"  [id]="'addToCart'+product.id" *ngIf="!itemListIDS.includes(product.id)"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">{{card}}
               </h4>
+
               <h5>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>

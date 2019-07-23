@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
-var $;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'hyper-tecno';
+  title = 'hyper-techno';
 
-ngOnInit(){
+ private cart = [];
+  ngOnInit() {
+  if (localStorage.cartID) {
+    this.cart = JSON.parse(localStorage.cartID);
+  }
 
-  
-
-};
+}
 
 }

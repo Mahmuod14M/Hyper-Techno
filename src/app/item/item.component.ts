@@ -17,7 +17,7 @@ export class ItemComponent implements OnInit {
 
   productDetails: Product;
   relatedProducts: Product[];
-
+  itemListIDS: any[] = [];
   isInStock = false;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {
@@ -73,6 +73,12 @@ export class ItemComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.storageService.getCartItems();
+    this.storageService.getCartObservable().subscribe(data => {
+      for (const product of data) {
+        this.itemListIDS.push(product.id);
+      }
+    });
     window.scrollTo(0, 0);
     this.route.paramMap.subscribe(params => {
 

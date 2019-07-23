@@ -122,6 +122,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   mainCat: any[] = [];
 
   brands: any[] = [];
+  itemListIDS: any[] = [];
 
   isCategoryReady = false;
   isHotProductReady = false;
@@ -209,16 +210,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
 
-  subscription = Subscription;
-  onClickCart(id) {
-    this.card = 'ADDED TO CART';
-  }
-
+  private subscription = Subscription;
   addToCart = function(product) {
     this.storageService.addToCart(product);
   };
 
   ngOnInit() {
+    this.storageService.getCartItems();
+    this.storageService.getCartObservable().subscribe(data => {
+      for (const product of data) {
+        this.itemListIDS.push(product.id);
+      }
+    });
     window.scrollTo(0, 0);
     $( '.owl-prev').css({
       position:'absolute',

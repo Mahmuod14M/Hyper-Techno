@@ -10,6 +10,7 @@ export class StorageService {
   }
 
   private cart = new Subject<any>();
+  // public cartIDS=   JSON.parse(localStorage.cartID);
   public userData = JSON.parse(localStorage.getItem('signData'));
   private log = new Subject<any>();
 
@@ -118,39 +119,47 @@ export class StorageService {
         cart.push(product.id);
       }
       localStorage.cartID = JSON.stringify(cart);
-      this.getCartItems(cart);
+      this.getCartItems();
     }
   }
 
-  removeFromCart(product) {
-    const itemsArry = JSON.parse(localStorage.cartID);
-    for (let index = 0; index < itemsArry.length; index++) {
-      if (itemsArry[index].id === product.id) {
-        itemsArry.splice(index, 1);
-        localStorage.cartID = JSON.stringify(itemsArry);
-        $('#cart_item_' + product).fadeOut();
+  removeAll() {
+    localStorage.cartID = [];
+    this.cart.next([]);
+  }
+
+  removeFromCart(productID) {
+    const itemsArray = JSON.parse(localStorage.cartID);
+    console.log(' itemsArray[index].id', itemsArray);
+    for (let index = 0; index < itemsArray.length; index++) {
+      console.log(' product.id', productID);
+      console.log(' itemsArray[index].id', itemsArray[index]);
+      if (itemsArray[index] === productID) {
+        itemsArray.splice(index, 1);
+        localStorage.cartID = JSON.stringify(itemsArray);
+        $('#cart_item_' + productID).fadeOut();
       }
     }
-    this.getCartItems(itemsArry);
+    this.getCartItems();
   }
 
   getCartObservable() {
     return this.cart.asObservable();
   }
 
-  getCartItems(ids = null) {
-    if (ids) {
-      ids = JSON.parse(localStorage.cartID);
+  getCartItems() {
+    if (localStorage.cartID) {
+      const ids = JSON.parse(localStorage.cartID);
+      this.itemService.getBroductById({ids}).subscribe(data => {
+        console.log('Response :', data);
+        if (!data.error) {
+          this.cart.next(data.products);
+        } else {
+          this.cart.next([]);
+        }
+      });
     } else {
-      ids = [];
+      this.cart.next([]);
     }
-    return this.itemService.getBroductById({ids}).subscribe(data => {
-      console.log('Response :', data);
-      if (!data.error) {
-        this.cart.next(data.products);
-      } else {
-        return [];
-      }
-    });
   }
 }

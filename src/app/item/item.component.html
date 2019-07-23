@@ -162,10 +162,13 @@
       <div class="item" *ngFor="let items of relatedProducts">
         <div class="card" (mouseover)="items.hover=true" (mouseleave)="items.hover=false">
           <div class="hover" [ngStyle]="{visibility: items.hover==true  ? 'visible' : 'hidden' }" (click)="itemHover()"
-               [routerLink]="['/item',items.id]">
+               >
             <div class="inner-card">
               <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]">
-              <h4><img src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART</h4>
+              <h4 *ngIf="itemListIDS.includes(items.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(items)"  [id]="'addToCart'+items.id" *ngIf="!itemListIDS.includes(items.id)"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
+              </h4>
               <h5>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>

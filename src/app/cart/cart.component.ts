@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class CartComponent implements OnInit {
 
+
+
   itemlist: Product[];
   finalPrice = 0;
   VocherPrice = 0;
@@ -27,7 +29,7 @@ export class CartComponent implements OnInit {
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
     $('#finalProduct_').hide();
-  };
+  }
 
   constructor(private storageService: StorageService, private itemService: ItemService) {
     storageService.getUserObservable().subscribe({
@@ -62,9 +64,9 @@ export class CartComponent implements OnInit {
       // preferred_time: time
     };
     this.itemService.makeOrder(checkData).subscribe(data => {
-      alert('done');
       console.log(checkData);
     });
+    this.storageService.removeAll();
   }
 
   counter(i: number) {
@@ -72,6 +74,13 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
+    function errorCallback(error) {
+      console.log(JSON.stringify(error));
+    }
+    function cancelCallback() {
+      console.log('Payment cancelled');
+    }
+
     console.log(this.logIn);
     console.log(this.id);
     this.storageService.getCartItems();
@@ -86,5 +95,6 @@ export class CartComponent implements OnInit {
     });
     window.scrollTo(0, 0);
   }
+
 
 }
