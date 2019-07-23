@@ -3,17 +3,13 @@ import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
 import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-
+import { SocialUser } from 'angularx-social-login';
 @Component({
   selector: 'app-sigin-up',
   templateUrl: './sigin-up.component.html',
   styleUrls: ['./sigin-up.component.css']
 })
 export class SiginUpComponent implements OnInit {
-  logIn: any ;
-  register(form) {
-    this.storageService.register(form);
-  }
   constructor(private itemService: ItemService,private storageService: StorageService,private authService: AuthService) {
 
     this.storageService.getUserObservable().subscribe({
@@ -21,6 +17,12 @@ export class SiginUpComponent implements OnInit {
         this.logIn =logIn;
       }
     });
+  }
+  logIn: any ;
+  private user: SocialUser;
+  private loggedIn: boolean;
+  register(form) {
+    this.storageService.register(form);
   }
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -34,6 +36,11 @@ export class SiginUpComponent implements OnInit {
     this.authService.signOut();
   }
   ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log('user',user);
+    });
     window.scrollTo(0, 0);
   }
 

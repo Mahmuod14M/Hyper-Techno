@@ -80,9 +80,9 @@
       <div class="menu">
         <div class="dropdown" (mouseenter)="showCard(x.parent.id)"
              (mouseleave)="hideCard(x.parent.id)" *ngFor="let x of subCategories">
-          <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]">{{x.parent.name}} <i
+          <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]" >{{x.parent.name}} <i
             class="fas fa-angle-down"></i></button>
-          <div class="dropdown-content " [id]="'dropCard'+x.parent.id"  (mouseenter)="mouseOver(x.parent.id)"
+          <div class="dropdown-content " [id]="'dropCard'+x.parent.id" *ngFor="let x of subCategories" (mouseenter)="mouseOver(x.parent.id)"
                (mouseleave)="mouseLeave(x.parent.id)">
             <h5>Select by Brand</h5>
 

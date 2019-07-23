@@ -155,11 +155,7 @@ export class NavbarComponent implements OnInit {
     $('#dropCard' + id).delay(3000).hide();
   }
   hideCard(id) {
-    // if (this.mouseHover === true) {
-    //   $('#dropCard' + id).show();
-    // }
     $('#dropCard' + id).hide();
-    // setTimeout( ,  5000);
   }
 
   handleMenuMouseEnter(event: Event, id: number) {

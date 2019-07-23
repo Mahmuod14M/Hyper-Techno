@@ -43,7 +43,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 
-let config = new AuthServiceConfig([
+
+const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider('Google-OAuth-Client-Id')
@@ -118,7 +119,7 @@ const appRoutes: Routes =
     Ng5SliderModule,
     FormsModule,
     InfiniteScrollModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 
   providers: [
