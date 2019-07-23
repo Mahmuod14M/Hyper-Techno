@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit {
     ceil: 500
   };
   items: any[] = [];
-  filter = {};
+  filter: any ;
   filterCategoryAttributes = [];
   brandsId: any[] = [];
   categoriesId: any[] = [];
