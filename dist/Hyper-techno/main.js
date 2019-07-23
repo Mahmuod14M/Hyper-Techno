@@ -2529,18 +2529,18 @@ var SiginUpComponent = /** @class */ (function () {
         this.authService.signIn(angularx_social_login__WEBPACK_IMPORTED_MODULE_4__["GoogleLoginProvider"].PROVIDER_ID);
     };
     SiginUpComponent.prototype.signInWithFB = function () {
-        this.authService.signIn(angularx_social_login__WEBPACK_IMPORTED_MODULE_4__["FacebookLoginProvider"].PROVIDER_ID);
-    };
-    SiginUpComponent.prototype.signOut = function () {
-        this.authService.signOut();
-    };
-    SiginUpComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.authService.signIn(angularx_social_login__WEBPACK_IMPORTED_MODULE_4__["FacebookLoginProvider"].PROVIDER_ID);
         this.authService.authState.subscribe(function (user) {
             _this.user = user;
             _this.loggedIn = (user != null);
             console.log('user', user);
         });
+    };
+    SiginUpComponent.prototype.signOut = function () {
+        this.authService.signOut();
+    };
+    SiginUpComponent.prototype.ngOnInit = function () {
         window.scrollTo(0, 0);
     };
     SiginUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

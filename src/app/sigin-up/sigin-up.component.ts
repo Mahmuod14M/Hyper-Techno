@@ -25,22 +25,22 @@ export class SiginUpComponent implements OnInit {
     this.storageService.register(form);
   }
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+ this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log('user',user);
+    });
   }
 
   signOut(): void {
     this.authService.signOut();
   }
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      console.log('user',user);
-    });
     window.scrollTo(0, 0);
   }
 
