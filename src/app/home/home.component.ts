@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   homePhoto: any[] = [];
   categories: any[] = [];
 
-  offersOne: any[] = [];
+  offersOne: any;
   offersTwo: any[] = [];
   offersThree: any[] = [];
   offersFour: any[] = [];
