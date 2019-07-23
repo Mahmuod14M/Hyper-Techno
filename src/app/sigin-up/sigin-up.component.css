@@ -133,4 +133,7 @@ from a :hover{
   background-color: #42AEEC;
   color: #fff;
 }
+.card-body img{
+  cursor: pointer;
+}
 
