@@ -59,14 +59,13 @@ export function provideConfig() {
 }
 const appRoutes: Routes =
   [
-    // {path: '', component: HomeComponent},
-    // {path: 'home', component: HomeComponent},
+    {path: '', component: HomeComponent},
+    {path: 'home', component: HomeComponent},
     {path: 'aboutUs', component: AboutUsComponent},
     {path: 'contactUs', component: ContactUsComponent},
     {path: 'item/:id', component: ItemComponent},
     {path: 'product/:page/:id', component: ProductListComponent},
     {path: 'siginUp', component: SiginUpComponent},
-    {path: '', component: SiginUpComponent},
     {path: 'policy', component: PolicyComponent},
     {path: 'Installments', component: InstallmentsComponent},
     {path: 'cart', component: CartComponent},
@@ -134,6 +133,5 @@ const appRoutes: Routes =
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  // platformBrowserDynamic().bootstrapModule(AppModule);
 }
-
-platformBrowserDynamic().bootstrapModule(AppModule);

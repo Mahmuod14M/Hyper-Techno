@@ -103,12 +103,10 @@ export class NavbarComponent implements OnInit {
 
     itemService.brands().subscribe(data => {
       this.imgs = data.brand;
-    });
-    itemService.brands().subscribe(data => {
       this.brands = data.brand;
     });
-
     itemService.Categ().subscribe(data => {
+      console.log('itemService.Categ');
       this.Categorys = data.category;
       data.category.forEach(mainCategory => {
         itemService.sub_catg(mainCategory.id).subscribe(subData => {
