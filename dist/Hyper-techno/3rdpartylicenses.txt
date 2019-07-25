@@ -295,9 +295,6 @@ SOFTWARE.
 ngx-owl-carousel-o
 MIT
 
-popper.js
-MIT
-
 rxjs
 Apache-2.0
                                Apache License
