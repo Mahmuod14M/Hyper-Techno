@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
     });
     itemService.get_address(this.id).subscribe(data => {
       this.addresses = data;
-      console.log(this.addresses);
+
     });
   }
 
@@ -65,6 +65,7 @@ export class CartComponent implements OnInit {
     };
     this.itemService.makeOrder(checkData).subscribe(data => {
       console.log(checkData);
+
     });
     this.storageService.removeAll();
   }

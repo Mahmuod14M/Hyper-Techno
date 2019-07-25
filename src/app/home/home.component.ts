@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private itemService: ItemService, private storageService: StorageService , private router: Router) {
     itemService.hotProduct(1).subscribe(data => {
       this.products = data.product;
-      console.log(data);
+      console.log('hotProduct');
       for (let i = 0; i < 8; i++) {
         this.item.push(data.product[i]);
       }
@@ -91,14 +91,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log('Home INIT');
+
     this.storageService.getCartObservable().subscribe({
       next: id => {
-        console.log(id);
       },
       error: err => {
-        console.log('Subscribe error');
-        console.log(err);
       }
     });
   }
@@ -222,6 +219,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
+    console.log('ngOnInit');
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {

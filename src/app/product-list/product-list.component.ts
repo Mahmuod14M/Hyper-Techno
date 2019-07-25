@@ -139,10 +139,12 @@ export class ProductListComponent implements OnInit {
         $('.data').show();
       }
     });
+
   };
   search = function(payload) {
     console.log('Page: ', this.pageCount);
     this.itemService.search(payload, this.pageCount).subscribe(data => {
+
       this.items = data;
       console.log('Data: ', data);
       this.filter = data.filter;
@@ -269,6 +271,7 @@ export class ProductListComponent implements OnInit {
     this.storageService.addToCart(product);
   };
   ngOnInit() {
+
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {
