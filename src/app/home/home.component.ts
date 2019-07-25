@@ -144,21 +144,27 @@ export class HomeComponent implements OnInit, OnDestroy {
         items: 1,
       },
       // breakpoint from 480 up
-      480: {
+      350: {
+        items:1,
+      },
+      375: {
         items: 2,
       },
-      // breakpoint from 768 up
-      375: {
-        items: 3,
+      690: {
+        items:4,
       },
+      // breakpoint from 768 up
+     768: {
+       items: 5,
+     },
       1024: {
-        items: 4,
+        items: 5,
       },
       1440: {
-        items: 7,
+        items: 8,
       },
       1920: {
-        items: 6,
+        items: 9,
       },
     }
   };

@@ -28,24 +28,24 @@ export class NavbarComponent implements OnInit {
     responsive: {
       // breakpoint from 0 up
       0: {
-        items: 1,
+        items: 2,
       },
       // breakpoint from 480 up
       480: {
-        items: 2,
+        items: 3,
       },
       // breakpoint from 768 up
       375: {
-        items: 3,
-      },
-      1024: {
         items: 4,
       },
+      1024: {
+        items: 6,
+      },
       1440: {
-        items: 5,
+        items: 7,
       },
       1920: {
-        items: 6,
+        items: 9,
       },
     }
   };
@@ -149,10 +149,13 @@ export class NavbarComponent implements OnInit {
   mouseOver(id) {
 
     $('#dropCard' + id).show();
-
+    $('#dropBtn' + id).css('color','#d93232');
+    $('#dropBtn' + id).css('border-bottom','2px solid #d93232');
   }
   mouseLeave(id) {
     $('#dropCard' + id).delay(3000).hide();
+    $('#dropBtn' + id).css('color',' #95979a');
+    $('#dropBtn' + id).css('border-bottom','none');
   }
   hideCard(id) {
     $('#dropCard' + id).hide();
@@ -313,8 +316,10 @@ export class NavbarComponent implements OnInit {
       $(window).scroll(function() {
         if ($(this).scrollTop() > 200) {
           $('.navbar').fadeIn(500);
+          $('.containeer').css('justify-content','space-between');
         } else {
           $('.navbar').fadeOut(500);
+          $('.containeer').css('justify-content','flex-end');
         }
       });
     }

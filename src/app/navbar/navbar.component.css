@@ -165,10 +165,10 @@ ul li {
 }
 
 .dropbtn {
-
   margin-right: 12px;
   font-size: 13px;
   border: none;
+
 }
 
 
@@ -178,7 +178,7 @@ ul li {
   display: none;
   position: absolute;
   top: 40px;
-  background-color: #f1f1f1;
+  background-color: rgba(241, 241, 241, 0.9);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -204,7 +204,6 @@ ul li {
 
 .containeer button {
   color: #95979a;
-  /* margin-right: 10px; */
   background-color: transparent;
   border: none;
   padding: 5px;
@@ -212,6 +211,7 @@ ul li {
 
 .containeer button:hover {
   color: #d93232;
+  border-bottom: 2px solid #d93232;
 }
 
 .menu .edge .dropdown-content {
@@ -240,6 +240,7 @@ owl-carousel .owl_img img {
   width: 100px;
   height: 75px;
   cursor: pointer;
+  background-color: rgba(241, 241, 241, 0.9);
 }
 
 owl-carousel .owl_img .owl-nav .owl-prev img {
@@ -261,8 +262,8 @@ owl-carousel .owl_img .owl-nav .owl-next img {
 }
 
 .dropdown-content h5 {
-  font-size: 19px;
-  font-weight: 200;
+  font-size: 18px;
+  font-weight: 500;
   display: inline-block;
   margin-bottom: 20px;
   padding-bottom: 15px;
@@ -271,10 +272,11 @@ owl-carousel .owl_img .owl-nav .owl-next img {
 
 .kind h2 {
   width: 33.333%;
-  font-size: 18px;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 400;
   cursor: pointer;
   padding-bottom: 10px;
+  outline: none;
 }
 
 .user {
@@ -617,8 +619,8 @@ $breakpoint determines at which width the media query breakpoint will take effec
 
 .nav-mobile {
   background: #fff;
-  width: 70px;
   display: none;
+  width: 40px;
   cursor: pointer;
 }
 
@@ -722,17 +724,29 @@ $breakpoint determines at which width the media query breakpoint will take effec
   }
 
   .containeer {
-    justify-content: flex-end;
-    width: 50%;
+    justify-content: flex-end ;
   }
 
   #main-img img {
-    width: 190px;
+    width: 75px;
+    height: auto;
     z-index: 16;
+    content:url("../../assets/img/22.png");
   }
 
   .login {
     top: 39px;
+  }
+
+  .user{
+    justify-content: space-between;
+
+  }
+  .wishList{
+
+  }
+  .item-count{
+    display: none;
   }
 }
 
@@ -786,6 +800,9 @@ $breakpoint determines at which width the media query breakpoint will take effec
 
   .sidenav a {
     font-size: 18px;
+  }
+  .nav-mobile {
+    width: 0;
   }
 }
 

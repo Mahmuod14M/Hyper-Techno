@@ -192,11 +192,16 @@ body {
     width: 100%;
   }
 }
-
+@media only screen and (max-width: 520px){
+  .nav span{
+    font-size: 6px;
+  }
+}
 .sec44 {
   width: 95%;
   margin: auto;
-  border: 1px solid #f1f0f0;
+
+
   border-radius: 0px 13px;
   position: relative;
   text-align: center;
@@ -206,8 +211,20 @@ body {
   font-size: 26px;
   color: #95979A;
   font-weight: lighter;
+  border: 1px solid rgba(0,0,0,.125);
+  margin: 0;
+  padding: 10px;
 }
-
+@media only screen and (max-width: 420px){
+  .sec44 h3 {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 350px){
+  .sec44 h3 {
+    font-size: 16px;
+  }
+}
 .sec44 h3 span {
   color: red;
   font-size: 32px;
@@ -226,7 +243,7 @@ body {
 
 
 .sec44 .card {
-  width: 160px !important;
+  width: 182px !important;
   height: 220px;
   position: relative;
 
@@ -319,7 +336,7 @@ body {
 
 .sec44 .card .hover {
   position: absolute;
-  width: 160px !important;
+  width: 182px !important;
   height: 220px;
   background-color: #8888883a;
   /* visibility: hidden; */
@@ -329,7 +346,7 @@ body {
 .sec44 .card .hover .inner-card {
   position: relative;
   text-align: center;
-  width: 160px !important;
+  width: 182px !important;
   height: 220px;
 }
 
@@ -360,7 +377,7 @@ body {
   position: absolute;
   top: 160px;
   background: #ee0000;
-  width: 160px;
+  width: 182px;
   height: 30px;
   color: white;
   font-size: 12px;
@@ -374,7 +391,7 @@ body {
   background: #a30202;
   color: white;
 
-  width: 160px;
+  width: 182px;
   height: 30px;
   position: absolute;
   top: 190px;
@@ -681,14 +698,14 @@ body {
 
 .owl-nav .owl-prev {
   position: absolute;
-  top: 50px;
-  left: -7px;
+  top: 75px;
+  left: -30px;
   outline: none;
 }
 
 .owl-nav .owl-prev img {
-  width: 30px;
-  height: 75px;
+  width: 55px;
+  height: 55px;
   background: none;
 }
 
@@ -705,15 +722,15 @@ body {
 }
 
 .owl-nav .owl-next img {
-  width: 30px;
-  height: 75px;
+  width: 55px;
+  height: 55px;
   background: none;
 }
 
 .owl-nav .owl-next {
   position: absolute;
-  top: 50px;
-  right: -4px;
+  top: 75px;
+  right: -30px;
   outline: none;
 }
 
