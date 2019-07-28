@@ -23,7 +23,6 @@ export class TrackOrderComponent implements OnInit {
     const userID =this.UserDetails.user.id;
     this.itemService.get_user_orders(userID).subscribe( data => {
       this.orderDetails =data;
-      console.log('orderDetails',this.orderDetails);
     });
     this.route.paramMap.subscribe(params => {
      const pageName = params.get('pageName');

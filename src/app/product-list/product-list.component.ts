@@ -45,7 +45,6 @@ export class ProductListComponent implements OnInit {
     this.disableScroll = true;
     this.pageCount += 1;
     this.init();
-    console.log('scrolled!!');
   }
 
   filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
@@ -80,15 +79,12 @@ export class ProductListComponent implements OnInit {
         }
       }
     }
-    console.log(this.brandsId);
-    console.log(this.categoriesId);
     this.applyFilter({
       brands: this.brandsId, cats: this.categoriesId, query: this.text ? this.text : '', cat_attrs_values: this.categoryAttrs,
       max_price: this.maxValue, min_price: this.minValue
     });
     this.isFilterChangeReady = true;
     if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-      console.log('this.isFilterChangeReady');
       $(window).scrollTop();
       $('#loading').fadeOut(2000);
       $('.data').show();
@@ -96,15 +92,12 @@ export class ProductListComponent implements OnInit {
   }
 
   applyFilter = function(payload) {
-    console.log('payload', payload);
     this.itemService.search(payload, this.pageCount).subscribe(data => {
       this.items = [];
       for (const item of data.product) {
         this.items.push(item);
       }
       this.disableScroll = false;
-      console.log('Data', data);
-      console.log('FilterData', data.filter);
       if (data.filter.brands.length > this.filter.brands.length) {
         this.filter.brands = data.filter.brands;
       }
@@ -112,11 +105,8 @@ export class ProductListComponent implements OnInit {
         this.filter.categories = data.filter.categories;
       }
       this.filter.category_attributes = data.filter.category_attributes ? data.filter.category_attributes : [];
-      console.log('category_attributes: ', this.filterCategoryAttributes);
       this.maxValue = data.filter.max_price;
       this.minValue = data.filter.min_price;
-      console.log('Data', data);
-      console.log('MaxValue', this.maxValue);
       this.options = {
         floor: data.filter.min_price,
         ceil: data.filter.max_price,
@@ -133,7 +123,6 @@ export class ProductListComponent implements OnInit {
       };
       this.isApplyFilterReady = true;
       if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        console.log('this.isApplyFilterReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
         $('.data').show();
@@ -142,11 +131,9 @@ export class ProductListComponent implements OnInit {
 
   };
   search = function(payload) {
-    console.log('Page: ', this.pageCount);
     this.itemService.search(payload, this.pageCount).subscribe(data => {
 
       this.items = data;
-      console.log('Data: ', data);
       this.filter = data.filter;
       this.maxValue = data.filter.max_price;
       this.minValue = data.filter.min_price;
@@ -166,7 +153,6 @@ export class ProductListComponent implements OnInit {
       };
       this.isSearchReady = true;
       if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        console.log('this.isSearchReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
         $('.data').show();
@@ -197,14 +183,11 @@ export class ProductListComponent implements OnInit {
     };
     this.isDataReady = true;
     if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-      console.log('this.isDataReady');
       $(window).scrollTop();
       $('#loading').fadeOut(2000);
       $('.data').show();
     }
 
-    console.log('MaxValue: ', this.maxValue);
-    console.log('Filter: ', this.filter);
   };
 
   seeMore() {
@@ -259,7 +242,6 @@ export class ProductListComponent implements OnInit {
       }
       this.isInitReady = true;
       if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        console.log(' this.isInitReady');
         $(window).scrollTop();
         $('#loading').fadeOut(2000);
         $('.data').show();

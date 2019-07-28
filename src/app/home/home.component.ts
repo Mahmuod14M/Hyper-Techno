@@ -210,7 +210,6 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit() {
-    console.log('ngOnInit');
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {

@@ -43,7 +43,6 @@ export class StorageService {
   address(id, form) {
     const user = JSON.parse(localStorage.getItem('signData'));
     if (user) {
-      console.log(form);
       for (const key in form.value) {
         const value = form.value[key];
         if (value === '') {
@@ -73,8 +72,6 @@ export class StorageService {
       };
       this.itemService.address(AddAddress).subscribe(data => {
         localStorage.setItem('UserAddress', JSON.stringify(data));
-        console.log(data);
-        console.log(user.user.id);
       });
     }
   }
@@ -86,7 +83,6 @@ export class StorageService {
     // at least one number, one lowercase and one uppercase letter
     // at least six characters
     const emailValidator = form.value.email;
-    console.log(emailValidator.value);
     if (filter.test(emailValidator)) {
       const signInData = {
         email: form.value.email,
@@ -130,10 +126,7 @@ export class StorageService {
 
   removeFromCart(productID) {
     const itemsArray = JSON.parse(localStorage.cartID);
-    console.log(' itemsArray[index].id', itemsArray);
     for (let index = 0; index < itemsArray.length; index++) {
-      console.log(' product.id', productID);
-      console.log(' itemsArray[index].id', itemsArray[index]);
       if (itemsArray[index] === productID) {
         itemsArray.splice(index, 1);
         localStorage.cartID = JSON.stringify(itemsArray);
@@ -151,7 +144,6 @@ export class StorageService {
     if (localStorage.cartID) {
       const ids = JSON.parse(localStorage.cartID);
       this.itemService.getBroductById({ids}).subscribe(data => {
-        console.log('Response :', data);
         if (!data.error) {
           this.cart.next(data.products);
         } else {

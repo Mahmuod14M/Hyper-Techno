@@ -19,8 +19,6 @@ export class OrderDetailsComponent implements OnInit {
       item_id:this.itemId ,
     };
     this.itemService.add_review(reviewBody).subscribe(data => {
-      console.log('reviewBody',data);
-      console.log('reviewBody',this.UserDetails.user.id);
     });
     this.closeReview(this.itemId);
   }
@@ -32,7 +30,6 @@ export class OrderDetailsComponent implements OnInit {
     const userID =this.UserDetails.user.id;
     this.itemService.get_user_orders(userID).subscribe( data => {
       this.orderDetails =data;
-      console.log('orderDetails',this.orderDetails);
     });
   }
   showView(id) {

@@ -18,7 +18,6 @@ export class ShippingAddressComponent implements OnInit {
     const userID =this.UserDetails.user.id;
     this.itemService.get_address(userID).subscribe( data => {
       this.addressesDetails =data.addresses;
-      console.log('addressesDetails',this.addressesDetails);
     });
   }
 

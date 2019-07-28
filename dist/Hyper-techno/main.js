@@ -127,7 +127,6 @@ var AccountSettingComponent = /** @class */ (function () {
     }
     AccountSettingComponent.prototype.ngOnInit = function () {
         this.UserDetails = this.storageService.getUserData();
-        console.log('productLishisisApplyFilterReady');
     };
     AccountSettingComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -203,11 +202,9 @@ var AddAddressComponent = /** @class */ (function () {
         window.scrollTo(0, 0);
         this.route.paramMap.subscribe(function (params) {
             _this.id = Number(params.get('id'));
-            console.log('id', _this.id);
             if (_this.id !== null) {
                 _this.itemService.get_user_address_By_id(_this.id).subscribe(function (data) {
                     _this.addressDetails = data.address;
-                    console.log('addressDetails', _this.addressDetails);
                 });
             }
         });
@@ -581,8 +578,6 @@ var CartComponent = /** @class */ (function () {
         var addressId = parseInt($('#addressSelector').val());
         var itemIds = [];
         $('.productCart').each(function () {
-            console.log('item id: ', $(this).attr('id'));
-            console.log('item id: ', $(this).find('#select').val());
             itemIds.push({
                 item_id: parseInt($(this).attr('id')),
                 item_quantity: parseInt($(this).find('#select').val()),
@@ -595,7 +590,6 @@ var CartComponent = /** @class */ (function () {
             items: itemIds,
         };
         this.itemService.makeOrder(checkData).subscribe(function (data) {
-            console.log(checkData);
         });
         this.storageService.removeAll();
     };
@@ -604,14 +598,6 @@ var CartComponent = /** @class */ (function () {
     };
     CartComponent.prototype.ngOnInit = function () {
         var _this = this;
-        function errorCallback(error) {
-            console.log(JSON.stringify(error));
-        }
-        function cancelCallback() {
-            console.log('Payment cancelled');
-        }
-        console.log(this.logIn);
-        console.log(this.id);
         this.storageService.getCartItems();
         this.storageService.getCartObservable().subscribe(function (data) {
             _this.itemlist = data;
@@ -776,11 +762,8 @@ var EditProfileComponent = /** @class */ (function () {
         this.storageService.getUserObservable().subscribe({
             next: function (logIn) {
                 _this.UserDetails = JSON.parse(logIn);
-                console.log(_this.UserDetails.user.profile_pic);
                 document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
                     '+ this.logIn.user.profile_pic)';
-                console.log(document.getElementById('imagePreview'));
-                console.log(("https://arafa.000webhostapp.com/Hyper/uploads/" + _this.UserDetails.user.profile_pic));
             },
             error: function (err) {
             }
@@ -1081,7 +1064,6 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('ngOnInit');
         this.storageService.getCartItems();
         this.storageService.getCartObservable().subscribe(function (data) {
             for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
@@ -1390,7 +1372,6 @@ var ItemComponent = /** @class */ (function () {
                 _this.productDetails = data.product;
                 _this.relatedProducts = data.related;
                 _this.isInStock = data.product.out_of_stock;
-                console.log('data_details');
                 _this.isItemDetailsReady = true;
                 if (_this.isItemDetailsReady) {
                     $(window).scrollTop();
@@ -1601,7 +1582,6 @@ var NavbarComponent = /** @class */ (function () {
         };
         this.removeItemFromCart = function (productID) {
             _this.storageService.removeFromCart(productID);
-            console.log('removeItemFromCart', productID);
         };
         this.router = router;
         itemService.brands().subscribe(function (data) {
@@ -1609,7 +1589,6 @@ var NavbarComponent = /** @class */ (function () {
             _this.brands = data.brand;
         });
         itemService.Categ().subscribe(function (data) {
-            console.log('itemService.Categ');
             _this.Categorys = data.category;
             data.category.forEach(function (mainCategory) {
                 itemService.sub_catg(mainCategory.id).subscribe(function (subData) {
@@ -1627,11 +1606,8 @@ var NavbarComponent = /** @class */ (function () {
         this.storageService.getUserObservable().subscribe({
             next: function (logIn) {
                 _this.logIn = JSON.parse(logIn);
-                console.log(_this.logIn.user.profile_pic);
                 document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
                     '+ this.logIn.user.profile_pic)';
-                console.log(document.getElementById('imagePreview'));
-                console.log(("https://arafa.000webhostapp.com/Hyper/uploads/" + _this.logIn.user.profile_pic));
             },
             error: function (err) {
             }
@@ -1644,11 +1620,8 @@ var NavbarComponent = /** @class */ (function () {
         this.storageService.getUserObservable().subscribe({
             next: function (logIn) {
                 _this.logIn = JSON.parse(logIn);
-                console.log(_this.logIn.user.profile_pic);
                 document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
                     '+ this.logIn.user.profile_pic)';
-                console.log(document.getElementById('imagePreview'));
-                console.log(("https://arafa.000webhostapp.com/Hyper/uploads/" + _this.logIn.user.profile_pic));
             },
             error: function (err) {
             }
@@ -1714,10 +1687,8 @@ var NavbarComponent = /** @class */ (function () {
         this.storageService.getCartObservable().subscribe({
             next: function (cartList) {
                 _this.itemlist = cartList;
-                console.log('itemList', _this.itemlist);
             },
             error: function (err) {
-                console.log('Subscribe error');
                 alert(err);
             }
         });
@@ -1758,11 +1729,8 @@ var NavbarComponent = /** @class */ (function () {
         this.storageService.getUserObservable().subscribe({
             next: function (logIn) {
                 _this.logIn = JSON.parse(logIn);
-                console.log(_this.logIn.user.profile_pic);
                 document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
                     '+ this.logIn.user.profile_pic)';
-                console.log(document.getElementById('imagePreview'));
-                console.log(("https://arafa.000webhostapp.com/Hyper/uploads/" + _this.logIn.user.profile_pic));
             },
             error: function (err) {
             }
@@ -1910,7 +1878,6 @@ var OrderDetailsComponent = /** @class */ (function () {
         this.storageService = storageService;
     }
     OrderDetailsComponent.prototype.review = function (form) {
-        var _this = this;
         var reviewBody = {
             review: form.value.review,
             user_id: this.UserDetails.user.id,
@@ -1918,8 +1885,6 @@ var OrderDetailsComponent = /** @class */ (function () {
             item_id: this.itemId,
         };
         this.itemService.add_review(reviewBody).subscribe(function (data) {
-            console.log('reviewBody', data);
-            console.log('reviewBody', _this.UserDetails.user.id);
         });
         this.closeReview(this.itemId);
     };
@@ -1930,7 +1895,6 @@ var OrderDetailsComponent = /** @class */ (function () {
         var userID = this.UserDetails.user.id;
         this.itemService.get_user_orders(userID).subscribe(function (data) {
             _this.orderDetails = data;
-            console.log('orderDetails', _this.orderDetails);
         });
     };
     OrderDetailsComponent.prototype.showView = function (id) {
@@ -2080,7 +2044,6 @@ var ProductListComponent = /** @class */ (function () {
         this.itemListIDS = [];
         this.applyFilter = function (payload) {
             var _this = this;
-            console.log('payload', payload);
             this.itemService.search(payload, this.pageCount).subscribe(function (data) {
                 _this.items = [];
                 for (var _i = 0, _a = data.product; _i < _a.length; _i++) {
@@ -2088,8 +2051,6 @@ var ProductListComponent = /** @class */ (function () {
                     _this.items.push(item);
                 }
                 _this.disableScroll = false;
-                console.log('Data', data);
-                console.log('FilterData', data.filter);
                 if (data.filter.brands.length > _this.filter.brands.length) {
                     _this.filter.brands = data.filter.brands;
                 }
@@ -2097,11 +2058,8 @@ var ProductListComponent = /** @class */ (function () {
                     _this.filter.categories = data.filter.categories;
                 }
                 _this.filter.category_attributes = data.filter.category_attributes ? data.filter.category_attributes : [];
-                console.log('category_attributes: ', _this.filterCategoryAttributes);
                 _this.maxValue = data.filter.max_price;
                 _this.minValue = data.filter.min_price;
-                console.log('Data', data);
-                console.log('MaxValue', _this.maxValue);
                 _this.options = {
                     floor: data.filter.min_price,
                     ceil: data.filter.max_price,
@@ -2118,7 +2076,6 @@ var ProductListComponent = /** @class */ (function () {
                 };
                 _this.isApplyFilterReady = true;
                 if (_this.isApplyFilterReady && _this.isSearchReady && _this.isInitReady && _this.isFilterChangeReady && _this.isDataReady) {
-                    console.log('this.isApplyFilterReady');
                     $(window).scrollTop();
                     $('#loading').fadeOut(2000);
                     $('.data').show();
@@ -2127,10 +2084,8 @@ var ProductListComponent = /** @class */ (function () {
         };
         this.search = function (payload) {
             var _this = this;
-            console.log('Page: ', this.pageCount);
             this.itemService.search(payload, this.pageCount).subscribe(function (data) {
                 _this.items = data;
-                console.log('Data: ', data);
                 _this.filter = data.filter;
                 _this.maxValue = data.filter.max_price;
                 _this.minValue = data.filter.min_price;
@@ -2150,7 +2105,6 @@ var ProductListComponent = /** @class */ (function () {
                 };
                 _this.isSearchReady = true;
                 if (_this.isApplyFilterReady && _this.isSearchReady && _this.isInitReady && _this.isFilterChangeReady && _this.isDataReady) {
-                    console.log('this.isSearchReady');
                     $(window).scrollTop();
                     $('#loading').fadeOut(2000);
                     $('.data').show();
@@ -2182,13 +2136,10 @@ var ProductListComponent = /** @class */ (function () {
             };
             this.isDataReady = true;
             if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-                console.log('this.isDataReady');
                 $(window).scrollTop();
                 $('#loading').fadeOut(2000);
                 $('.data').show();
             }
-            console.log('MaxValue: ', this.maxValue);
-            console.log('Filter: ', this.filter);
         };
         this.init = function (first) {
             var _this = this;
@@ -2237,7 +2188,6 @@ var ProductListComponent = /** @class */ (function () {
                 }
                 _this.isInitReady = true;
                 if (_this.isApplyFilterReady && _this.isSearchReady && _this.isInitReady && _this.isFilterChangeReady && _this.isDataReady) {
-                    console.log(' this.isInitReady');
                     $(window).scrollTop();
                     $('#loading').fadeOut(2000);
                     $('.data').show();
@@ -2252,7 +2202,6 @@ var ProductListComponent = /** @class */ (function () {
         this.disableScroll = true;
         this.pageCount += 1;
         this.init();
-        console.log('scrolled!!');
     };
     ProductListComponent.prototype.filterChange = function (event, minValue, maxValue, brandID, categoryID, subCatID) {
         if (event.currentTarget) {
@@ -2291,15 +2240,12 @@ var ProductListComponent = /** @class */ (function () {
                 }
             }
         }
-        console.log(this.brandsId);
-        console.log(this.categoriesId);
         this.applyFilter({
             brands: this.brandsId, cats: this.categoriesId, query: this.text ? this.text : '', cat_attrs_values: this.categoryAttrs,
             max_price: this.maxValue, min_price: this.minValue
         });
         this.isFilterChangeReady = true;
         if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-            console.log('this.isFilterChangeReady');
             $(window).scrollTop();
             $('#loading').fadeOut(2000);
             $('.data').show();
@@ -2442,7 +2388,6 @@ var ShippingAddressComponent = /** @class */ (function () {
         var userID = this.UserDetails.user.id;
         this.itemService.get_address(userID).subscribe(function (data) {
             _this.addressesDetails = data.addresses;
-            console.log('addressesDetails', _this.addressesDetails);
         });
     };
     ShippingAddressComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -2597,7 +2542,6 @@ var StorageService = /** @class */ (function () {
     StorageService.prototype.address = function (id, form) {
         var user = JSON.parse(localStorage.getItem('signData'));
         if (user) {
-            console.log(form);
             for (var key in form.value) {
                 var value = form.value[key];
                 if (value === '') {
@@ -2627,8 +2571,6 @@ var StorageService = /** @class */ (function () {
             };
             this.itemService.address(AddAddress).subscribe(function (data) {
                 localStorage.setItem('UserAddress', JSON.stringify(data));
-                console.log(data);
-                console.log(user.user.id);
             });
         }
     };
@@ -2640,7 +2582,6 @@ var StorageService = /** @class */ (function () {
         // at least one number, one lowercase and one uppercase letter
         // at least six characters
         var emailValidator = form.value.email;
-        console.log(emailValidator.value);
         if (filter.test(emailValidator)) {
             var signInData = {
                 email: form.value.email,
@@ -2681,10 +2622,7 @@ var StorageService = /** @class */ (function () {
     };
     StorageService.prototype.removeFromCart = function (productID) {
         var itemsArray = JSON.parse(localStorage.cartID);
-        console.log(' itemsArray[index].id', itemsArray);
         for (var index = 0; index < itemsArray.length; index++) {
-            console.log(' product.id', productID);
-            console.log(' itemsArray[index].id', itemsArray[index]);
             if (itemsArray[index] === productID) {
                 itemsArray.splice(index, 1);
                 localStorage.cartID = JSON.stringify(itemsArray);
@@ -2701,7 +2639,6 @@ var StorageService = /** @class */ (function () {
         if (localStorage.cartID) {
             var ids = JSON.parse(localStorage.cartID);
             this.itemService.getBroductById({ ids: ids }).subscribe(function (data) {
-                console.log('Response :', data);
                 if (!data.error) {
                     _this.cart.next(data.products);
                 }
@@ -2783,7 +2720,6 @@ var TrackOrderComponent = /** @class */ (function () {
         var userID = this.UserDetails.user.id;
         this.itemService.get_user_orders(userID).subscribe(function (data) {
             _this.orderDetails = data;
-            console.log('orderDetails', _this.orderDetails);
         });
         this.route.paramMap.subscribe(function (params) {
             var pageName = params.get('pageName');

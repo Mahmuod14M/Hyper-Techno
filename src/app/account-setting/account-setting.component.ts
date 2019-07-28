@@ -14,7 +14,6 @@ export class AccountSettingComponent implements OnInit {
 
   ngOnInit() {
     this.UserDetails = this.storageService.getUserData();
-    console.log('productLishisisApplyFilterReady');
   }
 
 }

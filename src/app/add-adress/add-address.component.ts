@@ -25,11 +25,9 @@ export class AddAddressComponent implements OnInit {
     window.scrollTo(0, 0);
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
-      console.log('id', this.id);
       if (this.id !== null) {
         this.itemService.get_user_address_By_id(this.id).subscribe(data => {
           this.addressDetails = data.address;
-          console.log('addressDetails', this.addressDetails);
         });
       }
     });

@@ -49,8 +49,6 @@ export class CartComponent implements OnInit {
     const addressId = parseInt($('#addressSelector').val());
     const itemIds = [];
     $('.productCart').each(function() {
-      console.log('item id: ', $(this).attr('id'));
-      console.log('item id: ', $(this).find('#select').val());
       itemIds.push({
         item_id: parseInt($(this).attr('id')),
         item_quantity: parseInt($(this).find('#select').val()),
@@ -64,7 +62,6 @@ export class CartComponent implements OnInit {
       // preferred_time: time
     };
     this.itemService.makeOrder(checkData).subscribe(data => {
-      console.log(checkData);
 
     });
     this.storageService.removeAll();
@@ -75,15 +72,6 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    function errorCallback(error) {
-      console.log(JSON.stringify(error));
-    }
-    function cancelCallback() {
-      console.log('Payment cancelled');
-    }
-
-    console.log(this.logIn);
-    console.log(this.id);
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;
