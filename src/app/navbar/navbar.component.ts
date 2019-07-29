@@ -1,21 +1,19 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
-import {Product} from '../Models';
 import 'bootstrap';
 
 declare var $: any;
 
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css'],
 })
 
 export class NavbarComponent implements OnInit {
-  router: Router = null;
   logIn: any = false;
   myCarouselOptions = {
     navClass: ['owl-prev', 'owl-next'],
@@ -49,8 +47,6 @@ export class NavbarComponent implements OnInit {
       },
     }
   };
-
-  imgs: any[] = [];
   brands: any[] = [];
   Categorys: any[] = [];
   Categories: any[] = [];
@@ -64,39 +60,24 @@ export class NavbarComponent implements OnInit {
 
   logIN(form) {
     this.storageService.logIN(form);
-    this.storageService.getUserObservable().subscribe({
-      next: logIn => {
-        this.logIn = JSON.parse(logIn);
-        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
-          '+ this.logIn.user.profile_pic)';
-      },
-      error: err => {
-      }
-    });
     $('#login').toggle();
   }
 
   removeId() {
     this.storageService.removeId();
+    $('#login').toggle();
+  }
+
+  constructor(private itemService: ItemService, private router: Router, private storageService: StorageService) {
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
         this.logIn = JSON.parse(logIn);
         document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
           '+ this.logIn.user.profile_pic)';
       },
-      error: err => {
-      }
     });
-    $('#login').toggle();
-  }
-
-  constructor(private itemService: ItemService, router: Router, private storageService: StorageService) {
-
-    this.router = router;
-
 
     itemService.brands().subscribe(data => {
-      this.imgs = data.brand;
       this.brands = data.brand;
     });
     itemService.Categ().subscribe(data => {
@@ -128,7 +109,7 @@ export class NavbarComponent implements OnInit {
   };
   removeItemFromCart = productID => {
     this.storageService.removeFromCart(productID);
-  };
+  }
 
   showCard(id) {
     $('#dropCard' + id).show();
@@ -137,7 +118,6 @@ export class NavbarComponent implements OnInit {
     } );
   }
   mouseOver(id) {
-
     $('#dropCard' + id).show();
     $('#dropBtn' + id).css('color','#d93232');
     $('#dropBtn' + id).css('border-bottom','2px solid #d93232');
@@ -149,24 +129,6 @@ export class NavbarComponent implements OnInit {
   }
   hideCard(id) {
     $('#dropCard' + id).hide();
-  }
-
-  handleMenuMouseEnter(event: Event, id: number) {
-    const elm = $('#dropdown-content-' + id);
-    elm.show();
-    // const target = event.target as HTMLSelectElement;
-    // const off = elm.offset();
-    // const l = off.left;
-    // const w = elm.width();
-    // const docH = $('.containeer').height();
-    // const docW = $('.containeer').width();
-    // const isEntirelyVisible = (l + w <= docW);
-    // if (!isEntirelyVisible) {
-    //   target.classList.add('edge');
-    // } else {
-    //   target.classList.remove('edge');
-    // }
-
   }
 
   showCatgs(event: Event, categoryId: number) {
@@ -198,9 +160,6 @@ export class NavbarComponent implements OnInit {
       next: cartList => {
         this.itemlist = cartList;
       },
-      error: err => {
-        alert(err);
-      }
     });
     this.storageService.getCartItems();
     $(window).scroll(function() {
@@ -209,11 +168,13 @@ export class NavbarComponent implements OnInit {
       } else {
         $('#return-to-top').fadeOut(200);   // Else fade out the arrow
       }
+      $('.containeer').css('justify-content','space-between');
     });
     $('#return-to-top').click(() => {      // When arrow is clicked
       $('body,html').animate({
         scrollTop: 0                       // Scroll to top of body
       }, 500);
+      $('.containeer').css('justify-content','flex-end');
     });
 
     function readURL(input) {
@@ -240,13 +201,10 @@ export class NavbarComponent implements OnInit {
     });
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
-
         this.logIn = JSON.parse(logIn);
         document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
           '+ this.logIn.user.profile_pic)';
       },
-      error: err => {
-      }
     });
     this.logIn = StorageService.getUserData();
     $('.sliderBG').click(() => {
@@ -262,7 +220,6 @@ export class NavbarComponent implements OnInit {
         e.stopPropagation();
       });
     });
-
     const self = this;
     $('#search_btn').click(() => {
       self.text = $('input[name=search]').val();
@@ -294,20 +251,6 @@ export class NavbarComponent implements OnInit {
     $('.click1').click(() => {
       $('.links1').slideToggle(100);
     });
-
-    $(document).ready(scroll);
-
-    function scroll() {
-      $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-          $('.navbar').fadeIn(500);
-          $('.containeer').css('justify-content','space-between');
-        } else {
-          $('.navbar').fadeOut(500);
-          $('.containeer').css('justify-content','flex-end');
-        }
-      });
-    }
   }
 
 

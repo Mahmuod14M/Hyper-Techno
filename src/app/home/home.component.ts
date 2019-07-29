@@ -1,10 +1,9 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
 import 'bootstrap';
 import {Router} from '@angular/router';
-import {computeStyle} from '@angular/animations/browser/src/util';
 
 declare var $: any;
 
@@ -17,100 +16,18 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private itemService: ItemService, private storageService: StorageService, private router: Router) {
-    this.itemService.hotProduct(1).subscribe(data => {
-      this.products = data.product;
-    });
-    itemService.homePageRequest().subscribe(data => {
-      this.homePhoto = data.promotions;
-
-      this.offersOne = data.promotions[0];
-      this.offersTwo = data.promotions[1];
-      this.offersThree = data.promotions[2];
-      this.offersFour = data.promotions[3];
-      this.isHomePageReady = true;
-
-      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
-    });
-
-    itemService.homePageRequest().subscribe(data => {
-      this.categories = data.categories;
-      this.isCategoryReady = true;
-      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
-    });
-
-
-    itemService.newArrivales(1).subscribe(data => {
-      this.Arrivals = data.product;
-      this.isArrivalReady = true;
-      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
-
-    });
-    itemService.main_cat_items(1, 1).subscribe(data => {
-      this.mainCat = data.product;
-      this.isArrivalReady = true;
-      if (this.isCategoryReady  && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show(2200);
-      }
-
-    });
-
-
-    itemService.brands().subscribe(data => {
-      this.brands = data.brand;
-      this.isBrandsReady = true;
-      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
-    });
-
-
-    this.storageService.getCartObservable().subscribe({
-      next: id => {
-      },
-      error: err => {
-      }
-    });
-  }
-
-  card = 'ADD TO CART';
+  constructor(private itemService: ItemService, private storageService: StorageService, private router: Router) {}
 
   itemList: any[] = [];
   idList: any[] = [];
-
   products: any[] = [];
   item: any[] = [];
   homePhoto: any[] = [];
   categories: any[] = [];
-
-  offersOne: any;
-  offersTwo: any[] = [];
-  offersThree: any[] = [];
-  offersFour: any[] = [];
-
   Arrivals: any[] = [];
-
   mainCat: any[] = [];
-
   brands: any[] = [];
   itemListIDS: any[] = [];
-
   isCategoryReady = false;
   isHotProductReady = false;
   isHomePageReady = false;
@@ -155,22 +72,6 @@ export class HomeComponent implements OnInit {
       },
     }
   };
-
-  routerLink(photo: any) {
-    const index = this.homePhoto.indexOf(photo);
-    if (this.homePhoto[index].id_brand != null) {
-      const ids = this.homePhoto[index].id_brand;
-      this.router.navigate(['/product/Brand/' + ids]);
-    } else if (this.homePhoto[index].id_category != null) {
-      const ids = this.homePhoto[index].id_category;
-      this.router.navigate(['/product/mainCat/' + ids]);
-    } else if (this.homePhoto[index].id_product != null) {
-      const ids = this.homePhoto[index].id_product;
-      this.router.navigate(['/item/' + ids]);
-    } else {
-    }
-  }
-
   slider1 = {
     items: 7,
     dots: false,
@@ -203,8 +104,23 @@ export class HomeComponent implements OnInit {
     }
   };
 
-
   private subscription = Subscription;
+
+  routerLink(photo: any) {
+    const index = this.homePhoto.indexOf(photo);
+    if (this.homePhoto[index].id_brand != null) {
+      const ids = this.homePhoto[index].id_brand;
+      this.router.navigate(['/product/Brand/' + ids]);
+    } else if (this.homePhoto[index].id_category != null) {
+      const ids = this.homePhoto[index].id_category;
+      this.router.navigate(['/product/mainCat/' + ids]);
+    } else if (this.homePhoto[index].id_product != null) {
+      const ids = this.homePhoto[index].id_product;
+      this.router.navigate(['/item/' + ids]);
+    } else {
+    }
+  }
+
   addToCart = function(product) {
     this.storageService.addToCart(product);
   };
@@ -216,6 +132,41 @@ export class HomeComponent implements OnInit {
         this.itemListIDS.push(product.id);
       }
     });
+
+    this.itemService.hotProduct(1).subscribe(data => {
+      this.products = data.product;
+    });
+    this.itemService.homePageRequest().subscribe(data => {
+      this.homePhoto = data.promotions;
+      this.categories = data.categories;
+      this.isHomePageReady = true;
+      this.isCategoryReady = true;
+      this.brands = data.brands;
+      this.isBrandsReady = true;
+      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show();
+      }
+    });
+    this.itemService.newArrivals(1).subscribe(data => {
+      this.Arrivals = data.product;
+      this.isArrivalReady = true;
+      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show();
+      }
+    });
+    this.itemService.main_cat_items(1, 1).subscribe(data => {
+      this.mainCat = data.product;
+      this.isArrivalReady = true;
+      if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show(2000);
+      }
+    });
     window.scrollTo(0, 0);
     $('.owl-prev').css({
       position: 'absolute',
@@ -223,7 +174,6 @@ export class HomeComponent implements OnInit {
       left: '0px',
       outline: 'none'
     });
-
   }
 
 }

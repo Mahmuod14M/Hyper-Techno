@@ -30,8 +30,8 @@ export class ItemService {
     return this.httpClient.get(BASE_URL + '/api/WebSite/home_page');
   }
 
-  newArrivales(id): Observable<any> {
-    return this.httpClient.get(BASE_URL + '/api/WebSite/get_new_items?Page=' + id);
+  newArrivals(page): Observable<any> {
+    return this.httpClient.get(BASE_URL + '/api/WebSite/get_new_items?Page=' + page);
   }
 
   brands(): Observable<any> {

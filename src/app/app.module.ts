@@ -4,7 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 
-import {CarouselModule} from 'ngx-owl-carousel-o';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FooterComponent} from './footer/footer.component';
@@ -27,12 +26,9 @@ import {StorageService} from './storage.service';
 import {SiginUpComponent} from './sigin-up/sigin-up.component';
 import {FormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
-import {ChangeColorDirective} from './change-color.directive';
 import {PolicyComponent} from './policy/policy.component';
 import {InstallmentsComponent} from './installments/installments.component';
 import {CartComponent} from './cart/cart.component';
-import {InfiniteScrollModule} from 'ngx-infinite-scroll';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AddAddressComponent } from './add-adress/add-address.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -61,9 +57,12 @@ const appRoutes: Routes =
   [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'aboutUs', component: AboutUsComponent},
-    {path: 'contactUs', component: ContactUsComponent},
-    {path: 'item/:id', component: ItemComponent},
+    // {path: 'aboutUs', component: AboutUsComponent},
+    {path: 'aboutUs', loadChildren: './about-us/about-us.module#AboutUsModule'},
+    // {path: 'contactUs', component: ContactUsComponent},
+    {path: 'contactUs', loadChildren: './contact-us/contact-us.module#ContactUsModule'},
+    // {path: 'item/:id', component: ItemComponent},
+    {path: 'item/:id', loadChildren: './item/item.module#ItemModule'},
     {path: 'product/:page/:id', component: ProductListComponent},
     {path: 'siginUp', component: SiginUpComponent},
     {path: 'policy', component: PolicyComponent},
@@ -83,13 +82,12 @@ const appRoutes: Routes =
     FooterComponent,
     HomeComponent,
     SeemorePipe,
-    AboutUsComponent,
-    ItemComponent,
-    ContactUsComponent,
+    // AboutUsComponent,
+    // ItemComponent,
+    // ContactUsComponent,
     ProductListComponent,
     SiginUpComponent,
     NavbarComponent,
-    ChangeColorDirective,
     PolicyComponent,
     InstallmentsComponent,
     CartComponent,
@@ -107,7 +105,6 @@ const appRoutes: Routes =
     NgbModule,
     NgbPaginationModule,
     BrowserAnimationsModule,
-    CarouselModule,
     SocialLoginModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
@@ -118,7 +115,6 @@ const appRoutes: Routes =
     JwSocialButtonsModule,
     Ng5SliderModule,
     FormsModule,
-    InfiniteScrollModule,
     ReactiveFormsModule,
   ],
 

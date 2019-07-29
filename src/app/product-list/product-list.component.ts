@@ -214,7 +214,7 @@ export class ProductListComponent implements OnInit {
           });
           break;
         case 'newarrivales':
-          this.itemService.newArrivales(this.pageCount).subscribe(data => {
+          this.itemService.newArrivals(this.pageCount).subscribe(data => {
             this.pageData(data);
 
           });

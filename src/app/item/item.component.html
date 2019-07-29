@@ -186,7 +186,7 @@
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + items.main_image
               " class="img-fluid"/>
-          <p>{{ items.name | seeMore: 20 }}</p>
+          <p>{{ items.name }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="items.price != items.wholesale_price">
