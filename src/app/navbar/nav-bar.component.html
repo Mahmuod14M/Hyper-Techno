@@ -74,24 +74,24 @@
              class="dropdown">
           <button class="dropbtn" [routerLink]="['/product/mainCat/',x.parent.id]" [id]="'dropBtn'+x.parent.id" >{{x.parent.name}} <i
             class="fas fa-angle-down"></i></button>
-          <div class="dropdown-content " [id]="'dropCard'+x.parent.id" (mouseenter)="mouseOver(x.parent.id)"
-               (mouseleave)="mouseLeave(x.parent.id)">
-            <h5>Select by Brand</h5>
 
-            <owl-carousel [options]=myCarouselOptions [items]="brands" [carouselClasses]="['owl-theme', 'sliding']">
-              <div class="owl_img" *ngFor="let brand of brands">
-                <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + brand.image"
-                     class="img-fluid owl-carousel-img" [routerLink]="['/product/Brand/',brand.id]"/>
-              </div>
-            </owl-carousel>
+        </div>
+        <div class="dropdown-content " [id]="'dropCard'+x.parent.id"  *ngFor="let x of subCategories" (mouseenter)="mouseOver(x.parent.id)"
+             (mouseleave)="mouseLeave(x.parent.id)">
+          <h5>Select by Brand</h5>
 
-            <h5 class="mt-3">Select by kind</h5>
-            <div class="kind">
-              <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">>  &nbsp;{{x.name}}</h2>
+          <owl-carousel [options]=myCarouselOptions [items]="brands" [carouselClasses]="['owl-theme', 'sliding']">
+            <div class="owl_img" *ngFor="let brand of brands">
+              <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + brand.image"
+                   class="img-fluid owl-carousel-img" [routerLink]="['/product/Brand/',brand.id]"/>
             </div>
+          </owl-carousel>
+
+          <h5 class="mt-3">Select by kind</h5>
+          <div class="kind">
+            <h2 *ngFor="let x of x.categories" [routerLink]="['/product/subCat/',x.id]">>  &nbsp;{{x.name}}</h2>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -193,7 +193,7 @@
         <h5>{{x.name}}</h5>
       </div>
       <span (click)="removeItemFromCart(x.id)">
-  <i class="fas fa-trash-alt"></i>
+  <i class="fas fa-times"></i>
 </span>
     </div>
     <div class="m-auto w-75">
@@ -204,6 +204,5 @@
 
 
 <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i></a>
-
 
 

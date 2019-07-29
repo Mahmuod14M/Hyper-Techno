@@ -87,21 +87,20 @@
 }
 
 .sec3 {
-  width: 80%;
+  width: 66%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .sec3 .about-card {
   border: 1px solid #ff1119;
-  width: 300px;
+  width: 320px;
   border-radius: 0px 13px;
-  padding: 20px 0px 20px 20px;
+  padding: 20px;
   position: relative;
-  margin: 15px;
-
+  margin-top: 20px;
 }
 
 .sec3 span {
@@ -125,7 +124,9 @@ font-size: 14px;
   margin-right: 10px;
 }
 .about-card p{
-  font-size: 12px;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
 }
 
 .sec4 img {

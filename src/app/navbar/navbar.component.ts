@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
 import 'bootstrap';
+import Popper from 'popper.js';
 
 declare var $: any;
 
@@ -168,13 +169,11 @@ export class NavbarComponent implements OnInit {
       } else {
         $('#return-to-top').fadeOut(200);   // Else fade out the arrow
       }
-      $('.containeer').css('justify-content','space-between');
     });
     $('#return-to-top').click(() => {      // When arrow is clicked
       $('body,html').animate({
         scrollTop: 0                       // Scroll to top of body
       }, 500);
-      $('.containeer').css('justify-content','flex-end');
     });
 
     function readURL(input) {
@@ -272,6 +271,7 @@ function scrollFunction() {
     elem.style.justifyContent = 'space-between';
     elem.style.zIndex = '5';
     $('#navbarLogo').show();
+    $('.containeer').css('justify-content','space-between');
   } else {
     const elem = document.getElementById('containeer');
     elem.style.position = 'relative';
@@ -280,6 +280,11 @@ function scrollFunction() {
     elem.style.justifyContent = 'space-evenly';
     elem.style.background = 'transparent';
     $('#navbarLogo').hide();
+    if ( $( window ).width()>800) {
+      $('.containeer').css('justify-content','space-evenly');
+    } else {
+      $('.containeer').css('justify-content','flex-end');
+    }
   }
 
 }

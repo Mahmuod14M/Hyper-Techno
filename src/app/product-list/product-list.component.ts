@@ -3,8 +3,6 @@ import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
 import {StorageService} from '../storage.service';
-import {query} from '@angular/animations';
-import {init} from 'protractor/built/launcher';
 
 
 declare var $: any;
@@ -17,8 +15,7 @@ declare var $: any;
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService ) {
-  }
+  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService ) {}
 
   minValue: number;
   maxValue: number;
@@ -35,17 +32,8 @@ export class ProductListComponent implements OnInit {
   private text: string;
   disableScroll = false;
   pageCount = 1;
-  isApplyFilterReady = false;
-  isSearchReady = false;
-  isInitReady = false;
-  isFilterChangeReady = false;
-  isDataReady = false;
+  isPageDataReady =false;
   itemListIDS: any[] = [];
-  onScroll() {
-    this.disableScroll = true;
-    this.pageCount += 1;
-    this.init();
-  }
 
   filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
     if (event.currentTarget) {
@@ -83,12 +71,6 @@ export class ProductListComponent implements OnInit {
       brands: this.brandsId, cats: this.categoriesId, query: this.text ? this.text : '', cat_attrs_values: this.categoryAttrs,
       max_price: this.maxValue, min_price: this.minValue
     });
-    this.isFilterChangeReady = true;
-    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-      $(window).scrollTop();
-      $('#loading').fadeOut(2000);
-      $('.data').show();
-    }
   }
 
   applyFilter = function(payload) {
@@ -121,12 +103,6 @@ export class ProductListComponent implements OnInit {
           }
         }
       };
-      this.isApplyFilterReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
     });
 
   };
@@ -151,17 +127,17 @@ export class ProductListComponent implements OnInit {
           }
         }
       };
-      this.isSearchReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
     });
   };
   pageData = function(data) {
     for (const item of data.product) {
       this.items.push(item);
+    }
+    this.isPageDataReady= true;
+    if (this.isPageDataReady === true) {
+      $(window).scrollTop();
+      $('#loading').fadeOut(2000);
+      $('.data').show();
     }
     this.disableScroll = data.product.length === 0;
     this.filter = data.filter;
@@ -181,13 +157,6 @@ export class ProductListComponent implements OnInit {
         }
       }
     };
-    this.isDataReady = true;
-    if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-      $(window).scrollTop();
-      $('#loading').fadeOut(2000);
-      $('.data').show();
-    }
-
   };
 
   seeMore() {
@@ -240,12 +209,6 @@ export class ProductListComponent implements OnInit {
         default:
           break;
       }
-      this.isInitReady = true;
-      if (this.isApplyFilterReady && this.isSearchReady && this.isInitReady && this.isFilterChangeReady && this.isDataReady) {
-        $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show();
-      }
     });
 
   };
@@ -253,7 +216,6 @@ export class ProductListComponent implements OnInit {
     this.storageService.addToCart(product);
   };
   ngOnInit() {
-
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {

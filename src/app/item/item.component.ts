@@ -38,21 +38,27 @@ export class ItemComponent implements OnInit {
         items: 1,
       },
       // breakpoint from 480 up
-      480: {
+      350: {
+        items: 1,
+      },
+      375: {
         items: 2,
       },
-      // breakpoint from 768 up
-      375: {
-        items: 3,
-      },
-      1024: {
+      690: {
         items: 4,
       },
+      // breakpoint from 768 up
+      768: {
+        items: 5,
+      },
+      1024: {
+        items: 5,
+      },
       1440: {
-        items: 7,
+        items: 8,
       },
       1920: {
-        items: 6,
+        items: 9,
       },
     }
   };
@@ -91,7 +97,7 @@ export class ItemComponent implements OnInit {
         if (this.isItemDetailsReady) {
           $(window).scrollTop();
           $('.data').show();
-          $('#loading').fadeOut(3000);
+          $('#loading').fadeOut(1000);
         }
       });
     });
