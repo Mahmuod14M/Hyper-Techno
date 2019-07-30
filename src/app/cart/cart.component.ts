@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
-
-import {query} from '@angular/animations';
 import {Product} from '../Models';
-
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -24,14 +22,14 @@ export class CartComponent implements OnInit {
   Shipping = 0;
   totalPrice = 0;
   logIn = StorageService.getUserData();
-  id = this.logIn.user.id;
+  id = null;
 
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
     $('#finalProduct_').hide();
   }
 
-  constructor(private storageService: StorageService, private itemService: ItemService) {
+  constructor(private storageService: StorageService, private itemService: ItemService,private router: Router) {
     storageService.getUserObservable().subscribe({
       next: logIn => {
         this.logIn = JSON.parse(logIn);
@@ -72,6 +70,12 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.logIn == null) {
+      alert('You Have To Login Frist!');
+      this.router.navigate(['siginUp']);
+    } else {
+      this.id = this.logIn.user.id;
+    }
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;

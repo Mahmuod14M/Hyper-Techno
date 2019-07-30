@@ -20,8 +20,7 @@ export class ItemComponent implements OnInit {
   itemListIDS: any[] = [];
   isInStock = false;
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {
-  }
+  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {}
   myCarouselOptions = {
     nav: true,
     navText: ['<img src=\'../../assets/img/icons/left.png\'>', '<img src=\'../../assets/img/icons/right.png\' >'],
@@ -66,9 +65,8 @@ export class ItemComponent implements OnInit {
   addToCart = function(product) {
     this.storageService.addToCart(product);
   };
- imgChange(id) {
+ imgChange() {
    const img = $('.imgs img');
-
    img.click(function() {
      const imgsrc = $(this).attr('src');
      $('.main-img img').attr('src', imgsrc);
@@ -76,7 +74,9 @@ export class ItemComponent implements OnInit {
  }
   itemHover() {
     window.scrollTo(0, 0);
-
+    this.isItemDetailsReady = false;
+    $('#loading').show();
+    $('.data').hide();
   }
   ngOnInit() {
     this.storageService.getCartItems();

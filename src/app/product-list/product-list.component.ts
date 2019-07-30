@@ -3,8 +3,6 @@ import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
 import {StorageService} from '../storage.service';
-
-
 declare var $: any;
 
 @Component({
@@ -25,7 +23,6 @@ export class ProductListComponent implements OnInit {
   };
   items: any[] = [];
   filter: any ;
-  filterCategoryAttributes = [];
   brandsId: any[] = [];
   categoriesId: any[] = [];
   categoryAttrs: any[] = [];

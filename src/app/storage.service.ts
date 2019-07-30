@@ -92,6 +92,7 @@ export class StorageService {
         localStorage.setItem('signData', JSON.stringify(data));
         this.userData = localStorage.getItem('signData');
         this.log.next(this.userData);
+        alert('Login successful!');
       });
     } else {
       alert('Your mail is wrong');
@@ -102,6 +103,7 @@ export class StorageService {
     localStorage.removeItem('signData');
     this.userData = localStorage.getItem('signData');
     this.log.next(this.userData);
+    alert('logOut successful!');
   }
 
   // CART

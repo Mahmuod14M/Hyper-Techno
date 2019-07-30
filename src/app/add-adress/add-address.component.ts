@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-address',
@@ -15,13 +16,12 @@ export class AddAddressComponent implements OnInit {
   address(form) {
     this.storageService.address(this.id, form);
     // location.reload();
+    alert('Address Added!');
+    this.router.navigate(['cart']);
   }
-
-  constructor(private itemService: ItemService, private storageService: StorageService, private route: ActivatedRoute) {
-  }
+  constructor(private itemService: ItemService, private storageService: StorageService, private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit() {
-
     window.scrollTo(0, 0);
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
