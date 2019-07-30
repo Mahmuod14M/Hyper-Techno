@@ -19,6 +19,8 @@ export class OrderDetailsComponent implements OnInit {
       item_id:this.itemId ,
     };
     this.itemService.add_review(reviewBody).subscribe(data => {
+      console.log(data);
+      alert('Review Added');
     });
     this.closeReview(this.itemId);
   }

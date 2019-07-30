@@ -60,9 +60,8 @@
           30-7-2019</h3>
 
         <div class="bottom">
-          <h3 class="add" (click)="addToCart(productDetails)">
-        <span><i class="fas fa-shopping-basket">
-        </i></span>Add To Cart</h3>
+          <h3 class="add" *ngIf="itemListIDS.includes(productDetails.id)"  ><span><i class="fas fa-shopping-basket"></i></span>Added To Cart</h3>
+          <h3 class="add" *ngIf="!itemListIDS.includes(productDetails.id)" (click)="addToCart(productDetails)"><span><i class="fas fa-shopping-basket"></i></span>Add To Cart</h3>
           <h3 class="proced"><span><i class="fas fa-shopping-basket"></i></span> Proced To Checkout</h3>
         </div>
       </div>

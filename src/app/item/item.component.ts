@@ -94,6 +94,7 @@ export class ItemComponent implements OnInit {
         this.relatedProducts = data.related;
         this.isInStock = data.product.out_of_stock;
         this.isItemDetailsReady= true;
+        console.log(   this.productDetails);
         if (this.isItemDetailsReady) {
           $(window).scrollTop();
           $('.data').show();

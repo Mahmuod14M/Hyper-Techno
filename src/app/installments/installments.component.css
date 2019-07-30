@@ -1,22 +1,24 @@
-.nav{
+.nav1{
   background-image: url(../../assets/img/header.jpg);
   height: 30px;
+  display: flex;
+  align-items: center;
 }
-.nav h2{
+.nav1 h2{
   width: 80%;
   margin: auto;
   font-size: 12px;
   color: white;
   font-weight: normal;
 }
-.nav h2 a{
+.nav1 h2 a{
   color: white;
 }
-.nav h2 a:hover{
+.nav1 h2 a:hover{
   text-decoration: none;
   color: white;
 }
-.nav h2 span{
+.nav1 h2 span{
   color: yellow;
 }
 

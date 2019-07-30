@@ -30,17 +30,7 @@ export class CartComponent implements OnInit {
   }
 
   constructor(private storageService: StorageService, private itemService: ItemService,private router: Router) {
-    storageService.getUserObservable().subscribe({
-      next: logIn => {
-        this.logIn = JSON.parse(logIn);
-        this.id = this.logIn.id;
 
-      }
-    });
-    itemService.get_address(this.id).subscribe(data => {
-      this.addresses = data;
-
-    });
   }
 
   checkout() {
@@ -60,7 +50,8 @@ export class CartComponent implements OnInit {
       // preferred_time: time
     };
     this.itemService.makeOrder(checkData).subscribe(data => {
-
+      alert('successful!');
+      this.router.navigate(['Account/MyOrders']);
     });
     this.storageService.removeAll();
   }
@@ -76,6 +67,18 @@ export class CartComponent implements OnInit {
     } else {
       this.id = this.logIn.user.id;
     }
+    this.storageService.getUserObservable().subscribe({
+      next: logIn => {
+        this.logIn = JSON.parse(logIn);
+        this.id = this.logIn.id;
+
+      }
+    });
+    this.itemService.get_address(this.id).subscribe(data => {
+      console.log(data);
+      this.addresses = data;
+
+    });
     this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;

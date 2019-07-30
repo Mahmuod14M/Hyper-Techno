@@ -17,9 +17,6 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   constructor(private itemService: ItemService, private storageService: StorageService, private router: Router) {}
-
-  itemList: any[] = [];
-  idList: any[] = [];
   products: any[] = [];
   item: any[] = [];
   homePhoto: any[] = [];
@@ -145,7 +142,7 @@ export class HomeComponent implements OnInit {
       this.isBrandsReady = true;
       if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
         $(window).scrollTop();
-        $('#loading').fadeOut(2000);
+        $('#loading').fadeOut();
         $('.data').show();
       }
     });
@@ -154,7 +151,7 @@ export class HomeComponent implements OnInit {
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
         $(window).scrollTop();
-        $('#loading').fadeOut(2000);
+        $('#loading').fadeOut();
         $('.data').show();
       }
     });
@@ -163,8 +160,8 @@ export class HomeComponent implements OnInit {
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
         $(window).scrollTop();
-        $('#loading').fadeOut(2000);
-        $('.data').show(2000);
+        $('#loading').fadeOut();
+        $('.data').show();
       }
     });
     window.scrollTo(0, 0);

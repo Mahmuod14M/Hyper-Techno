@@ -20,7 +20,7 @@
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>First Name</label>
-        <input name="Fname" class="form-control" type="text" ngModel required>
+        <input name="Fname" class="form-control" type="text" ngModel required [value]="UserDetails?.first_name">
       </div>
       <div style="width: 45%">
         <label>Last Name</label>
