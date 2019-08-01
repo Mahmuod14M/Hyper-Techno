@@ -133,4 +133,9 @@ export class ItemService {
       BASE_URL + '/api/Eslam/fav_cart', payload, httpOptions
     );
   }
+  editUserImg(id): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/User/edit_user_image?UserID='+id, null, httpOptions
+    );
+  }
 }

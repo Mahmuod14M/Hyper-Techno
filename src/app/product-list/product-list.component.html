@@ -16,13 +16,20 @@
   <!-- section2 -->
   <section class="p-sec2">
     <div class="text">
-      <h2>Tv & Home Theaters</h2>
-      <h5>Discover Our Best Deals From<span>Tv's & Home Theaters and Recivers </span></h5>
+<!--      <h2 *ngFor="let x of data.filter">{{x.categories.name}}</h2>-->
+      <h2>{{data.categories[0]?.name}} <span *ngIf="data.categories[1]"> & {{data.categories[1]?.name}}</span>  </h2>
+      <h5>{{data.brands[0].name}}
+        <span  *ngIf="data.brands[1]"> & {{data.brands[1]?.name}}</span>
+        <span *ngIf="data.brands[2]"> & {{data.brands[2]?.name}}</span>
+        <span *ngIf="data.brands[3]"> & {{data.brands[3]?.name}}</span>
+        <span *ngIf="data.brands[4]"> & {{data.brands[4]?.name}}</span>
+
+      </h5>
     </div>
   </section>
   <!-- section4 -->
   <div class="text-center">
-    <h1>TELEVISIONS</h1>
+    <h1>OUR PRODUCTS</h1>
   </div>
 
   <div class="all">
@@ -89,8 +96,8 @@
         <div class="card" (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
           <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
             <div class="inner-card">
-              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">
-              <h4 *ngIf="itemListIDS.includes(item.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+<!--              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">-->
+              <h4 *ngIf="itemListIDS.includes(item.id)" style="background-color:#019d0a;"><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
               <h4 (click)="addToCart(item)"  [id]="'addToCart'+item.id" *ngIf="!itemListIDS.includes(item.id)"><img
                 src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
               </h4>
@@ -110,8 +117,8 @@
           <span class="heart"><i class="fas fa-heart"></i></span>
           <img [src]="
             'https://arafa.000webhostapp.com/Hyper/uploads/' + item.main_image
-          " class="img-fluid"/>
-          <p>{{ item.name  }}</p>
+          " class="img-fluid" [routerLink]="['/item',item.id]"/>
+          <p [routerLink]="['/item',item.id]">{{ item.name  }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="item.price != item.wholesale_price">

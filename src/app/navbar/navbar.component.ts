@@ -4,6 +4,7 @@ import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
 import 'bootstrap';
 import Popper from 'popper.js';
+import swal from 'sweetalert';
 
 declare var $: any;
 
@@ -57,7 +58,7 @@ export class NavbarComponent implements OnInit {
   MyOrders = 'MyOrders';
   MyAddresses = 'MyAddresses';
   MyProfile = 'MyProfile';
-  mouseHover= false;
+  mouseHover = false;
 
   logIN(form) {
     this.storageService.logIN(form);
@@ -70,6 +71,9 @@ export class NavbarComponent implements OnInit {
   }
 
   constructor(private itemService: ItemService, private router: Router, private storageService: StorageService) {
+    // this.itemService.editUserImg(id).subscribe(data => {
+    //
+    // });
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
         this.logIn = JSON.parse(logIn);
@@ -110,53 +114,89 @@ export class NavbarComponent implements OnInit {
   };
   removeItemFromCart = productID => {
     this.storageService.removeFromCart(productID);
-  }
+  };
 
   showCard(id) {
     $('#dropCard' + id).show();
-    $('#dropCard' + id).mouseover(()=> {
-      this.mouseHover= true;
-    } );
+    $('#dropCard' + id).mouseover(() => {
+      this.mouseHover = true;
+    });
   }
   mouseOver(id) {
     $('#dropCard' + id).show();
-    $('#dropBtn' + id).css('color','#d93232');
-    $('#dropBtn' + id).css('border-bottom','2px solid #d93232');
+    $('#dropBtn' + id).css('color', '#d93232');
+    $('#dropBtn' + id).css('border-bottom', '2px solid #d93232');
   }
   mouseLeave(id) {
     $('#dropCard' + id).delay(3000).hide();
-    $('#dropBtn' + id).css('color',' #95979a');
-    $('#dropBtn' + id).css('border-bottom','none');
+    $('#dropBtn' + id).css('color', ' #95979a');
+    $('#dropBtn' + id).css('border-bottom', 'none');
   }
   hideCard(id) {
     $('#dropCard' + id).hide();
   }
-
   showCatgs(event: Event, categoryId: number) {
     $('#dropdown-content-' + categoryId).slideToggle();
   }
-
   edit() {
     $('#Edit').show(500);
   }
-
-  edit2() {
-    $('#Edit').hide(500);
-  }
-
   close() {
     $('.cart').toggle();
   }
-
   closeLonIn() {
     $('#login').hide();
   }
-
   hideLogin() {
     $('#login').toggle();
   }
 
+  changeImg(id) {
+    const val = $('#imageUpload').val();
+    $('#UerImg').attr('src',val);
+    this.storageService.changeImg(id);
+  }
+
+  // readURL(input) {
+  //   console.log('entered');
+  //   console.log(input);
+  //   if (input.files && input.files[0]) {
+  //     console.log(input.value());
+  //     const reader = new FileReader();
+  //     reader.onload = e => {
+  //       $('#imagePreview').css('background-image', 'url(' + reader.result + ')');
+  //       $('#imagePreview').hide();
+  //       $('#imagePreview').fadeIn(650);
+  //     };
+  //     reader.readAsDataURL(input.files[0]);
+  //   } else {
+  //     console.log('error');
+  //   }
+  // }
+
   ngOnInit() {
+    $('#showPhone').click(()=> {
+      $('.phone2').slideToggle();
+      $('.phone2').css('display','flex');
+    });
+    $('body').click((evt)=> {
+      if(evt.target.id === 'showPhone') {
+        return;
+      }
+      if(evt.target.id !== 'showPhone') {
+        $('.phone2').slideUp();
+        return;
+      }
+      if(evt.target.class === 'log') {
+        return;
+      }
+      if(evt.target.class !== 'log' ) {
+        swal('Loged out', '', 'success');
+        $('#login').hide();
+        return;
+      }
+    });
+
     this.storageService.getCartObservable().subscribe({
       next: cartList => {
         this.itemlist = cartList;
@@ -175,23 +215,6 @@ export class NavbarComponent implements OnInit {
         scrollTop: 0                       // Scroll to top of body
       }, 500);
     });
-
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          $('#imagePreview').css('background-image', 'url(' + reader.result + ')');
-          $('#imagePreview').hide();
-          $('#imagePreview').fadeIn(650);
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $('#imageUpload').change(function() {
-      readURL(this);
-    });
-
     $('.profileImg').mouseenter(() => {
       $('#Edit').show();
     });
@@ -237,6 +260,7 @@ export class NavbarComponent implements OnInit {
     });
 
 
+
     $('#btn').click(() => {
       $('#menu').toggle();
     });
@@ -259,6 +283,7 @@ window.onscroll = () => {
   scrollFunction();
 };
 
+
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     const elem = document.getElementById('containeer');
@@ -271,7 +296,7 @@ function scrollFunction() {
     elem.style.justifyContent = 'space-between';
     elem.style.zIndex = '5';
     $('#navbarLogo').show();
-    $('.containeer').css('justify-content','space-between');
+    $('.containeer').css('justify-content', 'space-between');
   } else {
     const elem = document.getElementById('containeer');
     elem.style.position = 'relative';
@@ -280,12 +305,13 @@ function scrollFunction() {
     elem.style.justifyContent = 'space-evenly';
     elem.style.background = 'transparent';
     $('#navbarLogo').hide();
-    if ( $( window ).width()>800) {
-      $('.containeer').css('justify-content','space-evenly');
+    if ($(window).width() > 800) {
+      $('.containeer').css('justify-content', 'space-evenly');
     } else {
-      $('.containeer').css('justify-content','flex-end');
+      $('.containeer').css('justify-content', 'flex-end');
     }
   }
+
 
 }
 

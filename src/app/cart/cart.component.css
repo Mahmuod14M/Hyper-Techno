@@ -204,3 +204,32 @@ select{
   background: #f7f7f7;
   color: #000;
 }
+.qty{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  border: 1px solid  #929191;
+  width: 75px;
+  height: 40px;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 0px 9px;
+  outline: none;
+}
+.qty i{
+  cursor: pointer;
+}
+.qty i:hover{
+  color: #e11a23;
+}
+.qty input{
+  width: 40px;
+  height: 38px;
+  text-align: center;
+  background: #f7f7f7;
+  border: none;
+}
+#LocalDelivery{
+  display: none;
+}

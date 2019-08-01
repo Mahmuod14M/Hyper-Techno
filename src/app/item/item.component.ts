@@ -67,11 +67,23 @@ export class ItemComponent implements OnInit {
   };
  imgChange() {
    const img = $('.imgs img');
-   img.click(function() {
+   const main= $('.main-img img');
+   main.mouseenter(function() {
      const imgsrc = $(this).attr('src');
-     $('.main-img img').attr('src', imgsrc);
+     $('.imgOver img').attr('src', imgsrc);
+     $('.imgOver').css('display','flex');
+     $('.imgOver').show();
+   });
+   img.mouseenter(function() {
+     const imgsrc = $(this).attr('src');
+     $('.imgOver img').attr('src', imgsrc);
+     $('.imgOver').css('display','flex');
+     $('.imgOver').show();
    });
  }
+  hideImg() {
+    $('.imgOver').hide();
+  }
   itemHover() {
     window.scrollTo(0, 0);
     this.isItemDetailsReady = false;

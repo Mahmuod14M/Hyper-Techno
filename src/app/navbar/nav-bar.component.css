@@ -90,8 +90,23 @@ ul li {
   margin-left: 5px;
   width: 190px;
   height: 30px;
+  position: relative;
 }
-
+.phone2{
+  position: absolute;
+  background-color: #f7f7f7;
+  width: 190px;
+  height: 30px;
+  top: 29px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.phone2 img{
+  width: 10%;
+  height: 75%;
+}
 
 .call .down {
   font-size: 12px;
@@ -1071,4 +1086,8 @@ h1 small {
   height: 500px;
   background-color: #4917ff;
   display: none;
+}
+#navbarLogo{
+  width: 240px;
+  height: 65px;
 }

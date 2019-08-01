@@ -4,22 +4,27 @@
     <div class="dot2"></div>
   </div>
 </div>
-<div class="data" >
-  <div class="img_zoom">
-  <span>
-  <i class="fas fa-search-minus"></i>
-  </span>
-    <img class=" img-fluid" src="https://arafa.000webhostapp.com/Hyper/uploads/5c3cc17ec261b.jpg"/>
+<div class="data">
+<!--  <div class="img_zoom">-->
+<!--  <span>-->
+<!--  <i class="fas fa-search-minus"></i>-->
+<!--  </span>-->
+<!--    <img class=" img-fluid" src="https://arafa.000webhostapp.com/Hyper/uploads/5c3cc17ec261b.jpg"/>-->
 
-  </div>
-
+<!--  </div>-->
+<div class="imgOver">
+  <img class="frist img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+ productDetails.main_image"/>
+</div>
   <div class="sec1">
     <div class="inner">
       <h3>
-        <a href="#">Home </a> <span>> </span>
-        <a href="#">Larg </a> <span>> </span>
-        <a href="#">Refrigetores </a> <span>> </span>
-        <a href="#" class="item-name">Samsoung</a>
+        <a routerLink="/home">Home </a> <span>> </span>
+        <a [routerLink]="['/product/subCat/',productDetails.id_category]">{{productDetails?.category}} </a>
+        <span>> </span>
+        <a [routerLink]="['/product/mainCat/',productDetails.id_main_category]">{{productDetails?.main_category}} </a>
+        <span>> </span>
+        <a [routerLink]="['/product/Brand/',productDetails.id_manufacturer]"
+           class="item-name">{{productDetails?.manufacturer}}</a>
       </h3>
     </div>
   </div>
@@ -28,14 +33,13 @@
 
     <div class="item-img">
       <div class="main-img">
-        <span><i class="fas fa-search-plus"></i></span>
-        <img class="frist img-fluid"
+        <img class="frist img-fluid" (mouseenter)="imgChange()" (mouseleave)="hideImg()"
              [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+ productDetails.main_image"/>
       </div>
       <hr>
       <div class="imgs" *ngIf="productDetails.images">
         <img class="second img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/'+img.image_url"
-             *ngFor="let img of productDetails.images" (click)="imgChange()"/>
+             *ngFor="let img of productDetails.images" (mouseenter)="imgChange()" (mouseleave)="hideImg()"/>
 
       </div>
     </div>
@@ -45,23 +49,21 @@
       <br>
       <h6>{{productDetails.price |currency:' '}} LE</h6>
       <br>
-      <p>{{productDetails.highlights}}</p>
+      <p style="color: chocolate">{{productDetails.highlights}}</p>
       <br>
-      <div>
-<!--        <tweet class="btn twitter"><span><i class="fab fa-twitter"></i></span> Twitter</tweet>-->
-        <fb-like class="btn facebook"><span><i class="fab fa-facebook-f"></i></span> Facebook</fb-like>
-
-        <pin-it class="btn pin"><span><i class="fab fa-pinterest-p"></i></span> Pin It</pin-it>
+      <div *ngFor=" let x of productDetails.colors " >
+        <div class="ItemColors" [style.background-color]="x.color.code"></div>
       </div>
       <br>
       <br>
       <div>
-        <h3 class=" free"><span><i class="fas fa-truck-moving"></i></span> Get FREE Delivery For this item till
-          30-7-2019</h3>
+
 
         <div class="bottom">
-          <h3 class="add" *ngIf="itemListIDS.includes(productDetails.id)"  ><span><i class="fas fa-shopping-basket"></i></span>Added To Cart</h3>
-          <h3 class="add" *ngIf="!itemListIDS.includes(productDetails.id)" (click)="addToCart(productDetails)"><span><i class="fas fa-shopping-basket"></i></span>Add To Cart</h3>
+          <h3 class="add" *ngIf="itemListIDS.includes(productDetails.id)"><span><i
+            class="fas fa-shopping-basket"></i></span>Added To Cart</h3>
+          <h3 class="add" *ngIf="!itemListIDS.includes(productDetails.id)" (click)="addToCart(productDetails)"><span><i
+            class="fas fa-shopping-basket"></i></span>Add To Cart</h3>
           <h3 class="proced"><span><i class="fas fa-shopping-basket"></i></span> Proced To Checkout</h3>
         </div>
       </div>
@@ -153,18 +155,19 @@
   <!-- section4 -->
   <div class="sec4">
     <h3><span>B</span>rowse Related Products</h3>
-    <a href="#" class="view">VIEW ALL ></a>.
+    <a [routerLink]="['/product/subCat/',productDetails.id_category]" class="view">VIEW ALL ></a>.
 
     <owl-carousel [options]=myCarouselOptions [items]="relatedProducts"
                   [carouselClasses]="['owl-theme', 'sliding']">
       <div class="item" *ngFor="let items of relatedProducts">
         <div class="card" (mouseover)="items.hover=true" (mouseleave)="items.hover=false">
           <div class="hover" [ngStyle]="{visibility: items.hover==true  ? 'visible' : 'hidden' }"
-               >
+          >
             <div class="inner-card">
-              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]" (click)="itemHover()">
-              <h4 *ngIf="itemListIDS.includes(items.id)" ><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
-              <h4 (click)="addToCart(items)"  [id]="'addToCart'+items.id" *ngIf="!itemListIDS.includes(items.id)"><img
+              <!--              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',items.id]" (click)="itemHover()">-->
+              <h4 *ngIf="itemListIDS.includes(items.id)" style="background-color:#019d0a;"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(items)" [id]="'addToCart'+items.id" *ngIf="!itemListIDS.includes(items.id)"><img
                 src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
               </h4>
               <h5>
@@ -183,8 +186,8 @@
           <span class="heart"><i class="fas fa-heart"></i></span>
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + items.main_image
-              " class="img-fluid"/>
-          <p>{{ items.name }}</p>
+              " class="img-fluid" [routerLink]="['/item',items.id]" (click)="itemHover()"/>
+          <p [routerLink]="['/item',items.id]" (click)="itemHover()">{{ items.name }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="items.price != items.wholesale_price">

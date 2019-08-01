@@ -82,7 +82,12 @@
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>Preferred Delivery Time</label>
-        <input name="PreferredDeliveryTime" class="form-control" type="text" ngModel [value]="addressDetails?.preferred_time">
+<!--        <input name="PreferredDeliveryTime" class="form-control" type="text" ngModel [value]="addressDetails?.preferred_time">-->
+        <select class="form-control" name="PreferredDeliveryTime">
+          <option value="9TO1">From 9 Am to 1 Pm</option>
+          <option value="1TO5">From 1 pm to 5 Pm</option>
+          <option value="5TO9">From 5 pm to 9 Pm</option>
+        </select>
       </div>
       <div style="width: 45%">
         <label>Shipping Notes</label>

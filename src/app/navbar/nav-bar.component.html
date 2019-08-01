@@ -32,7 +32,7 @@
     <ul class="frist-ul" id="first-ul">
       <li><a routerLink="/home"> Home </a></li>
       <li><a routerLink="/aboutUs">About Us </a></li>
-      <li class="mr-5"><a routerLink="/contactUs"> Contect Us </a></li>
+      <li class="mr-5"><a routerLink="/contactUs"> Contact Us </a></li>
 
       <li><a> <img src="assets/img/flag.png" class="img-fluid" alt="egypt"> | &nbsp;العربيه </a></li>
     </ul>
@@ -59,14 +59,19 @@
         <img src="assets/img/icons/phone.png">
         <span class="sales">Sales</span>
         <span class="phone">(040)3308300</span>
-        <i class="fas fa-angle-down down "></i>
+        <i class="fas fa-angle-down down " id="showPhone"></i>
+        <div class="phone2 form-control" >
+          <img src="assets/img/icons/phone.png">
+          <span class="sales">Sales</span>
+        <span class="phone"> (040)3295080 </span>
+        </div>
       </div>
     </div>
 
   </div>
   <hr>
   <div class="containeer" id="containeer">
-    <img src="assets/img/logo menu minimize.png" routerLink="/home" id="navbarLogo">
+    <img src="assets/img/Logo.png" routerLink="/home" id="navbarLogo">
 
     <div class="menu" id="menu">
       <div class="menu">
@@ -109,10 +114,10 @@
 
       </div>
 
-      <div class="item-count">
-        <h6>{{itemlist.length}} ITEMS</h6>
-        <h5><i class="fas fa-pound-sign"></i> 0.00</h5>
-      </div>
+<!--      <div class="item-count">-->
+<!--        <h6>{{itemlist.length}} ITEMS</h6>-->
+<!--        <h5><i class="fas fa-pound-sign"></i> 0.00</h5>-->
+<!--      </div>-->
       <div class="nav-mobile" (click)="openNav()">
         <a id="nav-toggle"><span></span></a>
       </div>
@@ -129,12 +134,14 @@
     <div class="container">
       <div class="avatar-upload">
         <div class="avatar-edit">
-          <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"/>
+          <form>
+          <input type='file' id="imageUpload" (change)="changeImg(logIn.user.id)" accept=".png, .jpg, .jpeg"/>
           <label for="imageUpload"></label>
+          </form>
         </div>
         <div class="avatar-preview">
           <div id="imagePreview" class="imagePreview">
-            <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + logIn.user.profile_pic" class="img-fluid">
+            <img id="UerImg" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + logIn.user.profile_pic" class="img-fluid">
           </div>
         </div>
       </div>

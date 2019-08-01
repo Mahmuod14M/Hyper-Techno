@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   };
   items: any[] = [];
   filter: any ;
+  data: any;
   brandsId: any[] = [];
   categoriesId: any[] = [];
   categoryAttrs: any[] = [];
@@ -105,7 +106,6 @@ export class ProductListComponent implements OnInit {
   };
   search = function(payload) {
     this.itemService.search(payload, this.pageCount).subscribe(data => {
-
       this.items = data;
       this.filter = data.filter;
       this.maxValue = data.filter.max_price;
@@ -130,6 +130,7 @@ export class ProductListComponent implements OnInit {
     for (const item of data.product) {
       this.items.push(item);
     }
+    this.data=data.filter;
     this.isPageDataReady= true;
     if (this.isPageDataReady === true) {
       $(window).scrollTop();
@@ -186,7 +187,7 @@ export class ProductListComponent implements OnInit {
           });
           break;
         case 'brand':
-          this.itemService.top_items_by_brand(this.pageCount).subscribe(data => {
+          this.itemService.top_items_by_brand(id).subscribe(data => {
             this.pageData(data);
           });
           break;

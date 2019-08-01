@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
+import swal from 'sweetalert';
 declare var $: any;
 @Component({
   selector: 'app-order-details',
@@ -20,7 +21,7 @@ export class OrderDetailsComponent implements OnInit {
     };
     this.itemService.add_review(reviewBody).subscribe(data => {
       console.log(data);
-      alert('Review Added');
+      swal('Review Added', '', 'success');
     });
     this.closeReview(this.itemId);
   }

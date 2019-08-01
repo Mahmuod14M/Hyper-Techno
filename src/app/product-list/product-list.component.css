@@ -194,10 +194,10 @@ h1 {
 
 .p-sec3 .item p {
   font-size: 12px;
+  font-weight: bold;
 }
 
 .p-sec3 .item img {
-  width: 90%;
   margin: auto;
   height: 120px;
 }
@@ -205,7 +205,7 @@ h1 {
 .p-sec3 .card .hover {
   position: absolute;
   width: 100% !important;
-  height: 250px;
+  /*height: 250px;*/
   background-color: #8888883a;
   /* visibility: hidden; */
   z-index: 1;
@@ -214,7 +214,7 @@ h1 {
 .p-sec3 .card .hover .inner-card {
   position: relative;
   text-align: center;
-  height: 220px;
+  /*height: 220px;*/
 }
 
 .hide-me {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ItemService} from './item.service';
-
+import swal from 'sweetalert';
 declare var $: any;
 
 @Injectable()
@@ -72,6 +72,12 @@ export class StorageService {
       };
       this.itemService.address(AddAddress).subscribe(data => {
         localStorage.setItem('UserAddress', JSON.stringify(data));
+        if(data.error!==true) {
+          alert('Address Added!');
+        } else {
+          alert('error!');
+          console.log(data);
+        }
       });
     }
   }
@@ -98,6 +104,15 @@ export class StorageService {
       alert('Your mail is wrong');
     }
   }
+  changeImg(file) {
+    const imgData = {
+      ProfileImage:file,
+      UserID:this.userData.user.id,
+    };
+    return  this.changeImg(imgData).subscribe( data => {
+        console.log(data);
+    });
+  }
 
   removeId() {
     localStorage.removeItem('signData');
@@ -118,6 +133,7 @@ export class StorageService {
       }
       localStorage.cartID = JSON.stringify(cart);
       this.getCartItems();
+      swal('Added to cart!', '', 'success');
     }
   }
 

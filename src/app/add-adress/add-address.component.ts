@@ -16,7 +16,6 @@ export class AddAddressComponent implements OnInit {
   address(form) {
     this.storageService.address(this.id, form);
     // location.reload();
-    alert('Address Added!');
     this.router.navigate(['cart']);
   }
   constructor(private itemService: ItemService, private storageService: StorageService, private route: ActivatedRoute,private router: Router) {}
