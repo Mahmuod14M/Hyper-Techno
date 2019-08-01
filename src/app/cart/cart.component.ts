@@ -5,7 +5,8 @@ import {Product} from '../Models';
 import {Router} from '@angular/router';
 
 declare var $: any;
-import swal from 'sweetalert';
+// @ts-ignore
+const Swal = require('sweetalert2');
 
 
 @Component({
@@ -16,13 +17,7 @@ import swal from 'sweetalert';
 export class CartComponent implements OnInit {
 
 
-  itemlist: any [] = [];
-  amount(item) {
-    return item.price;
-  }
-  sum(prev, next) {
-    return prev + next;
-  }
+  itemlist: any[] = [];
   finalPrice = 0;
   VocherPrice = 0;
   subtotal = 0;
@@ -31,8 +26,6 @@ export class CartComponent implements OnInit {
   totalPrice = 0;
   logIn = StorageService.getUserData();
   id = null;
-  itemQTY = 1;
-
 
   minus(product) {
     if (1 < product.orderQTY) {
@@ -73,7 +66,7 @@ export class CartComponent implements OnInit {
         // preferred_time: time
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
-        swal('successful!', '', 'success');
+        Swal.fire('successful!', '', 'success');
         this.router.navigate(['Account/MyOrders']);
       });
       this.storageService.removeAll();
@@ -94,7 +87,7 @@ export class CartComponent implements OnInit {
         // preferred_time: time
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
-        swal('successful!', '', 'success');
+        Swal.fire('successful!', '', 'success');
         this.router.navigate(['Account/MyOrders']);
       });
       this.storageService.removeAll();
@@ -122,7 +115,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     if (this.logIn == null) {
-      swal('You Have To Login First!', '', 'success');
+      Swal.fire('You Have To Login First!', '', 'success');
       this.router.navigate(['siginUp']);
     } else {
       this.id = this.logIn.user.id;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
-import swal from 'sweetalert';
+// @ts-ignore
+const Swal = require('sweetalert2');
 declare var $: any;
 @Component({
   selector: 'app-order-details',
@@ -21,7 +22,7 @@ export class OrderDetailsComponent implements OnInit {
     };
     this.itemService.add_review(reviewBody).subscribe(data => {
       console.log(data);
-      swal('Review Added', '', 'success');
+       Swal.fire('Review Added', '', 'success');
     });
     this.closeReview(this.itemId);
   }

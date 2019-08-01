@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ItemService} from './item.service';
-import swal from 'sweetalert';
+// @ts-ignore
+const Swal = require('sweetalert2');
 declare var $: any;
 
 @Injectable()
@@ -73,9 +74,9 @@ export class StorageService {
       this.itemService.address(AddAddress).subscribe(data => {
         localStorage.setItem('UserAddress', JSON.stringify(data));
         if(data.error!==true) {
-          alert('Address Added!');
+          Swal.fire('Address Added!', '', 'success');
         } else {
-          alert('error!');
+          // Swal('error!', '', 'success');
           console.log(data);
         }
       });
@@ -98,10 +99,10 @@ export class StorageService {
         localStorage.setItem('signData', JSON.stringify(data));
         this.userData = localStorage.getItem('signData');
         this.log.next(this.userData);
-        alert('Login successful!');
+        Swal.fire('Login successful!', '', 'success');
       });
     } else {
-      alert('Your mail is wrong');
+      Swal.fire('Your mail is wrong!', '', 'success');
     }
   }
   changeImg(file) {
@@ -118,7 +119,7 @@ export class StorageService {
     localStorage.removeItem('signData');
     this.userData = localStorage.getItem('signData');
     this.log.next(this.userData);
-    alert('logOut successful!');
+    Swal.fire('logOut successful!', '', 'success');
   }
 
   // CART
@@ -133,7 +134,7 @@ export class StorageService {
       }
       localStorage.cartID = JSON.stringify(cart);
       this.getCartItems();
-      swal('Added to cart!', '', 'success');
+      Swal.fire('Added to cart!', '', 'success');
     }
   }
 

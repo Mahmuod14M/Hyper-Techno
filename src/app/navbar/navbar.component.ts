@@ -3,9 +3,8 @@ import {Router} from '@angular/router';
 import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
 import 'bootstrap';
-import Popper from 'popper.js';
-import swal from 'sweetalert';
-
+// @ts-ignore
+const Swal = require('sweetalert2');
 declare var $: any;
 
 
@@ -191,7 +190,7 @@ export class NavbarComponent implements OnInit {
         return;
       }
       if(evt.target.class !== 'log' ) {
-        swal('Loged out', '', 'success');
+         Swal.fire('Loged out', '', 'success');
         $('#login').hide();
         return;
       }
