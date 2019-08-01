@@ -35,17 +35,17 @@
       <td>
 
         <div class="qty">
-          <i class="fas fa-minus" (click)="minus(x.quantity,x.id)"></i>
-          <input [id]="'itemNum'+x.id" type="number" [value]="x.quantity"  disabled>
+          <i class="fas fa-minus" (click)="minus(x)"></i>
+          <input [id]="'itemNum'+x.id" type="number" [value]="x.orderQTY"  disabled>
 <!--          <span>{{itemQTY}}</span>-->
-         <i class="fas fa-plus" (click)="plus(x.quantity,x.id)"></i>
+         <i class="fas fa-plus" (click)="plus(x)"></i>
         </div>
 <!--        <select id="select">-->
 <!--          <option [value]="i+1" class="quantity" *ngFor='let in of counter(x.quantity) ;let i = index'>{{i+1}}</option>-->
 <!--        </select>-->
       </td>
       <td>
-        <h5>{{x.price*itemQTY|currency:' '}}</h5>
+        <h5>{{x.price*x.orderQTY|currency:' '}}</h5>
       </td>
       <td style="color: red;cursor: pointer">
         <i class="fas fa-times" (click)="removeItemFromCart(x.id)"></i>

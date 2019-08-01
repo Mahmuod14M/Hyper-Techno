@@ -24,7 +24,7 @@ import { TrackOrderComponent } from './track-order/track-order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 const config = new AuthServiceConfig([
   {
@@ -101,6 +101,7 @@ const appRoutes: Routes =
     Ng5SliderModule,
     FormsModule,
     ReactiveFormsModule,
+    [SweetAlert2Module.forRoot()],
   ],
 
   providers: [

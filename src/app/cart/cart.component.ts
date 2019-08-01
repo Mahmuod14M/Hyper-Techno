@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 
 declare var $: any;
 import swal from 'sweetalert';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
+
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +16,13 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 export class CartComponent implements OnInit {
 
 
-  itemlist: Product[];
+  itemlist: any [] = [];
+  amount(item) {
+    return item.price;
+  }
+  sum(prev, next) {
+    return prev + next;
+  }
   finalPrice = 0;
   VocherPrice = 0;
   subtotal = 0;
@@ -27,15 +33,17 @@ export class CartComponent implements OnInit {
   id = null;
   itemQTY = 1;
 
-  minus(QTY,id) {
-    const number =$('#itemNum'+id).attr('value',this.itemQTY);
-    this.itemQTY -= number;
-    $('#itemNum'+id).attr('value',this.itemQTY);
-}
-  plus(QTY,id) {
-    const number =$('#itemNum'+id).val();
-    this.itemQTY += number;
-    $('#itemNum'+id).attr('value',this.itemQTY);
+
+  minus(product) {
+    if (1 < product.orderQTY) {
+      product.orderQTY -= 1;
+    }
+  }
+
+  plus(product) {
+    if (product.orderQTY <= product.quantity) {
+      product.orderQTY += 1;
+    }
   }
 
   removeItemFromCart = product => {
@@ -48,7 +56,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    if (this.address==='localShipping') {
+    if (this.address === 'localShipping') {
       const addressId = $('#LocalDelivery').val();
       const itemIds = [];
       $('.productCart').each(function() {
@@ -69,7 +77,7 @@ export class CartComponent implements OnInit {
         this.router.navigate(['Account/MyOrders']);
       });
       this.storageService.removeAll();
-    } else if (this.address==='freeShipping') {
+    } else if (this.address === 'freeShipping') {
       const addressId = parseInt($('#addressSelector').val());
       const itemIds = [];
       $('.productCart').each(function() {
@@ -96,14 +104,16 @@ export class CartComponent implements OnInit {
   counter(i: number) {
     return new Array(i);
   }
-   address : any;
+
+  address: any;
+
   onItemChange(value) {
-    const target =value.target.value;
-    this.address =value.target.value;
-    if (target==='localShipping') {
+    const target = value.target.value;
+    this.address = value.target.value;
+    if (target === 'localShipping') {
       $('#addressSelector').hide();
       $('#LocalDelivery').show();
-    } else if (target==='freeShipping') {
+    } else if (target === 'freeShipping') {
       $('#addressSelector').show();
       $('#LocalDelivery').hide();
     }
@@ -128,16 +138,18 @@ export class CartComponent implements OnInit {
       this.addresses = data;
 
     });
-    this.storageService.getCartItems();
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;
-
-      for (const product of this.itemlist) {
-        this.finalPrice += Number(product.price);
-        this.subtotal = this.finalPrice + this.VocherPrice;
-        this.totalPrice = this.subtotal + this.Shipping;
+      for (const i in this.itemlist) {
+        this.itemlist[i].orderQTY = 1;
       }
+      // for (const product of this.itemlist) {
+      //   var productPrice = 0;
+      //   productsPrice += Number(product.price *product.orderQTY);
+      //   this.finalPrice = productsPrice - Voucher
+      // }
     });
+    this.storageService.getCartItems();
     window.scrollTo(0, 0);
   }
 

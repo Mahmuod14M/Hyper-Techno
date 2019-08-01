@@ -200,6 +200,7 @@ h1 {
 .p-sec3 .item img {
   margin: auto;
   height: 120px;
+  width: auto;
 }
 
 .p-sec3 .card .hover {

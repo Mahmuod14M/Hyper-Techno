@@ -332,6 +332,7 @@ body {
 .sec44 .item img {
   margin: auto;
   height: 120px;
+  width: auto;
 }
 
 .sec44 .card .hover {

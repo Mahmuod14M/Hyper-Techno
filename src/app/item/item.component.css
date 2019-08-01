@@ -541,6 +541,7 @@ display: inline-block;
 .sec4 .item img {
   margin: auto;
   height: 120px;
+  width: auto;
 }
 
 .sec4 .card .hover {
