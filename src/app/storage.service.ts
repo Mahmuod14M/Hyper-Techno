@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ItemService} from './item.service';
+import {Router} from '@angular/router';
 // @ts-ignore
 const Swal = require('sweetalert2');
 declare var $: any;
 
 @Injectable()
 export class StorageService {
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService , private router: Router) {
   }
 
   private cart = new Subject<any>();
@@ -34,11 +35,21 @@ export class StorageService {
       first_name: form.value.Fname,
       password: form.value.password,
     };
-    this.itemService.signUp(signUpData).subscribe(data => {
-      localStorage.setItem('signData', JSON.stringify(data));
-      this.userData = localStorage.getItem('signData');
-      this.log.next(this.userData);
-    });
+    if (form.value.Umail=== '' || form.value.Lname==='' ||form.value.Fname==='' ||form.value.password==='') {
+      Swal.fire('you have to complete fields', '', 'error');
+    } else {
+      this.itemService.signUp(signUpData).subscribe(data => {
+        if (data.message ==='Email Already Exists') {
+          Swal.fire('Email Already Exists', '', 'error');
+        } else {
+          localStorage.setItem('signData', JSON.stringify(data));
+          this.userData = localStorage.getItem('signData');
+          this.log.next(this.userData);
+          console.log(data);
+          this.router.navigate(['home']);
+        }
+      });
+    }
   }
 
   address(id, form) {
@@ -50,8 +61,14 @@ export class StorageService {
           form.value[key] = null;
         }
       }
+      let addressId =id;
+      if (addressId=== 0) {
+        addressId = null;
+      } else {
+        addressId =id;
+      }
       const AddAddress = {
-        address_id: id,
+        address_id: addressId,
         area_name: form.value.City,
         location_type: form.value.LocationType,
         apartment_num: form.value.ApartmentNum,
@@ -71,15 +88,22 @@ export class StorageService {
         building_num: form.value.buildNum,
         country_name: form.value.country
       };
-      this.itemService.address(AddAddress).subscribe(data => {
-        localStorage.setItem('UserAddress', JSON.stringify(data));
-        if(data.error!==true) {
-          Swal.fire('Address Added!', '', 'success');
-        } else {
-          // Swal('error!', '', 'success');
-          console.log(data);
-        }
-      });
+      if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
+         form.value.buildNum=== null ||form.value.MobileNumber===null ) {
+        Swal.fire('you have to complete fields', '', 'error');
+      } else  {
+        this.itemService.address(AddAddress).subscribe(data => {
+          localStorage.setItem('UserAddress', JSON.stringify(data));
+          if(data.error!==true) {
+            Swal.fire('Address Added!', '', 'success');
+            this.router.navigate(['cart']);
+          } else {
+            Swal.fire('error!', '', 'error');
+            console.log(data);
+            console.log( addressId);
+          }
+        });
+      }
     }
   }
 
@@ -96,13 +120,20 @@ export class StorageService {
         password: form.value.password,
       };
       this.itemService.signIn(signInData).subscribe(data => {
-        localStorage.setItem('signData', JSON.stringify(data));
-        this.userData = localStorage.getItem('signData');
-        this.log.next(this.userData);
-        Swal.fire('Login successful!', '', 'success');
+        console.log(data);
+        if (data.message=== 'no matching email') {
+          Swal.fire('no matching email', '', 'error');
+        } else if (data.message==='Wrong password') {
+          Swal.fire('Wrong password', '', 'error');
+        } else {
+          localStorage.setItem('signData', JSON.stringify(data));
+          this.userData = localStorage.getItem('signData');
+          this.log.next(this.userData);
+          Swal.fire('Login successful!', '', 'success');
+        }
       });
     } else {
-      Swal.fire('Your mail is wrong!', '', 'success');
+      Swal.fire('Your mail is wrong!', '', 'error');
     }
   }
   changeImg(file) {
@@ -119,7 +150,7 @@ export class StorageService {
     localStorage.removeItem('signData');
     this.userData = localStorage.getItem('signData');
     this.log.next(this.userData);
-    Swal.fire('logOut successful!', '', 'success');
+    location.reload();
   }
 
   // CART

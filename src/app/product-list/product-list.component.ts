@@ -4,7 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
 import {StorageService} from '../storage.service';
 declare var $: any;
-
+// @ts-ignore
+const Swal = require('sweetalert2');
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -32,6 +33,7 @@ export class ProductListComponent implements OnInit {
   pageCount = 1;
   isPageDataReady =false;
   itemListIDS: any[] = [];
+  pageTitle= 'OUR PRODUCTS';
 
   filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
     if (event.currentTarget) {
@@ -105,25 +107,30 @@ export class ProductListComponent implements OnInit {
 
   };
   search = function(payload) {
-    this.itemService.search(payload, this.pageCount).subscribe(data => {
-      this.items = data;
-      this.filter = data.filter;
-      this.maxValue = data.filter.max_price;
-      this.minValue = data.filter.min_price;
-      this.options = {
-        floor: data.filter.min_price,
-        ceil: data.filter.max_price,
-        translate: (value: number, label: LabelType): string => {
-          switch (label) {
-            case LabelType.Low:
-              return 'LE ' + value;
-            case LabelType.High:
-              return 'LE ' + value;
-            default:
-              return '';
+    this.itemService.searchBar(payload,this.pageCount).subscribe(data => {
+      this.pageData(data);
+      if (data.count===0 ||payload.query === '') {
+        Swal.fire('error!', '', 'error');
+        this.router.navigate(['#']);
+      } else  {
+        this.filter = data.filter;
+        this.maxValue = data.filter.max_price;
+        this.minValue = data.filter.min_price;
+        this.options = {
+          floor: data.filter.min_price,
+          ceil: data.filter.max_price,
+          translate: (value: number, label: LabelType): string => {
+            switch (label) {
+              case LabelType.Low:
+                return 'LE ' + value;
+              case LabelType.High:
+                return 'LE ' + value;
+              default:
+                return '';
+            }
           }
-        }
-      };
+        };
+      }
     });
   };
   pageData = function(data) {
@@ -178,17 +185,19 @@ export class ProductListComponent implements OnInit {
         case 'hotproduct':
           this.itemService.hotProduct(this.pageCount).subscribe(data => {
             this.pageData(data);
+            this.pageTitle ='hot product';
           });
           break;
-        case 'newarrivales':
+        case 'new':
           this.itemService.newArrivals(this.pageCount).subscribe(data => {
             this.pageData(data);
-
+            this.pageTitle ='new arrivals';
           });
           break;
         case 'brand':
           this.itemService.top_items_by_brand(id).subscribe(data => {
             this.pageData(data);
+            this.pageTitle= data.filter.brands[0].name;
           });
           break;
 

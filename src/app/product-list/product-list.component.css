@@ -1,15 +1,15 @@
-.nav {
+.nav1 {
   background-image: url(../../assets/img/header.jpg);
   height: 40px;
 }
 
-.nav h6 {
+.nav1 h6 {
   width: 70%;
   margin: auto;
   color: #faea8f;
 }
 
-.nav h6 .text {
+.nav1 h6 .text {
   color: white;
   cursor: pointer;
 }

@@ -4,6 +4,9 @@ import {StorageService} from '../storage.service';
 import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
+declare var $: any;
+// @ts-ignore
+const Swal = require('sweetalert2');
 @Component({
   selector: 'app-sigin-up',
   templateUrl: './sigin-up.component.html',
@@ -22,7 +25,13 @@ export class SiginUpComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   register(form) {
-    this.storageService.register(form);
+    const password = $('#password').val();
+    const rePassword = $('#rePassword').val();
+    if (password===rePassword) {
+      this.storageService.register(form);
+    } else {
+      Swal.fire('Password isn`t correct', '', 'error');
+    }
   }
   signOut(): void {
     this.authService.signOut();

@@ -16,6 +16,10 @@ const Swal = require('sweetalert2');
 })
 export class CartComponent implements OnInit {
 
+  constructor(private storageService: StorageService, private itemService: ItemService, private router: Router) {
+
+  }
+
 
   itemlist: any[] = [];
   finalPrice = 0;
@@ -27,26 +31,30 @@ export class CartComponent implements OnInit {
   logIn = StorageService.getUserData();
   id = null;
 
+  address: any;
+
   minus(product) {
     if (1 < product.orderQTY) {
       product.orderQTY -= 1;
+      this.finalPrice=0;
+      this.cartPrice();
     }
   }
 
   plus(product) {
     if (product.orderQTY <= product.quantity) {
       product.orderQTY += 1;
+      this.finalPrice=0;
+      this.cartPrice();
     }
   }
 
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
-    $('#finalProduct_').hide();
+    // $('#finalProduct_').hide();
+    this.finalPrice=0;
+    this.cartPrice();
   };
-
-  constructor(private storageService: StorageService, private itemService: ItemService, private router: Router) {
-
-  }
 
   checkout() {
     if (this.address === 'localShipping') {
@@ -98,8 +106,6 @@ export class CartComponent implements OnInit {
     return new Array(i);
   }
 
-  address: any;
-
   onItemChange(value) {
     const target = value.target.value;
     this.address = value.target.value;
@@ -112,8 +118,44 @@ export class CartComponent implements OnInit {
     }
 
   }
-
+  cartPrice() {
+    for (const product of this.itemlist) {
+      console.log(this.itemlist);
+      this.finalPrice +=  Number(product.price *product.orderQTY);
+      this.subtotal =this.finalPrice - this.VocherPrice;
+      this.totalPrice =this.subtotal+this.Shipping;
+      console.log(this.finalPrice);
+    }
+  }
   ngOnInit() {
+
+    // function errorCallback(error) {
+    //   console.log(JSON.stringify(error));
+    // }
+    // function cancelCallback() {
+    //   confirm('Are you sure you want to cancel?');
+    //   console.log('Payment cancelled');
+    // }
+    // function Checkout.configure({
+    //   merchant: '<NBE Test>',
+    //   order: {
+    //     amount: () => 80 + 20,
+    //     currency: 'USD',
+    //     description: 'Ordered goods',
+    //     id: '< merchant.TESTNBETEST>'
+    //   },
+    //   interaction: {
+    //     operation: 'AUTHORIZE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
+    //     merchant: {
+    //       name: 'NBE Test',
+    //       address: {
+    //         line1: '200 Sample St',
+    //         line2: '1234 Example Town'
+    //       }
+    //     }
+    //   }
+    // });
+    this.cartPrice();
     if (this.logIn == null) {
       Swal.fire('You Have To Login First!', '', 'success');
       this.router.navigate(['siginUp']);
@@ -136,11 +178,6 @@ export class CartComponent implements OnInit {
       for (const i in this.itemlist) {
         this.itemlist[i].orderQTY = 1;
       }
-      // for (const product of this.itemlist) {
-      //   var productPrice = 0;
-      //   productsPrice += Number(product.price *product.orderQTY);
-      //   this.finalPrice = productsPrice - Voucher
-      // }
     });
     this.storageService.getCartItems();
     window.scrollTo(0, 0);

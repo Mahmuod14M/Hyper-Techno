@@ -46,7 +46,7 @@
 
       <div class="card  m-2" *ngFor="let item of categories" style="width: 18rem;">
         <img class="card-img-top img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + item.image"
-             alt="Card image cap"/>
+             alt="Card image cap" [routerLink]="['/product/mainCat/',item.id]"/>
         <div class="itemName ">
           <h5 class="card-title" [routerLink]="['/product/mainCat/',item.id]">{{ item.name }}</h5>
         </div>
@@ -140,8 +140,8 @@
   </div>
   <br/>
   <div class="sec44">
-    <h3><span>B</span>rowse New Arrivales</h3>
-    <a href="#" class="view" [routerLink]="['/product/newArrivals/',1]">VIEW ALL ></a>
+    <h3><span>B</span>rowse New Arrivals</h3>
+    <a href="#" class="view" [routerLink]="['/product/new/',1]">VIEW ALL ></a>
     <hr class="hr2"/>
 
     <owl-carousel [options]=myCarouselOptions [items]="Arrivals" [carouselClasses]="['owl-theme', 'sliding']">

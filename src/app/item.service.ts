@@ -79,7 +79,7 @@ export class ItemService {
     );
   }
 
-  search(payload, page): Observable<any> {
+  searchBar(payload, page): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/General/search?Page=' + page, payload, httpOptions
     );

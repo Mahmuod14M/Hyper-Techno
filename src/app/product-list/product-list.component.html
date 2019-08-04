@@ -7,7 +7,7 @@
 <div class="data">
 
 
-  <div class="nav">
+  <div class="nav1">
     <h6>
       <span class="text" routerLink="/home">Home ></span>
       <span>  Tv & Home Theaters</span>
@@ -16,7 +16,7 @@
   <!-- section2 -->
   <section class="p-sec2">
     <div class="text">
-<!--      <h2 *ngFor="let x of data.filter">{{x.categories.name}}</h2>-->
+      <h2 *ngFor="let x of data?.filter">{{x.categories?.name}}</h2>
       <h2>{{data.categories[0]?.name}} <span *ngIf="data.categories[1]"> & {{data.categories[1]?.name}}</span>  </h2>
       <h5>{{data.brands[0].name}}
         <span  *ngIf="data.brands[1]"> & {{data.brands[1]?.name}}</span>
@@ -29,7 +29,7 @@
   </section>
   <!-- section4 -->
   <div class="text-center">
-    <h1>OUR PRODUCTS</h1>
+    <h1>{{pageTitle}}</h1>
   </div>
 
   <div class="all">
