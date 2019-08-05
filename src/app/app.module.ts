@@ -25,6 +25,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 const config = new AuthServiceConfig([
   {
@@ -57,6 +58,7 @@ const appRoutes: Routes =
     {path: 'EditProfile', loadChildren:'./edit-profile/edit-profile.module#EditProfileModule'},
     // {path: 'Account/:pageName', component: TrackOrderComponent},
     {path: 'Account/:pageName', component: TrackOrderComponent},
+    {path: 'wishList', component: WishListComponent},
   ];
 
 // @ts-ignore
@@ -81,7 +83,8 @@ const appRoutes: Routes =
     TrackOrderComponent,
     OrderDetailsComponent,
     ShippingAddressComponent,
-    AccountSettingComponent
+    AccountSettingComponent,
+    WishListComponent
   ],
   imports: [
     BrowserModule,

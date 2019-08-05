@@ -18,6 +18,7 @@ export class ItemComponent implements OnInit {
   productDetails: Product;
   relatedProducts: Product[];
   itemListIDS: any[] = [];
+  wishListIDS: any[] = [];
   isInStock = false;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService) {}
@@ -90,11 +91,20 @@ export class ItemComponent implements OnInit {
     $('#loading').show();
     $('.data').hide();
   }
+  addToWishList = function(product) {
+    this.storageService.addTOWishList(product);
+  };
   ngOnInit() {
     this.storageService.getCartItems();
+    this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {
         this.itemListIDS.push(product.id);
+      }
+    });
+    this.storageService.getwishListObservable().subscribe(data => {
+      for (const product of data) {
+        this.wishListIDS.push(product.id);
       }
     });
     window.scrollTo(0, 0);

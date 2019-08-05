@@ -118,7 +118,8 @@
           <div class="save" *ngIf="product.reduction_percent != null">
             <span>SAVE {{product.reduction_percent}}%</span>
           </div>
-          <span class="heart"><i class="fas fa-heart"></i></span>
+          <span class="heart" style="color: red" (click)="removeToWishList(product.id)"  *ngIf="wishListIDS.includes(product.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(product)" [id]="'addToWishList'+product.id" *ngIf="!wishListIDS.includes(product.id)"></i></span>
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]"/>
@@ -171,7 +172,8 @@
           <div class="save" *ngIf="product.reduction_percent != null">
             <span>SAVE {{product.reduction_percent}}%</span>
           </div>
-          <span class="heart"><i class="fas fa-heart"></i></span>
+          <span class="heart" style="color: red" (click)="removeToWishList(product.id)"  *ngIf="wishListIDS.includes(product.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(product)" [id]="'addToWishList'+product.id" *ngIf="!wishListIDS.includes(product.id)"></i></span>
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]"/>
@@ -223,7 +225,8 @@
           <div class="save" *ngIf="product.reduction_percent != null">
             <span>SAVE {{product.reduction_percent}}%</span>
           </div>
-          <span class="heart"><i class="fas fa-heart"></i></span>
+          <span class="heart" style="color: red" (click)="removeToWishList(product.id)" *ngIf="wishListIDS.includes(product.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(product)" [id]="'addToWishList'+product.id" *ngIf="!wishListIDS.includes(product.id)"></i></span>
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]" />

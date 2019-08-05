@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
   Categories: any[] = [];
   subCategories: any[] = [];
   itemlist: any[] = [];
+  wishList: any[] = [];
   text: any = '';
   MyOrders = 'MyOrders';
   MyAddresses = 'MyAddresses';
@@ -201,7 +202,13 @@ export class NavbarComponent implements OnInit {
         this.itemlist = cartList;
       },
     });
+    this.storageService.getwishListObservable().subscribe({
+      next: wishList => {
+        this.wishList = wishList;
+      },
+    });
     this.storageService.getCartItems();
+    this.storageService.getwishListItems();
     $(window).scroll(function() {
       if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
         $('#return-to-top').fadeIn(200);    // Fade in the arrow

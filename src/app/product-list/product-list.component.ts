@@ -33,6 +33,7 @@ export class ProductListComponent implements OnInit {
   pageCount = 1;
   isPageDataReady =false;
   itemListIDS: any[] = [];
+  wishListIDS: any[] = [];
   pageTitle= 'OUR PRODUCTS';
 
   filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
@@ -222,11 +223,21 @@ export class ProductListComponent implements OnInit {
   addToCart = function(product) {
     this.storageService.addToCart(product);
   };
+  addToWishList = function(product) {
+    this.storageService.addTOWishList(product);
+  };
   ngOnInit() {
+
     this.storageService.getCartItems();
+    this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {
         this.itemListIDS.push(product.id);
+      }
+    });
+    this.storageService.getwishListObservable().subscribe(data => {
+      for (const product of data) {
+        this.wishListIDS.push(product.id);
       }
     });
     this.init();

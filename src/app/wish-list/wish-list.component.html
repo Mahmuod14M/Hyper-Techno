@@ -1,0 +1,88 @@
+<!--<div id="loading">-->
+<!--  <div class="spinner">-->
+<!--    <div class="dot1"></div>-->
+<!--    <div class="dot2"></div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="data">
+
+
+  <div class="nav1">
+    <h6>
+      <span class="text" routerLink="/home">Home ></span>
+      <span>  wish List</span>
+    </h6>
+  </div>
+  <!-- section2 -->
+  <section class="p-sec2">
+    <div class="text">
+      <h2>wish List</h2>
+
+    </div>
+  </section>
+  <!-- section4 -->
+  <div class="text-center">
+    <h1>{{pageTitle}}</h1>
+  </div>
+
+  <div class="all">
+
+    <!-- section3 -->
+    <section class="p-sec3">
+
+
+      <div class="item" *ngFor="let item of items" [id]="'cart_item_'+item.id">
+        <div class="card" (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
+          <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
+            <div class="inner-card">
+              <!--              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">-->
+              <h4 *ngIf="itemListIDS.includes(item.id)" style="background-color:#019d0a;"><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(item)"  [id]="'addToCart'+item.id" *ngIf="!itemListIDS.includes(item.id)"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
+              </h4>
+              <h5>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </h5>
+            </div>
+
+          </div>
+          <div class="save" *ngIf="item.reduction_percent != null">
+            <span>SAVE {{item.reduction_percent}}%</span>
+          </div>
+          <span class="heart" style="color: red" (click)="removeToWishList(item.id)" *ngIf="wishListIDS.includes(item.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(item)" [id]="'addToWishList'+item.id" *ngIf="!wishListIDS.includes(item.id)"></i></span>
+          <img [src]="
+            'https://arafa.000webhostapp.com/Hyper/uploads/' + item.main_image
+          " class="img-fluid" [routerLink]="['/item',item.id]"/>
+          <p [routerLink]="['/item',item.id]">{{ item.name  }}</p>
+          <div class="bttom">
+            <span class="stock"><i class="fas fa-circle"></i>In stock</span>
+            <div class="old-price" *ngIf="item.price != item.wholesale_price">
+              <span class="egp1 ">EGP</span>
+              <span class="old">{{ item.wholesale_price |currency:' ' }}</span>
+            </div>
+            <div class="new-price">
+              <span class="egp">EGP</span>
+              <span class="new">{{ item.price |currency:' ' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+    </section>
+
+  </div>
+
+
+
+</div>
+
+
+
+

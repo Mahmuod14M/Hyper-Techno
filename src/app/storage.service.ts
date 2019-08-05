@@ -12,6 +12,7 @@ export class StorageService {
   }
 
   private cart = new Subject<any>();
+  private wishList = new Subject<any>();
   // public cartIDS=   JSON.parse(localStorage.cartID);
   public userData = JSON.parse(localStorage.getItem('signData'));
   private log = new Subject<any>();
@@ -169,6 +170,20 @@ export class StorageService {
     }
   }
 
+  addTOWishList(product) {
+    if (localStorage) {
+      let wishList = [];
+      if (localStorage.wishList) {
+        wishList = JSON.parse(localStorage.wishList);
+      }
+      if (!wishList.includes(product.id)) {
+        wishList.push(product.id);
+      }
+      localStorage.wishList = JSON.stringify(wishList);
+      this.getwishListItems();
+      Swal.fire('Added to wishList!', '', 'success');
+    }
+  }
   removeAll() {
     localStorage.cartID = [];
     this.cart.next([]);
@@ -185,9 +200,23 @@ export class StorageService {
     }
     this.getCartItems();
   }
+  removeToWishList(id) {
+    const itemsArray = JSON.parse(localStorage.wishList);
+    for (let index = 0; index < itemsArray.length; index++) {
+      if (itemsArray[index] === id) {
+        itemsArray.splice(index, 1);
+        localStorage.wishList = JSON.stringify(itemsArray);
+        $('#cart_item_' + id).fadeOut();
+      }
+    }
+    this.getwishListItems();
+  }
 
   getCartObservable() {
     return this.cart.asObservable();
+  }
+  getwishListObservable() {
+    return this.wishList.asObservable();
   }
 
   getCartItems() {
@@ -202,6 +231,20 @@ export class StorageService {
       });
     } else {
       this.cart.next([]);
+    }
+  }
+  getwishListItems() {
+    if (localStorage.wishList) {
+      const ids = JSON.parse(localStorage.wishList);
+      this.itemService.getBroductById({ids}).subscribe(data => {
+        if (!data.error) {
+          this.wishList.next(data.products);
+        } else {
+          this.wishList.next([]);
+        }
+      });
+    } else {
+      this.wishList.next([]);
     }
   }
 }

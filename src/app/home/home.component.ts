@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   mainCat: any[] = [];
   brands: any[] = [];
   itemListIDS: any[] = [];
+  wishListIDS: any[] = [];
   isCategoryReady = false;
   isHotProductReady = false;
   isHomePageReady = false;
@@ -121,12 +122,25 @@ export class HomeComponent implements OnInit {
   addToCart = function(product) {
     this.storageService.addToCart(product);
   };
+  addToWishList = function(product) {
+    this.storageService.addTOWishList(product);
+  };
+  removeToWishList = function(id) {
+    this.storageService.removeToWishList(id);
+  };
 
   ngOnInit() {
     this.storageService.getCartItems();
+    this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {
       for (const product of data) {
         this.itemListIDS.push(product.id);
+      }
+    });
+    this.storageService.getwishListObservable().subscribe(data => {
+      console.log('called');
+      for (const product of data) {
+        this.wishListIDS.push(product.id);
       }
     });
 

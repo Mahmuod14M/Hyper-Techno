@@ -521,6 +521,7 @@ display: inline-block;
   right: 20px;
   font-size: 24px;
   color: #d6d3d4;
+  cursor: pointer;
 }
 
 .sec4 .card .bttom .old {
