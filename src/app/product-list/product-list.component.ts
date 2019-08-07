@@ -226,16 +226,21 @@ export class ProductListComponent implements OnInit {
   addToWishList = function(product) {
     this.storageService.addTOWishList(product);
   };
+  removeToWishList = function(id) {
+    this.storageService.removeToWishList(id);
+  };
   ngOnInit() {
 
     this.storageService.getCartItems();
     this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {
+      this.itemListIDS=[];
       for (const product of data) {
         this.itemListIDS.push(product.id);
       }
     });
     this.storageService.getwishListObservable().subscribe(data => {
+      this.wishListIDS=[];
       for (const product of data) {
         this.wishListIDS.push(product.id);
       }

@@ -183,7 +183,7 @@ ul li {
   margin-right: 12px;
   font-size: 13px;
   border: none;
-
+  outline: none;
 }
 
 
@@ -192,30 +192,22 @@ ul li {
   width: 60%;
   display: none;
   position: absolute;
-  top: 40px;
+  top: 30px;
   background-color: rgba(241, 241, 241, 0.9);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-/*@media only screen and (max-width: 1200px){*/
-/*  .dropdown-content{*/
-/*    width: 999px;*/
-/*    left: 20px;*/
-/*  }*/
-/*}*/
-/*@media only screen and (max-width: 1050px){*/
-/*  .dropdown-content{*/
-/*    width: 800px;*/
-
-/*  }*/
-/*}*/
-/*@media only screen and (max-width: 900px){*/
-/*  .dropdown-content{*/
-/*    width: 750px;*/
-
-/*  }*/
-/*}*/
+@media only screen and (max-width: 1750px){
+  .dropdown-content{
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 1500px){
+  .dropdown-content{
+    width: 90%;
+  }
+}
 
 .containeer button {
   color: #95979a;

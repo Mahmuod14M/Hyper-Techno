@@ -70,33 +70,7 @@ export class NavbarComponent implements OnInit {
     $('#login').toggle();
   }
 
-  constructor(private itemService: ItemService, private router: Router, private storageService: StorageService) {
-    // this.itemService.editUserImg(id).subscribe(data => {
-    //
-    // });
-    this.storageService.getUserObservable().subscribe({
-      next: logIn => {
-        this.logIn = JSON.parse(logIn);
-        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
-          '+ this.logIn.user.profile_pic)';
-      },
-    });
-
-    itemService.brands().subscribe(data => {
-      this.brands = data.brand;
-    });
-    itemService.Categ().subscribe(data => {
-      this.Categorys = data.category;
-      data.category.forEach(mainCategory => {
-        itemService.sub_catg(mainCategory.id).subscribe(subData => {
-          this.subCategories.push({
-            parent: mainCategory,
-            categories: subData.category
-          });
-        });
-      });
-    });
-  }
+  constructor(private itemService: ItemService, private router: Router, private storageService: StorageService) {}
 
   openNav = function openNav() {
     document.getElementById('mySidenav').style.width = '250px';
@@ -175,6 +149,27 @@ export class NavbarComponent implements OnInit {
   // }
 
   ngOnInit() {
+    this.storageService.getUserObservable().subscribe({
+      next: logIn => {
+        this.logIn = JSON.parse(logIn);
+        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+          '+ this.logIn.user.profile_pic)';
+      },
+    });
+    this.itemService.brands().subscribe(data => {
+      this.brands = data.brand;
+    });
+    this.itemService.Categ().subscribe(data => {
+      this.Categorys = data.category;
+      data.category.forEach(mainCategory => {
+        this.itemService.sub_catg(mainCategory.id).subscribe(subData => {
+          this.subCategories.push({
+            parent: mainCategory,
+            categories: subData.category
+          });
+        });
+      });
+    });
     $('#showPhone').click(()=> {
       $('.phone2').slideToggle();
       $('.phone2').css('display','flex');

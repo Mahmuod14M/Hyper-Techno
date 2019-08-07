@@ -4,6 +4,7 @@ import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
 import 'bootstrap';
 import {Router} from '@angular/router';
+import {delay} from 'rxjs/operators';
 
 declare var $: any;
 
@@ -27,7 +28,6 @@ export class HomeComponent implements OnInit {
   itemListIDS: any[] = [];
   wishListIDS: any[] = [];
   isCategoryReady = false;
-  isHotProductReady = false;
   isHomePageReady = false;
   isArrivalReady = false;
   isBrandsReady = false;
@@ -128,31 +128,11 @@ export class HomeComponent implements OnInit {
   removeToWishList = function(id) {
     this.storageService.removeToWishList(id);
   };
-  getClass(id): boolean {
-    // add filter logic here
-    return this.itemListIDS.findIndex(fav => fav.id === id) > -1;
-  }
   ngOnInit() {
-    this.storageService.getCartItems();
-    this.storageService.getwishListItems();
-    this.storageService.getCartObservable().subscribe(data => {
-      this.itemListIDS=[];
-      for (const product of data) {
-        this.itemListIDS.push(product.id);
-      }
-      console.log(this.itemListIDS);
-    });
-    this.storageService.getwishListObservable().subscribe(data => {
-      this.wishListIDS=[];
-      for (const product of data) {
-        this.wishListIDS.push(product.id);
-      }
-    });
-
-    this.itemService.hotProduct(1).subscribe(data => {
+    this.itemService.hotProduct(1).pipe(delay(5000)).subscribe(data => {
       this.products = data.product;
     });
-    this.itemService.homePageRequest().subscribe(data => {
+    this.itemService.homePageRequest().pipe(delay(5000)).subscribe(data => {
       this.homePhoto = data.promotions;
       this.categories = data.categories;
       this.isHomePageReady = true;
@@ -165,7 +145,7 @@ export class HomeComponent implements OnInit {
         $('.data').show();
       }
     });
-    this.itemService.newArrivals(1).subscribe(data => {
+    this.itemService.newArrivals(1).pipe(delay(5000)).subscribe(data => {
       this.Arrivals = data.product;
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
@@ -174,13 +154,29 @@ export class HomeComponent implements OnInit {
         $('.data').show();
       }
     });
-    this.itemService.main_cat_items(1, 1).subscribe(data => {
+    this.itemService.main_cat_items(1, 1).pipe(delay(5000)).subscribe(data => {
       this.mainCat = data.product;
       this.isArrivalReady = true;
       if (this.isCategoryReady && this.isHomePageReady && this.isArrivalReady && this.isBrandsReady) {
         $(window).scrollTop();
         $('#loading').fadeOut();
         $('.data').show();
+      }
+    });
+
+
+    // this.storageService.getCartItems();
+    // this.storageService.getwishListItems();
+    this.storageService.getCartObservable().subscribe(data => {
+      this.itemListIDS=[];
+      for (const product of data) {
+        this.itemListIDS.push(product.id);
+      }
+    });
+    this.storageService.getwishListObservable().subscribe(data => {
+      this.wishListIDS=[];
+      for (const product of data) {
+        this.wishListIDS.push(product.id);
       }
     });
     window.scrollTo(0, 0);

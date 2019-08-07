@@ -183,7 +183,7 @@
           <div class="save" *ngIf="items.reduction_percent != null">
             <span>SAVE {{items.reduction_percent}}%</span>
           </div>
-          <span class="heart" style="color: red" *ngIf="wishListIDS.includes(items.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart" (click)="removeToWishList(items.id)"  style="color: red" *ngIf="wishListIDS.includes(items.id)"><i class="fas fa-heart"></i></span>
           <span class="heart"><i class="fas fa-heart" (click)="addToWishList(items)" [id]="'addToWishList'+items.id" *ngIf="!wishListIDS.includes(items.id)"></i></span>
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + items.main_image
