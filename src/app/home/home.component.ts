@@ -128,17 +128,22 @@ export class HomeComponent implements OnInit {
   removeToWishList = function(id) {
     this.storageService.removeToWishList(id);
   };
-
+  getClass(id): boolean {
+    // add filter logic here
+    return this.itemListIDS.findIndex(fav => fav.id === id) > -1;
+  }
   ngOnInit() {
     this.storageService.getCartItems();
     this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {
+      this.itemListIDS=[];
       for (const product of data) {
         this.itemListIDS.push(product.id);
       }
+      console.log(this.itemListIDS);
     });
     this.storageService.getwishListObservable().subscribe(data => {
-      console.log('called');
+      this.wishListIDS=[];
       for (const product of data) {
         this.wishListIDS.push(product.id);
       }

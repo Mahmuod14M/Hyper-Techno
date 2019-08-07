@@ -741,4 +741,9 @@ body {
   height: 75px;
 }
 
-
+.visible{
+  display: block;
+}
+.hidden{
+  display: none;
+}

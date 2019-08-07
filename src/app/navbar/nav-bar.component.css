@@ -758,7 +758,7 @@ $breakpoint determines at which width the media query breakpoint will take effec
 
   }
   .wishList{
-
+    outline: none;
   }
   .item-count{
     display: none;
@@ -1090,4 +1090,7 @@ h1 small {
 #navbarLogo{
   width: 240px;
   height: 65px;
+}
+#wishList{
+  outline: none;
 }
