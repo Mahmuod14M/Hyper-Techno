@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -40,24 +39,6 @@ const config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
-const appRoutes: Routes =
-  [
-    {path: '', component: HomeComponent},
-    {path: 'home', component: HomeComponent},
-    {path: 'aboutUs', loadChildren: './about-us/about-us.module#AboutUsModule'},
-    {path: 'contactUs', loadChildren: './contact-us/contact-us.module#ContactUsModule'},
-    {path: 'item/:id', loadChildren: './item/item.module#ItemModule'},
-    {path: 'product/:page/:id', loadChildren: './product-list/productList.module#ProductListModule'},
-    {path: 'siginUp', loadChildren:'./sigin-up/sigin-up.module#SiginUpModule'},
-    {path: 'policy', loadChildren:'./policy/policy.module#PolicyModule'},
-    {path: 'Installments', loadChildren:'./installments/instsllments.module#InstallmentsModule'},
-    {path: 'cart', loadChildren:'./cart/cart.module#CartModule'},
-    {path: 'address', loadChildren:'./add-adress/AddAddress.module#AddAddressModule'},
-    {path: 'address/:id', loadChildren:'./add-adress/AddAddress.module#AddAddressModule'},
-    {path: 'EditProfile', loadChildren:'./edit-profile/edit-profile.module#EditProfileModule'},
-    {path: 'Account/:pageName', component: TrackOrderComponent},
-    {path: 'wishList', component: WishListComponent},
-  ];
 
 
 @NgModule({
@@ -82,9 +63,6 @@ const appRoutes: Routes =
     BrowserAnimationsModule,
     SocialLoginModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, {
-      onSameUrlNavigation: 'reload'
-    }),
     BrowserModule,
     OwlModule,
     JwSocialButtonsModule,
