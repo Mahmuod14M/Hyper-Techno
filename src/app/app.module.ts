@@ -54,32 +54,19 @@ const appRoutes: Routes =
     {path: 'cart', loadChildren:'./cart/cart.module#CartModule'},
     {path: 'address', loadChildren:'./add-adress/AddAddress.module#AddAddressModule'},
     {path: 'address/:id', loadChildren:'./add-adress/AddAddress.module#AddAddressModule'},
-    // {path: 'EditProfile', component: EditProfileComponent},
     {path: 'EditProfile', loadChildren:'./edit-profile/edit-profile.module#EditProfileModule'},
-    // {path: 'Account/:pageName', component: TrackOrderComponent},
     {path: 'Account/:pageName', component: TrackOrderComponent},
     {path: 'wishList', component: WishListComponent},
   ];
 
-// @ts-ignore
-// @ts-ignore
+
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HomeComponent,
     SeemorePipe,
-    // AboutUsComponent,
-    // ItemComponent,
-    // ContactUsComponent,
-    // ProductListComponent,
-    // SiginUpComponent,
     NavbarComponent,
-    // PolicyComponent,
-    // InstallmentsComponent,
-    // CartComponent,
-    // EditProfileComponent,
-    // AddAddressComponent,
     TrackOrderComponent,
     OrderDetailsComponent,
     ShippingAddressComponent,
@@ -118,5 +105,4 @@ const appRoutes: Routes =
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  // platformBrowserDynamic().bootstrapModule(AppModule);
 }
