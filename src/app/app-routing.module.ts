@@ -6,7 +6,6 @@ import {WishListComponent} from './wish-list/wish-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  
   {path: 'home', component: HomeComponent},
   {path: 'aboutUs', loadChildren: './about-us/about-us.module#AboutUsModule'},
   {path: 'contactUs', loadChildren: './contact-us/contact-us.module#ContactUsModule'},
