@@ -30,32 +30,47 @@ export class StorageService {
   }
 
   register(form) {
-    const signUpData = {
-      email: form.value.Umail,
-      last_name: form.value.Lname,
-      first_name: form.value.Fname,
-      password: form.value.password,
-    };
-    if (form.value.Umail=== '' || form.value.Lname==='' ||form.value.Fname==='' ||form.value.password==='') {
-      Swal.fire('you have to complete fields', '', 'error');
-    } else {
-      this.itemService.signUp(signUpData).subscribe(data => {
-        if (data.message ==='Email Already Exists') {
-          Swal.fire('Email Already Exists', '', 'error');
-        } else {
-          localStorage.setItem('signData', JSON.stringify(data));
-          this.userData = localStorage.getItem('signData');
-          this.log.next(this.userData);
-          console.log(data);
-          this.router.navigate(['home']);
-        }
-      });
+    const filter = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const nameFilter = /^[a-zA-Z]{3,9}/;
+    const emailValidator = form.value.Umail;
+    const LnameValidator = form.value.Lname;
+    const FnameValidator = form.value.Fname;
+    if (filter.test(emailValidator)&&nameFilter.test(LnameValidator)&&nameFilter.test(FnameValidator)) {
+      const signUpData = {
+        email: form.value.Umail,
+        last_name: form.value.Lname,
+        first_name: form.value.Fname,
+        password: form.value.password,
+      };
+      if (form.value.Umail === '' || form.value.Lname === '' || form.value.Fname === '' || form.value.password === '') {
+        Swal.fire('you have to complete fields', '', 'error');
+      } else {
+        this.itemService.signUp(signUpData).subscribe(data => {
+          if (data.message === 'Email Already Exists') {
+            Swal.fire('Email Already Exists', '', 'error');
+          } else {
+            localStorage.setItem('signData', JSON.stringify(data));
+            this.userData = localStorage.getItem('signData');
+            this.log.next(this.userData);
+            console.log(data);
+            this.router.navigate(['home']);
+          }
+        });
+      }
+    } else if (!filter.test(emailValidator)) {
+      Swal.fire('Your mail is wrong!', '', 'error');
+    } else if (!nameFilter.test(LnameValidator)) {
+      Swal.fire('Your Last Name is wrong!', '', 'error');
+    } else if (!nameFilter.test(FnameValidator)) {
+      Swal.fire('Your First Name is wrong!', '', 'error');
     }
   }
 
   address(id, form) {
     const user = JSON.parse(localStorage.getItem('signData'));
+    let AddAddress = {};
     if (user) {
+      // tslint:disable-next-line:forin
       for (const key in form.value) {
         const value = form.value[key];
         if (value === '') {
@@ -65,46 +80,86 @@ export class StorageService {
       let addressId =id;
       if (addressId=== 0) {
         addressId = null;
+        AddAddress = {
+          address_id: addressId,
+          area_name: form.value.City,
+          location_type: form.value.LocationType,
+          apartment_num: form.value.ApartmentNum,
+          floor_num: form.value.FloorNumber,
+          user_id: user.user.id,
+          street_name: form.value.Street,
+          first_name: form.value.Fname,
+          mobile: form.value.MobileNumber,
+          latitude: 0,
+          preferred_time: form.value.PreferredDeliveryTime,
+          landline: form.value.LandlineNumber,
+          landmark: form.value.NearstLandmark,
+          longitude: 0,
+          city_name: form.value.City,
+          last_name: form.value.Lname,
+          notes: form.value.Notes,
+          building_num: form.value.buildNum,
+          country_name: form.value.country
+        };
+        if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
+          form.value.buildNum=== null ||form.value.MobileNumber===null ) {
+          Swal.fire('you have to complete fields', '', 'error');
+          console.log(AddAddress);
+        } else  {
+          this.itemService.address(AddAddress).subscribe(data => {
+            localStorage.setItem('UserAddress', JSON.stringify(data));
+            if(data.error!==true) {
+              Swal.fire('Address Added!', '', 'success');
+              // this.router.navigate(['cart']);
+            } else {
+              Swal.fire('error!', '', 'error');
+              console.log(data);
+              console.log( addressId);
+            }
+          });
+        }
       } else {
         addressId =id;
+        AddAddress = {
+          address_id: addressId,
+          area_name: form.value.City,
+          location_type: form.value.LocationType,
+          apartment_num: form.value.ApartmentNum,
+          floor_num: form.value.FloorNumber,
+          user_id: user.user.id,
+          street_name: form.value.Street,
+          first_name: form.value.Fname,
+          mobile: form.value.MobileNumber,
+          latitude: 0,
+          preferred_time: form.value.PreferredDeliveryTime,
+          landline: form.value.LandlineNumber,
+          landmark: form.value.NearstLandmark,
+          longitude: 0,
+          city_name: form.value.City,
+          last_name: form.value.Lname,
+          notes: form.value.Notes,
+          building_num: form.value.buildNum,
+          country_name: form.value.country
+        };
+        if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
+          form.value.buildNum=== null ||form.value.MobileNumber===null ) {
+          Swal.fire('you have to complete fields', '', 'error');
+          console.log(AddAddress);
+        } else  {
+          this.itemService.address(AddAddress).subscribe(data => {
+            localStorage.setItem('UserAddress', JSON.stringify(data));
+            if(data.error!==true) {
+              Swal.fire('Address Added!', '', 'success');
+              this.router.navigate(['Account/MyAddresses']);
+            } else {
+              Swal.fire('error!', '', 'error');
+              console.log(data);
+              console.log( addressId);
+            }
+          });
+        }
       }
-      const AddAddress = {
-        address_id: addressId,
-        area_name: form.value.City,
-        location_type: form.value.LocationType,
-        apartment_num: form.value.ApartmentNum,
-        floor_num: form.value.FloorNumber,
-        user_id: user.user.id,
-        street_name: form.value.Street,
-        first_name: form.value.Fname,
-        mobile: form.value.MobileNumber,
-        latitude: 0,
-        preferred_time: form.value.PreferredDeliveryTime,
-        landline: form.value.LandlineNumber,
-        landmark: form.value.NearstLandmark,
-        longitude: 0,
-        city_name: form.value.City,
-        last_name: form.value.Lname,
-        notes: form.value.Notes,
-        building_num: form.value.buildNum,
-        country_name: form.value.country
-      };
-      if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
-         form.value.buildNum=== null ||form.value.MobileNumber===null ) {
-        Swal.fire('you have to complete fields', '', 'error');
-      } else  {
-        this.itemService.address(AddAddress).subscribe(data => {
-          localStorage.setItem('UserAddress', JSON.stringify(data));
-          if(data.error!==true) {
-            Swal.fire('Address Added!', '', 'success');
-            this.router.navigate(['cart']);
-          } else {
-            Swal.fire('error!', '', 'error');
-            console.log(data);
-            console.log( addressId);
-          }
-        });
-      }
+
     }
   }
 
@@ -131,6 +186,7 @@ export class StorageService {
           this.userData = localStorage.getItem('signData');
           this.log.next(this.userData);
           Swal.fire('Login successful!', '', 'success');
+          this.router.navigate(['home']);
         }
       });
     } else {
@@ -148,6 +204,7 @@ export class StorageService {
   }
 
   removeId() {
+    this.router.navigate(['home']);
     localStorage.removeItem('signData');
     this.userData = localStorage.getItem('signData');
     this.log.next(this.userData);
@@ -169,7 +226,6 @@ export class StorageService {
       Swal.fire('Added to cart!', '', 'success');
     }
   }
-
   addTOWishList(product) {
     if (localStorage) {
       let wishList = [];
@@ -188,7 +244,6 @@ export class StorageService {
     localStorage.cartID = [];
     this.cart.next([]);
   }
-
   removeFromCart(productID) {
     const itemsArray = JSON.parse(localStorage.cartID);
     for (let index = 0; index < itemsArray.length; index++) {
@@ -211,14 +266,12 @@ export class StorageService {
     }
     this.getwishListItems();
   }
-
   getCartObservable() {
     return this.cart.asObservable();
   }
   getwishListObservable() {
     return this.wishList.asObservable();
   }
-
   getCartItems() {
     if (localStorage.cartID) {
       const ids = JSON.parse(localStorage.cartID);

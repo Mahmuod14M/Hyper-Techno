@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
     // $('#finalProduct_').hide();
     this.finalPrice=0;
     this.cartPrice();
-  };
+  }
 
   checkout() {
     if (this.address === 'localShipping') {
@@ -119,6 +119,7 @@ export class CartComponent implements OnInit {
 
   }
   cartPrice() {
+    console.log(this.itemlist);
     for (const product of this.itemlist) {
       console.log(this.itemlist);
       this.finalPrice +=  Number(product.price *product.orderQTY);
@@ -155,7 +156,13 @@ export class CartComponent implements OnInit {
     //     }
     //   }
     // });
-    this.cartPrice();
+    this.storageService.getCartObservable().subscribe(data => {
+      this.itemlist = data;
+      for (const i in this.itemlist) {
+        this.itemlist[i].orderQTY = 1;
+      }
+      this.cartPrice();
+    });
     if (this.logIn == null) {
       Swal.fire('You Have To Login First!', '', 'success');
       this.router.navigate(['siginUp']);
@@ -173,12 +180,7 @@ export class CartComponent implements OnInit {
       this.addresses = data;
 
     });
-    this.storageService.getCartObservable().subscribe(data => {
-      this.itemlist = data;
-      for (const i in this.itemlist) {
-        this.itemlist[i].orderQTY = 1;
-      }
-    });
+
     this.storageService.getCartItems();
     window.scrollTo(0, 0);
   }
