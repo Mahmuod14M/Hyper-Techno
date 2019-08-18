@@ -57,6 +57,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    console.log(this.address);
     if (this.address === 'localShipping') {
       const addressId = $('#LocalDelivery').val();
       const itemIds = [];
@@ -79,6 +80,7 @@ export class CartComponent implements OnInit {
       });
       this.storageService.removeAll();
     } else if (this.address === 'freeShipping') {
+      console.log('enterd');
       const addressId = parseInt($('#addressSelector').val());
       const itemIds = [];
       $('.productCart').each(function() {
@@ -119,17 +121,14 @@ export class CartComponent implements OnInit {
 
   }
   cartPrice() {
-    console.log(this.itemlist);
     for (const product of this.itemlist) {
-      console.log(this.itemlist);
       this.finalPrice +=  Number(product.price *product.orderQTY);
       this.subtotal =this.finalPrice - this.VocherPrice;
       this.totalPrice =this.subtotal+this.Shipping;
-      console.log(this.finalPrice);
     }
   }
   ngOnInit() {
-
+    //
     // function errorCallback(error) {
     //   console.log(JSON.stringify(error));
     // }
@@ -156,6 +155,7 @@ export class CartComponent implements OnInit {
     //     }
     //   }
     // });
+
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;
       for (const i in this.itemlist) {
@@ -165,7 +165,7 @@ export class CartComponent implements OnInit {
     });
     if (this.logIn == null) {
       Swal.fire('You Have To Login First!', '', 'success');
-      this.router.navigate(['siginUp']);
+      this.router.navigate(['home']);
     } else {
       this.id = this.logIn.user.id;
     }
@@ -178,7 +178,10 @@ export class CartComponent implements OnInit {
     });
     this.itemService.get_address(this.id).subscribe(data => {
       this.addresses = data;
-
+      if ( $('input[checked=\'true\']')) {
+        const address =$('input[value=\'freeShipping\']').val();
+        this.address = address;
+      }
     });
 
     this.storageService.getCartItems();
