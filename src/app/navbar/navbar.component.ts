@@ -152,12 +152,16 @@ export class NavbarComponent implements OnInit {
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
         this.logIn = JSON.parse(logIn);
-        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
-          '+ this.logIn.user.profile_pic)';
+        console.log(  'this.logIn',this.logIn);
+        if (this.logIn.fb_token === null) {
+          document.getElementById('imagePreview').style.backgroundImage = 'url(this.logIn.user.profile_pic)';
+        } else {
+          document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
+            '+ this.logIn.user.profile_pic)';
+        }
       },
     });
     this.logIn = StorageService.getUserData();
-    console.log(  'this.logIn',this.logIn);
     this.itemService.brands().subscribe(data => {
       this.brands = data.brand;
     });
