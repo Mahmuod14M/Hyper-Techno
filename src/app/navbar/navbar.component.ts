@@ -156,6 +156,8 @@ export class NavbarComponent implements OnInit {
           '+ this.logIn.user.profile_pic)';
       },
     });
+    this.logIn = StorageService.getUserData();
+    console.log(  'this.logIn',this.logIn);
     this.itemService.brands().subscribe(data => {
       this.brands = data.brand;
     });
@@ -222,14 +224,6 @@ export class NavbarComponent implements OnInit {
     $('.profileImg').mouseleave(() => {
       $('#Edit').show();
     });
-    this.storageService.getUserObservable().subscribe({
-      next: logIn => {
-        this.logIn = JSON.parse(logIn);
-        document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
-          '+ this.logIn.user.profile_pic)';
-      },
-    });
-    this.logIn = StorageService.getUserData();
     $('.sliderBG').click(() => {
       document.getElementById('mySidenav').style.width = '0';
       document.querySelector('body').style.left = '0';

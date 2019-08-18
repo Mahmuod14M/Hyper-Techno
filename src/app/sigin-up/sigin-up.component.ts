@@ -26,11 +26,13 @@ export class SiginUpComponent implements OnInit {
     const socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        this.sendToRestApiMethod(userData.token);
+        // this.sendToRestApiMethod(userData.token);
+        console.log(userData);
+        this.storageService.fbLogIn(userData);
       }
     );
   }
-  sendToRestApiMethod: any;
+  // sendToRestApiMethod: any;
   userdata = StorageService.getUserData();
   logIn: any;
   private loggedIn: boolean;

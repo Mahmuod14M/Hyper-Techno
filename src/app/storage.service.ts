@@ -193,6 +193,26 @@ export class StorageService {
       Swal.fire('Your mail is wrong!', '', 'error');
     }
   }
+  fbLogIn(userData) {
+    const name =userData.toString().split(' ');
+    console.log(name);
+    // const Lname =userData.substr(userData.indexOf(' ')+1);
+    const signInData = {
+      email: userData.email,
+      fb_id:userData.id,
+      first_name: userData.name,
+      last_name: ' ',
+      fb_token: userData.token,
+      picture: userData.image
+    };
+    this.itemService.facebook(signInData).subscribe(data => {
+      localStorage.setItem('signData', JSON.stringify(data));
+      this.userData = localStorage.getItem('signData');
+      this.log.next(this.userData);
+      console.log(data);
+      this.router.navigate(['home']);
+    });
+  }
   changeImg(file) {
     const imgData = {
       ProfileImage:file,
