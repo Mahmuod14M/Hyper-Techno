@@ -50,29 +50,29 @@ export class SiginUpComponent implements OnInit {
   signInWithGoogle(): void {
     // this.authService.signOut();
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    // this.authService.authState.subscribe((user) => {
-    //   console.log('google',user);
-    //   // if (user !== null) {
-    //   //   this.storageService.fbLogIn(user);
-    //   // }
-    //   this.user = user;
-    //   this.loggedIn = (user != null);
-    // });
-  }
-
-  signInWithFB(): void {
-    this.authService.signOut();
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
-      if (user !== null) {
-        this.storageService.fbLogIn(user);
-      }
+      console.log('google',user);
+      // if (user !== null) {
+      //   this.storageService.fbLogIn(user);
+      // }
       this.user = user;
       this.loggedIn = (user != null);
     });
-
-
   }
+
+  // signInWithFB(): void {
+  //   this.authService.signOut();
+  //   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  //   this.authService.authState.subscribe((user) => {
+  //     if (user !== null) {
+  //       this.storageService.fbLogIn(user);
+  //     }
+  //     this.user = user;
+  //     this.loggedIn = (user != null);
+  //   });
+  //
+  //
+  // }
   register(form) {
     const password = $('#password').val();
     const rePassword = $('#rePassword').val();
