@@ -83,7 +83,7 @@ export class SiginUpComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.authService.signOut();
     console.log(this.logIn);
     // if (this.logIn !== null) {
     //   Swal.fire('You Are Logged in ', '', 'success');
