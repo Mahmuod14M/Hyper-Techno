@@ -48,6 +48,7 @@ export class SiginUpComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   signInWithGoogle(): void {
+    this.authService.signOut();
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       console.log('google',user);
@@ -60,6 +61,7 @@ export class SiginUpComponent implements OnInit {
   }
 
   signInWithFB(): void {
+    this.authService.signOut();
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       console.log('user',user);
