@@ -22,11 +22,25 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { WishListComponent } from './wish-list/wish-list.component';
-import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
-import { FacebookLoginProvider } from 'angular5-social-login';
-import { getAuthServiceConfigs } from './socialloginConfig';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+// import { SocialLoginModule, AuthServiceConfig,FacebookLoginProvider } from 'angular5-social-login';
+// import { getAuthServiceConfigs } from './socialloginConfig';
 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('"339404093859-f5bqqvah8qjclj4dh182e9ihvte7e75m.apps.googleusercontent.com')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('720813308073066')
+  }
+]);
 
+export function provideConfig() {
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +73,8 @@ import { getAuthServiceConfigs } from './socialloginConfig';
 
   providers: [
     {
-      provide: AuthServiceConfig,useFactory: getAuthServiceConfigs
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
     },
     NgbDropdownConfig,
     StorageService

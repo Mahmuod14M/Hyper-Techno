@@ -10,10 +10,10 @@ export function getAuthServiceConfigs() {
       id: FacebookLoginProvider.PROVIDER_ID,
       provider: new FacebookLoginProvider('720813308073066')
     },
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider('"339404093859-f5bqqvah8qjclj4dh182e9ihvte7e75m.apps.googleusercontent.com')
-    }
+    // {
+    //   id: GoogleLoginProvider.PROVIDER_ID,
+    //   provider: new GoogleLoginProvider('"339404093859-f5bqqvah8qjclj4dh182e9ihvte7e75m.apps.googleusercontent.com')
+    // }
   ]);
   return config;
 }
