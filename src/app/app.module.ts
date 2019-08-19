@@ -22,15 +22,18 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { WishListComponent } from './wish-list/wish-list.component';
-import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import {SocialLoginModule, AuthServiceConfig, LoginOpt} from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 // import { SocialLoginModule, AuthServiceConfig,FacebookLoginProvider } from 'angular5-social-login';
 // import { getAuthServiceConfigs } from './socialloginConfig';
 
+const googleLoginOptions: LoginOpt = {
+  scope: 'profile email'
+};
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('339404093859-kmrutvlfanikgcmc8vqr3i5ll2hlp01k.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('339404093859-kmrutvlfanikgcmc8vqr3i5ll2hlp01k.apps.googleusercontent.com',googleLoginOptions)
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
