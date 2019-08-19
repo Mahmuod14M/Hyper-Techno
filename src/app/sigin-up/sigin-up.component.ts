@@ -48,23 +48,22 @@ export class SiginUpComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   signInWithGoogle(): void {
-    this.authService.signOut();
+    // this.authService.signOut();
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      console.log('google',user);
-      // if (user !== null) {
-      //   this.storageService.fbLogIn(user);
-      // }
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
+    // this.authService.authState.subscribe((user) => {
+    //   console.log('google',user);
+    //   // if (user !== null) {
+    //   //   this.storageService.fbLogIn(user);
+    //   // }
+    //   this.user = user;
+    //   this.loggedIn = (user != null);
+    // });
   }
 
   signInWithFB(): void {
     this.authService.signOut();
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
-      console.log('user',user);
       if (user !== null) {
         this.storageService.fbLogIn(user);
       }
@@ -86,11 +85,15 @@ export class SiginUpComponent implements OnInit {
 
   ngOnInit() {
     this.authService.signOut();
-    console.log(this.logIn);
-    // if (this.logIn !== null) {
-    //   Swal.fire('You Are Logged in ', '', 'success');
-    //   this.router.navigate(['home']);
-    // }
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log('google',user);
+    });
+    if (this.userdata !== null) {
+      Swal.fire('You Are Logged in ', '', 'success');
+      this.router.navigate(['home']);
+    }
     window.scrollTo(0, 0);
   }
 }
