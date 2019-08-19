@@ -32,6 +32,15 @@ export class SiginUpComponent implements OnInit {
       }
     );
   }
+  public signinWithGoogle() {
+    const socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+
+    this.socialAuthService.signIn(socialPlatformProvider)
+      .then((userData) => {
+
+       console.log(userData);
+      });
+  }
   // sendToRestApiMethod: any;
   userdata = StorageService.getUserData();
   logIn: any;

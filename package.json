@@ -35,6 +35,7 @@
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "jw-angular-social-buttons": "latest",
     "ng5-slider": "^1.1.14",
     "ngx-bar-rating": "^1.1.0",
     "ngx-infinite-scroll": "^7.2.0",
@@ -46,8 +47,7 @@
     "sweetalert2": "^8.14.0",
     "tooltip.js": "^1.3.2",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26",
-    "jw-angular-social-buttons": "latest"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",

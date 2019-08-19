@@ -1,20 +1,14 @@
-<!doctype html>
-<html lang="en">
+
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>HyperTechno</title>
-  <base href="/">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
   <script src="https://nbe.gateway.mastercard.com/checkout/version/52/checkout.js"
           data-error="errorCallback"
           data-cancel="cancelCallback">
   </script>
+
   <script type="text/javascript">
     function errorCallback(error) {
+      console.log('enterd');
       console.log(JSON.stringify(error));
     }
     function cancelCallback() {
@@ -28,12 +22,12 @@
           //Dynamic calculation of amount
           return 80 + 20;
         },
-        currency: 'EGP',
+        currency: 'USD',
         description: 'Ordered goods',
-        id: '500'
+        id: '<unique_order_id>'
       },
       interaction: {
-        operation: 'PURCHASE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
+        operation: 'AUTHORIZE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
         merchant: {
           name: 'NBE Test',
           address: {
@@ -44,14 +38,11 @@
       }
     });
   </script>
-
-
 </head>
-
 <body>
-
-
-  <app-root></app-root>
-  
+...
+<input type="button" value="Pay with Lightbox" onclick="Checkout.showLightbox();" />
+<input type="button" value="Pay with Payment Page" onclick="Checkout.showPaymentPage();" />
+...
 </body>
 </html>

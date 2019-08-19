@@ -16,6 +16,7 @@ declare var $: any;
 
 export class NavbarComponent implements OnInit {
   logIn: any = false;
+  userIMg: any;
   myCarouselOptions = {
     navClass: ['owl-prev', 'owl-next'],
     items: 5,
@@ -152,12 +153,11 @@ export class NavbarComponent implements OnInit {
     this.storageService.getUserObservable().subscribe({
       next: logIn => {
         this.logIn = JSON.parse(logIn);
-        console.log(  'this.logIn',this.logIn);
-        if (this.logIn.fb_token === null) {
-          document.getElementById('imagePreview').style.backgroundImage = 'url(this.logIn.user.profile_pic)';
+        console.log(  'this.logIn',this.logIn.user.fb_token);
+        if (this.logIn.user.fb_token) {
+          this.userIMg =this.logIn.user.profile_pic;
         } else {
-          document.getElementById('imagePreview').style.backgroundImage = 'url(`https://arafa.000webhostapp.com/Hyper/uploads/` ' +
-            '+ this.logIn.user.profile_pic)';
+          this.userIMg =`https://arafa.000webhostapp.com/Hyper/uploads/` + this.logIn.user.profile_pic;
         }
       },
     });
