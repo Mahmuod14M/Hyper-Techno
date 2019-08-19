@@ -194,18 +194,20 @@ export class StorageService {
     }
   }
   fbLogIn(userData) {
-    const name =userData.toString().split(' ');
-    console.log(name);
-    // const Lname =userData.substr(userData.indexOf(' ')+1);
+    console.log(userData);
     const signInData = {
       email: userData.email,
       fb_id:userData.id,
-      first_name: userData.name,
-      last_name: ' ',
-      fb_token: userData.token,
-      picture: userData.image
+      first_name: userData.firstName,
+      last_name: userData.lastName,
+      fb_token: userData.authToken,
+      picture: userData.photoUrl
     };
+
+
+    console.log('signInData',signInData);
     this.itemService.facebook(signInData).subscribe(data => {
+      console.log('facebookURL');
       localStorage.setItem('signData', JSON.stringify(data));
       this.userData = localStorage.getItem('signData');
       this.log.next(this.userData);

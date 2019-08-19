@@ -3,7 +3,7 @@ import {ItemService} from '../item.service';
 import {StorageService} from '../storage.service';
 import {Router} from '@angular/router';
 // import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular5-social-login';
-import { AuthService } from 'angularx-social-login';
+import { AuthService,SocialUser } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 declare var $: any;
 // @ts-ignore
@@ -43,18 +43,35 @@ export class SiginUpComponent implements OnInit {
   //     });
   // }
   // sendToRestApiMethod: any;
-
+  userdata = StorageService.getUserData();
+  logIn: any;
+  private user: SocialUser;
+  private loggedIn: boolean;
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      console.log('google',user);
+      // if (user !== null) {
+      //   this.storageService.fbLogIn(user);
+      // }
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-  userdata = StorageService.getUserData();
-  logIn: any;
-  private loggedIn: boolean;
+    this.authService.authState.subscribe((user) => {
+      console.log('user',user);
+      if (user !== null) {
+        this.storageService.fbLogIn(user);
+      }
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
 
+
+  }
   register(form) {
     const password = $('#password').val();
     const rePassword = $('#rePassword').val();
@@ -66,6 +83,7 @@ export class SiginUpComponent implements OnInit {
   }
 
   ngOnInit() {
+
     console.log(this.logIn);
     // if (this.logIn !== null) {
     //   Swal.fire('You Are Logged in ', '', 'success');

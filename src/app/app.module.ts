@@ -30,7 +30,7 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-logi
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('"339404093859-f5bqqvah8qjclj4dh182e9ihvte7e75m.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('339404093859-kmrutvlfanikgcmc8vqr3i5ll2hlp01k.apps.googleusercontent.com')
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
