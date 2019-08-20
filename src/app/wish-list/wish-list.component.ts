@@ -2,7 +2,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
-import {Options, LabelType} from 'ng5-slider';
 import {StorageService} from '../storage.service';
 declare var $: any;
 // @ts-ignore
@@ -30,7 +29,6 @@ export class WishListComponent implements OnInit {
     this.storageService.removeToWishList(id);
   };
   ngOnInit() {
-
     this.storageService.getCartItems();
     this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {

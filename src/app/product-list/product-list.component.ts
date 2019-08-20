@@ -111,8 +111,8 @@ export class ProductListComponent implements OnInit {
     this.itemService.searchBar(payload,this.pageCount).subscribe(data => {
       this.pageData(data);
       if (data.count===0 ||payload.query === '') {
-        Swal.fire('error!', '', 'error');
-        this.router.navigate(['#']);
+        Swal.fire('sorry we don`t have products!', '', 'error');
+        this.router.navigate(['home']);
       } else  {
         this.filter = data.filter;
         this.maxValue = data.filter.max_price;
@@ -135,8 +135,14 @@ export class ProductListComponent implements OnInit {
     });
   };
   pageData = function(data) {
+    console.log('data',data);
+    this.pageTitle= data.filter.brands[0].name;
     for (const item of data.product) {
       this.items.push(item);
+    }
+    if (data.count=== 0) {
+      Swal.fire('sorry we don`t have products!', '', 'error');
+      this.router.navigate(['home']);
     }
     this.data=data.filter;
     this.isPageDataReady= true;
@@ -180,30 +186,39 @@ export class ProductListComponent implements OnInit {
       switch (params.get('page').toLowerCase()) {
         case 'maincat':
           this.itemService.main_cat_items(id, this.pageCount).subscribe(data => {
+            $('#loading').fadeIn(2000);
+            $('.data').hide();
             this.pageData(data);
           });
           break;
         case 'hotproduct':
           this.itemService.hotProduct(this.pageCount).subscribe(data => {
+            $('#loading').fadeIn(2000);
+            $('.data').hide();
             this.pageData(data);
             this.pageTitle ='hot product';
           });
           break;
         case 'new':
           this.itemService.newArrivals(this.pageCount).subscribe(data => {
+            $('#loading').fadeIn(2000);
+            $('.data').hide();
             this.pageData(data);
             this.pageTitle ='new arrivals';
           });
           break;
         case 'brand':
           this.itemService.top_items_by_brand(id).subscribe(data => {
+            $('#loading').fadeIn(2000);
+            $('.data').hide();
             this.pageData(data);
-            this.pageTitle= data.filter.brands[0].name;
           });
           break;
 
         case 'subcat':
           this.itemService.get_sub_cat_items_id(id, this.pageCount).subscribe(data => {
+            $('#loading').fadeIn(2000);
+            $('.data').hide();
             this.pageData(data);
           });
           break;
@@ -230,7 +245,7 @@ export class ProductListComponent implements OnInit {
     this.storageService.removeToWishList(id);
   };
   ngOnInit() {
-
+    console.log('items', this.items);
     this.storageService.getCartItems();
     this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {

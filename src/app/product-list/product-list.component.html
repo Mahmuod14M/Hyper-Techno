@@ -61,7 +61,7 @@
         </button>
         <hr>
         <div class="check scroll" id="offer_List">
-          <div *ngFor="let x of filter.categories">
+          <div *ngFor="let x of filter?.categories">
             <h6><input type="checkbox" (change)="filterChange($event,null,null,null, x.id ,null)"> {{x.name}} ({{x.sum}}
               )</h6>
             <div class="hr"></div>
@@ -70,7 +70,7 @@
         </div>
 
       </div>
-      <div class="filter" *ngFor="let x of filter.category_attributes">
+      <div class="filter" *ngFor="let x of filter?.category_attributes">
         <button class="btn " id="screen_Btn" (click)="showScreen(x.id)">{{x.name}} ({{x.sum}}) <i class="fas fa-angle-down  fa-rotate-270"
                                                                                                   [id]="'icon2'+x.id"></i>
         </button>

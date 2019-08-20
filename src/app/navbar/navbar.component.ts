@@ -296,6 +296,8 @@ function scrollFunction() {
     elem.style.zIndex = '5';
     $('#navbarLogo').show();
     $('.containeer').css('justify-content', 'space-between');
+    $('.login').css('top','76px');
+    $('.login').css('right','20px');
   } else {
     const elem = document.getElementById('containeer');
     elem.style.position = 'relative';
@@ -309,6 +311,8 @@ function scrollFunction() {
     } else {
       $('.containeer').css('justify-content', 'flex-end');
     }
+    $('.login').css('top','38px');
+    $('.login').css('right','80px');
   }
 
 

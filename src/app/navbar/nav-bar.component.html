@@ -123,57 +123,59 @@
       </div>
 
     </div>
+    <section class="login" id="login">
+      <div id="LOGOUT" class="text-center" *ngIf="logIn">
+        <div class="upperBackground"></div>
+        <div class="container">
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <form>
+                <input type='file' id="imageUpload" (change)="changeImg(logIn.user.id)" accept=".png, .jpg, .jpeg"/>
+                <label for="imageUpload"></label>
+              </form>
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" class="imagePreview">
+                <img id="UerImg" [src]="userIMg" class="img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 *ngIf="logIn">{{logIn.user.first_name}} {{logIn.user.last_name}}</h2>
+        <div class="line"></div>
+        <h4 [routerLink]="['/Account/',MyOrders]" (click)="hideLogin()">My Orders</h4>
+        <div class="line"></div>
+        <h4 [routerLink]="['/Account/',MyAddresses]" (click)="hideLogin()">My Addresses</h4>
+        <div class="line"></div>
+        <h4 [routerLink]="['/Account/',MyProfile]" (click)="hideLogin()">Edit Profile</h4>
+        <div class="line"></div>
+        <h4 (click)="removeId()">log out</h4>
+      </div>
+
+
+      <form #myForm="ngForm" (ngSubmit)="logIN(myForm)" id="SINGUPFORM" class="form-group" *ngIf="!logIn">
+        <h3>LOGIN NOW</h3>
+        <hr>
+        <input type="email" placeholder="Your Email" name="email" class="form-control" ngModel required>
+
+        <input type="password" placeholder="Password" name="password" class="form-control" ngModel required>
+
+        <button type="submit" class="btn btn-dark">LOGIN</button>
+      </form>
+      <div id="RIGISTER" class="password pt-2" *ngIf="!logIn">
+        <a routerLink="/siginUp" class="forgotPassword" (click)="closeLonIn()">I forgot my password</a>
+        <hr>
+        <a routerLink="/siginUp" id="Register" (click)="closeLonIn()">Register Now ? Create an account </a>
+      </div>
+      <br>
+    </section>
   </div>
 
   <hr>
+
 </nav>
 
-<section class="login" id="login">
-  <div id="LOGOUT" class="text-center" *ngIf="logIn">
-    <div class="upperBackground"></div>
-    <div class="container">
-      <div class="avatar-upload">
-        <div class="avatar-edit">
-          <form>
-          <input type='file' id="imageUpload" (change)="changeImg(logIn.user.id)" accept=".png, .jpg, .jpeg"/>
-          <label for="imageUpload"></label>
-          </form>
-        </div>
-        <div class="avatar-preview">
-          <div id="imagePreview" class="imagePreview">
-            <img id="UerImg" [src]="userIMg" class="img-fluid">
-          </div>
-        </div>
-      </div>
-    </div>
-    <h2 *ngIf="logIn">{{logIn.user.first_name}} {{logIn.user.last_name}}</h2>
-    <div class="line"></div>
-    <h4 [routerLink]="['/Account/',MyOrders]" (click)="hideLogin()">My Orders</h4>
-    <div class="line"></div>
-    <h4 [routerLink]="['/Account/',MyAddresses]" (click)="hideLogin()">My Addresses</h4>
-    <div class="line"></div>
-    <h4 [routerLink]="['/Account/',MyProfile]" (click)="hideLogin()">Edit Profile</h4>
-    <div class="line"></div>
-    <h4 (click)="removeId()">log out</h4>
-  </div>
 
-
-  <form #myForm="ngForm" (ngSubmit)="logIN(myForm)" id="SINGUPFORM" class="form-group" *ngIf="!logIn">
-    <h3>LOGIN NOW</h3>
-    <hr>
-    <input type="email" placeholder="Your Email" name="email" class="form-control" ngModel required>
-
-    <input type="password" placeholder="Password" name="password" class="form-control" ngModel required>
-
-    <button type="submit" class="btn btn-dark">LOGIN</button>
-  </form>
-  <div id="RIGISTER" class="password pt-2" *ngIf="!logIn">
-    <a routerLink="/siginUp" class="forgotPassword" (click)="closeLonIn()">I forgot my password</a>
-    <hr>
-    <a routerLink="/siginUp" id="Register" (click)="closeLonIn()">Register Now ? Create an account </a>
-  </div>
-  <br>
-</section>
 
 
 <section class="cart">

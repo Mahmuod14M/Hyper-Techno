@@ -84,6 +84,11 @@ export class ItemService {
       BASE_URL + '/api/General/search?Page=' + page, payload, httpOptions
     );
   }
+  search(payload, page): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/General/search?Page=' + page, payload, httpOptions
+    );
+  }
 
   signUp(payload): Observable<any> {
     return this.httpClient.post(

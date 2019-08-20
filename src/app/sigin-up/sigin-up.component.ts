@@ -60,19 +60,19 @@ export class SiginUpComponent implements OnInit {
     });
   }
 
-  // signInWithFB(): void {
-  //   this.authService.signOut();
-  //   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  //   this.authService.authState.subscribe((user) => {
-  //     if (user !== null) {
-  //       this.storageService.fbLogIn(user);
-  //     }
-  //     this.user = user;
-  //     this.loggedIn = (user != null);
-  //   });
-  //
-  //
-  // }
+  signInWithFB(): void {
+    this.authService.signOut();
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      if (user !== null) {
+        this.storageService.fbLogIn(user);
+      }
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+
+
+  }
   register(form) {
     const password = $('#password').val();
     const rePassword = $('#rePassword').val();
