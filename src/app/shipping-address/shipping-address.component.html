@@ -13,4 +13,5 @@
 
   <h4>{{address.phone.mobile}}</h4>
   <h5 [routerLink]="['/address/',address.id]">Edit</h5>
+  <h5 (click)="removeAddress(address.id)">Remove</h5>
 </div>

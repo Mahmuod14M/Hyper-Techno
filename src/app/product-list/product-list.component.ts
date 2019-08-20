@@ -3,6 +3,7 @@ import {ItemService} from '../item.service';
 import {ActivatedRoute} from '@angular/router';
 import {Options, LabelType} from 'ng5-slider';
 import {StorageService} from '../storage.service';
+import {Router} from '@angular/router';
 declare var $: any;
 // @ts-ignore
 const Swal = require('sweetalert2');
@@ -14,7 +15,7 @@ const Swal = require('sweetalert2');
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService ) {}
+  constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService, private router: Router ) {}
 
   minValue: number;
   maxValue: number;
@@ -135,40 +136,42 @@ export class ProductListComponent implements OnInit {
     });
   };
   pageData = function(data) {
-    console.log('data',data);
-    this.pageTitle= data.filter.brands[0].name;
-    for (const item of data.product) {
-      this.items.push(item);
-    }
     if (data.count=== 0) {
-      Swal.fire('sorry we don`t have products!', '', 'error');
       this.router.navigate(['home']);
-    }
-    this.data=data.filter;
-    this.isPageDataReady= true;
-    if (this.isPageDataReady === true) {
-      $(window).scrollTop();
-      $('#loading').fadeOut(2000);
-      $('.data').show();
-    }
-    this.disableScroll = data.product.length === 0;
-    this.filter = data.filter;
-    this.maxValue = data.filter.max_price;
-    this.minValue = data.filter.min_price;
-    this.options = {
-      floor: data.filter.min_price,
-      ceil: data.filter.max_price,
-      translate: (value: number, label: LabelType): string => {
-        switch (label) {
-          case LabelType.Low:
-            return 'LE ' + value;
-          case LabelType.High:
-            return 'LE ' + value;
-          default:
-            return '';
-        }
+      Swal.fire('sorry we don`t have products!', '', 'error');
+    } else {
+      console.log('data',data);
+      this.pageTitle= data.filter.brands[0].name;
+      for (const item of data.product) {
+        this.items.push(item);
       }
-    };
+      this.data=data.filter;
+      this.isPageDataReady= true;
+      if (this.isPageDataReady === true) {
+        $(window).scrollTop();
+        $('#loading').fadeOut(2000);
+        $('.data').show();
+      }
+      this.disableScroll = data.product.length === 0;
+      this.filter = data.filter;
+      this.maxValue = data.filter.max_price;
+      this.minValue = data.filter.min_price;
+      this.options = {
+        floor: data.filter.min_price,
+        ceil: data.filter.max_price,
+        translate: (value: number, label: LabelType): string => {
+          switch (label) {
+            case LabelType.Low:
+              return 'LE ' + value;
+            case LabelType.High:
+              return 'LE ' + value;
+            default:
+              return '';
+          }
+        }
+      };
+    }
+
   };
 
   seeMore() {

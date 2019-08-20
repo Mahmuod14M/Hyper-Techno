@@ -8,7 +8,7 @@ declare var $: any;
 
 @Injectable()
 export class StorageService {
-  constructor(private itemService: ItemService , private router: Router) {
+  constructor(private itemService: ItemService, private router: Router) {
   }
 
   private cart = new Subject<any>();
@@ -35,7 +35,7 @@ export class StorageService {
     const emailValidator = form.value.Umail;
     const LnameValidator = form.value.Lname;
     const FnameValidator = form.value.Fname;
-    if (filter.test(emailValidator)&&nameFilter.test(LnameValidator)&&nameFilter.test(FnameValidator)) {
+    if (filter.test(emailValidator) && nameFilter.test(LnameValidator) && nameFilter.test(FnameValidator)) {
       const signUpData = {
         email: form.value.Umail,
         last_name: form.value.Lname,
@@ -67,6 +67,14 @@ export class StorageService {
   }
 
   address(id, form) {
+    const filter = /^[a-zA-Z0-9]{3,9}/;
+    const num = /^[0-9]{3,9}/;
+    const LnameValidator = form.value.Lname;
+    const CityValidator = form.value.City;
+    const FnameValidator = form.value.Fname;
+    const StreetValidator = form.value.Street;
+    const buildNumValidator = form.value.buildNum;
+    // filter.test(CityValidator)||filter.test(LnameValidator)||filter.test(FnameValidator)||filter.test(StreetValidator)||num.test(buildNumValidator)
     const user = JSON.parse(localStorage.getItem('signData'));
     let AddAddress = {};
     if (user) {
@@ -77,8 +85,8 @@ export class StorageService {
           form.value[key] = null;
         }
       }
-      let addressId =id;
-      if (addressId=== 0) {
+      let addressId = id;
+      if (addressId === 0) {
         addressId = null;
         AddAddress = {
           address_id: addressId,
@@ -101,25 +109,26 @@ export class StorageService {
           building_num: form.value.buildNum,
           country_name: form.value.country
         };
-        if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
-          form.value.buildNum=== null ||form.value.MobileNumber===null ) {
+        if (form.value.City === null || form.value.Lname === null || form.value.Fname === null || form.value.Street === null ||
+          form.value.buildNum === null || form.value.MobileNumber === null  ||form.value.City === ' '||form.value.Lname === ' '||
+        form.value.Fname === ' ' ||form.value.Street === ' ' || form.value.buildNum === ' '||form.value.MobileNumber === ' ') {
           Swal.fire('you have to complete fields', '', 'error');
           console.log(AddAddress);
-        } else  {
+        } else {
           this.itemService.address(AddAddress).subscribe(data => {
             localStorage.setItem('UserAddress', JSON.stringify(data));
-            if(data.error!==true) {
+            if (data.error !== true) {
               Swal.fire('Address Added!', '', 'success');
-              // this.router.navigate(['cart']);
+              this.router.navigate(['Account/MyAddresses']);
             } else {
               Swal.fire('error!', '', 'error');
               console.log(data);
-              console.log( addressId);
+              console.log(addressId);
             }
           });
         }
       } else {
-        addressId =id;
+        addressId = id;
         AddAddress = {
           address_id: addressId,
           area_name: form.value.City,
@@ -141,26 +150,35 @@ export class StorageService {
           building_num: form.value.buildNum,
           country_name: form.value.country
         };
-        if (form.value.City===  null|| form.value.Lname===null ||form.value.Fname===null ||form.value.Street===null||
-          form.value.buildNum=== null ||form.value.MobileNumber===null ) {
+        if (form.value.City === null || form.value.Lname === null || form.value.Fname === null || form.value.Street === null ||
+          form.value.buildNum === null || form.value.MobileNumber === null || form.value.City === ' '||form.value.Lname === ' '||
+          form.value.Fname === ' ' ||form.value.Street === ' ' || form.value.buildNum === ' '||form.value.MobileNumber === ' ' ) {
           Swal.fire('you have to complete fields', '', 'error');
           console.log(AddAddress);
-        } else  {
+        } else {
           this.itemService.address(AddAddress).subscribe(data => {
             localStorage.setItem('UserAddress', JSON.stringify(data));
-            if(data.error!==true) {
+            if (data.error !== true) {
               Swal.fire('Address Added!', '', 'success');
               this.router.navigate(['Account/MyAddresses']);
             } else {
               Swal.fire('error!', '', 'error');
               console.log(data);
-              console.log( addressId);
+              console.log(addressId);
             }
           });
         }
       }
 
     }
+
+  }
+
+  removeAddress(id) {
+    this.itemService.removeAddress(id).subscribe(data => {
+      console.log('remove', data);
+      console.log('id', id);
+    });
   }
 
   logIN(form) {
@@ -177,9 +195,9 @@ export class StorageService {
       };
       this.itemService.signIn(signInData).subscribe(data => {
         console.log(data);
-        if (data.message=== 'no matching email') {
+        if (data.message === 'no matching email') {
           Swal.fire('no matching email', '', 'error');
-        } else if (data.message==='Wrong password') {
+        } else if (data.message === 'Wrong password') {
           Swal.fire('Wrong password', '', 'error');
         } else {
           localStorage.setItem('signData', JSON.stringify(data));
@@ -193,11 +211,12 @@ export class StorageService {
       Swal.fire('Your mail is wrong!', '', 'error');
     }
   }
+
   fbLogIn(userData) {
     console.log(userData);
     const signInData = {
       email: userData.email,
-      fb_id:userData.id,
+      fb_id: userData.id,
       first_name: userData.firstName,
       last_name: userData.lastName,
       fb_token: userData.authToken,
@@ -205,7 +224,7 @@ export class StorageService {
     };
 
 
-    console.log('signInData',signInData);
+    console.log('signInData', signInData);
     this.itemService.facebook(signInData).subscribe(data => {
       console.log('facebookURL');
       localStorage.setItem('signData', JSON.stringify(data));
@@ -215,13 +234,14 @@ export class StorageService {
       this.router.navigate(['home']);
     });
   }
+
   changeImg(file) {
     const imgData = {
-      ProfileImage:file,
-      UserID:this.userData.user.id,
+      ProfileImage: file,
+      UserID: this.userData.user.id,
     };
-    return  this.changeImg(imgData).subscribe( data => {
-        console.log(data);
+    return this.changeImg(imgData).subscribe(data => {
+      console.log(data);
     });
   }
 
@@ -248,6 +268,7 @@ export class StorageService {
       Swal.fire('Added to cart!', '', 'success');
     }
   }
+
   addTOWishList(product) {
     if (localStorage) {
       let wishList = [];
@@ -262,10 +283,12 @@ export class StorageService {
       Swal.fire('Added to wishList!', '', 'success');
     }
   }
+
   removeAll() {
     localStorage.cartID = [];
     this.cart.next([]);
   }
+
   removeFromCart(productID) {
     const itemsArray = JSON.parse(localStorage.cartID);
     for (let index = 0; index < itemsArray.length; index++) {
@@ -277,6 +300,7 @@ export class StorageService {
     }
     this.getCartItems();
   }
+
   removeToWishList(id) {
     const itemsArray = JSON.parse(localStorage.wishList);
     for (let index = 0; index < itemsArray.length; index++) {
@@ -288,12 +312,15 @@ export class StorageService {
     }
     this.getwishListItems();
   }
+
   getCartObservable() {
     return this.cart.asObservable();
   }
+
   getwishListObservable() {
     return this.wishList.asObservable();
   }
+
   getCartItems() {
     if (localStorage.cartID) {
       const ids = JSON.parse(localStorage.cartID);
@@ -308,6 +335,7 @@ export class StorageService {
       this.cart.next([]);
     }
   }
+
   getwishListItems() {
     if (localStorage.wishList) {
       const ids = JSON.parse(localStorage.wishList);

@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 declare var $: any;
+// @ts-ignore
+const Swal = require('sweetalert2');
 @Component({
   selector: 'app-add-address',
   templateUrl: './add-address.component.html',
@@ -29,42 +31,56 @@ export class AddAddressComponent implements OnInit {
       form.value.Street = $('input[name=Street]').val();
       form.value.buildNum = $('input[name=buildNum]').val();
       form.value.country = $('input[name=country]').val();
-      if (form.value.City === '') {
+      const filter = /^[a-zA-Z0-9]{3,9}/;
+      const num = /^[0-9]{3,9}/;
+      const LnameValidator = form.value.Lname;
+      const CityValidator = form.value.City;
+      const FnameValidator = form.value.Fname;
+      const StreetValidator = form.value.Street;
+      const buildNumValidator = form.value.buildNum;
+      if (form.value.City === ''||form.value.City === ' ') {
         $('input[name=City]').css('border','1px solid red');
       }
-      if (form.value.Lname === '') {
+      if (form.value.Lname === ''||form.value.Lname === ' ') {
         $('input[name=Lname]').css('border','1px solid red');
       }
-      if (form.value.Fname === '') {
+      if (form.value.Fname === ''||form.value.Fname === ' ') {
         $('input[name=Fname]').css('border','1px solid red');
       }
-      if (form.value.Street === '') {
+      if (form.value.Street === ''||form.value.Street === ' ') {
         $('input[name=Street]').css('border','1px solid red');
       }
-      if (form.value.buildNum === '') {
+      if (form.value.buildNum === ''||form.value.buildNum === ' ') {
         $('input[name=buildNum]').css('border','1px solid red');
       }
-      if (form.value.MobileNumber === '') {
+      if (form.value.MobileNumber === ''||form.value.MobileNumber === ' ') {
         $('input[name=MobileNumber]').css('border','1px solid red');
       }
       this.storageService.address(this.id, form);
     } else {
-      if (form.value.City === '') {
+      const filter = /^[a-zA-Z0-9]{3,9}/;
+      const num = /^[0-9]{3,9}/;
+      const LnameValidator = form.value.Lname;
+      const CityValidator = form.value.City;
+      const FnameValidator = form.value.Fname;
+      const StreetValidator = form.value.Street;
+      const buildNumValidator = form.value.buildNum;
+      if (form.value.City === ''||form.value.City === ' ') {
         $('input[name=City]').css('border','1px solid red');
       }
-      if (form.value.Lname === '') {
+      if (form.value.Lname === ''||form.value.Lname === ' ') {
         $('input[name=Lname]').css('border','1px solid red');
       }
-      if (form.value.Fname === '') {
+      if (form.value.Fname === ''||form.value.Fname === ' ') {
         $('input[name=Fname]').css('border','1px solid red');
       }
-      if (form.value.Street === '') {
+      if (form.value.Street === ''||form.value.Street === ' ') {
         $('input[name=Street]').css('border','1px solid red');
       }
-      if (form.value.buildNum === '') {
+      if (form.value.buildNum === ''||form.value.buildNum === ' ') {
         $('input[name=buildNum]').css('border','1px solid red');
       }
-      if (form.value.MobileNumber === '') {
+      if (form.value.MobileNumber === ''||form.value.MobileNumber === ' ') {
         $('input[name=MobileNumber]').css('border','1px solid red');
       }
       this.storageService.address(this.id, form);

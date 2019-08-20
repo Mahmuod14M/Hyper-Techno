@@ -11,7 +11,9 @@ export class ShippingAddressComponent implements OnInit {
   UserDetails: any ;
   addressesDetails: [];
   constructor(private itemService: ItemService, private storageService: StorageService) { }
-
+  removeAddress = ID => {
+    this.storageService.removeAddress(ID);
+  }
   ngOnInit() {
     window.scrollTo(0, 0);
     this.UserDetails = this.storageService.getUserData();

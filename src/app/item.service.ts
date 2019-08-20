@@ -78,6 +78,11 @@ export class ItemService {
       BASE_URL + '/api/Category/get_sub_cat_items_by_id?SubCatID=' + id + '&Page=' + page, httpOptions
     );
   }
+  removeAddress(id): Observable<any> {
+    return this.httpClient.get(
+      BASE_URL + '/api/Address/remove_user_address?AddressID=' + id , httpOptions
+    );
+  }
 
   searchBar(payload, page): Observable<any> {
     return this.httpClient.post(
