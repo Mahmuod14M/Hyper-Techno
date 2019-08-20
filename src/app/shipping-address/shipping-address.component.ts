@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../storage.service';
 import {ItemService} from '../item.service';
 declare var $: any;
+// @ts-ignore
+const Swal = require('sweetalert2');
 @Component({
   selector: 'app-shipping-address',
   templateUrl: './shipping-address.component.html',
@@ -12,7 +14,15 @@ export class ShippingAddressComponent implements OnInit {
   addressesDetails: [];
   constructor(private itemService: ItemService, private storageService: StorageService) { }
   removeAddress = ID => {
-    this.storageService.removeAddress(ID);
+    this.itemService.removeAddress(ID).subscribe(data => {
+      console.log('remove', data);
+      if (data.error === true) {
+        Swal.fire('you can`t remove this Address!', '', 'error');
+      } else {
+        $('#address'+ID).hide();
+        Swal.fire('Address removed!', '', 'success');
+      }
+    });
   }
   ngOnInit() {
     window.scrollTo(0, 0);

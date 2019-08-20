@@ -38,22 +38,22 @@ export class AddAddressComponent implements OnInit {
       const FnameValidator = form.value.Fname;
       const StreetValidator = form.value.Street;
       const buildNumValidator = form.value.buildNum;
-      if (form.value.City === ''||form.value.City === ' ') {
+      if (form.value.City === ''||/\S/.test(form.value.City)===false) {
         $('input[name=City]').css('border','1px solid red');
       }
-      if (form.value.Lname === ''||form.value.Lname === ' ') {
+      if (form.value.Lname === ''||/\S/.test(form.value.Lname)===false) {
         $('input[name=Lname]').css('border','1px solid red');
       }
-      if (form.value.Fname === ''||form.value.Fname === ' ') {
+      if (form.value.Fname === ''||/\S/.test(form.value.Fname)===false) {
         $('input[name=Fname]').css('border','1px solid red');
       }
-      if (form.value.Street === ''||form.value.Street === ' ') {
+      if (form.value.Street === ''||/\S/.test(form.value.Street)===false) {
         $('input[name=Street]').css('border','1px solid red');
       }
-      if (form.value.buildNum === ''||form.value.buildNum === ' ') {
+      if (form.value.buildNum === ''||/\S/.test(form.value.buildNum)===false) {
         $('input[name=buildNum]').css('border','1px solid red');
       }
-      if (form.value.MobileNumber === ''||form.value.MobileNumber === ' ') {
+      if (form.value.MobileNumber === ''||/\S/.test(form.value.MobileNumber)===false) {
         $('input[name=MobileNumber]').css('border','1px solid red');
       }
       this.storageService.address(this.id, form);
@@ -65,22 +65,22 @@ export class AddAddressComponent implements OnInit {
       const FnameValidator = form.value.Fname;
       const StreetValidator = form.value.Street;
       const buildNumValidator = form.value.buildNum;
-      if (form.value.City === ''||form.value.City === ' ') {
+      if (form.value.City === ''||/\S/.test(form.value.City)===false) {
         $('input[name=City]').css('border','1px solid red');
       }
-      if (form.value.Lname === ''||form.value.Lname === ' ') {
+      if (form.value.Lname === ''||/\S/.test(form.value.Lname)===false) {
         $('input[name=Lname]').css('border','1px solid red');
       }
-      if (form.value.Fname === ''||form.value.Fname === ' ') {
+      if (form.value.Fname === ''||/\S/.test(form.value.Fname)===false) {
         $('input[name=Fname]').css('border','1px solid red');
       }
-      if (form.value.Street === ''||form.value.Street === ' ') {
+      if (form.value.Street === ''||/\S/.test(form.value.Street)===false) {
         $('input[name=Street]').css('border','1px solid red');
       }
-      if (form.value.buildNum === ''||form.value.buildNum === ' ') {
+      if (form.value.buildNum === ''||/\S/.test(form.value.buildNum)===false) {
         $('input[name=buildNum]').css('border','1px solid red');
       }
-      if (form.value.MobileNumber === ''||form.value.MobileNumber === ' ') {
+      if (form.value.MobileNumber === ''||/\S/.test(form.value.MobileNumber)===false) {
         $('input[name=MobileNumber]').css('border','1px solid red');
       }
       this.storageService.address(this.id, form);

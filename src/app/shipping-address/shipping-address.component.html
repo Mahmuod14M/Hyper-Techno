@@ -1,9 +1,8 @@
-<div class="addressHead">
+<div class="addressHead" >
   <h2>Shipping Addresses</h2>
   <button routerLink="/address">CREAT A NEW ADDRESS</button>
 </div>
-<div class="addressBody" *ngFor="let address of addressesDetails ">
-
+<div class="addressBody" *ngFor="let address of addressesDetails " [id]="'address'+address.id">
   <input type="radio">
   <h3>{{address.first_name}} {{address.last_name}}</h3>
 

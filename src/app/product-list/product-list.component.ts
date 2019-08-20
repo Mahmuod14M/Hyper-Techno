@@ -149,7 +149,7 @@ export class ProductListComponent implements OnInit {
       this.isPageDataReady= true;
       if (this.isPageDataReady === true) {
         $(window).scrollTop();
-        $('#loading').fadeOut(2000);
+        $('#loading').fadeOut(500);
         $('.data').show();
       }
       this.disableScroll = data.product.length === 0;

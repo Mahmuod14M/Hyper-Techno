@@ -110,8 +110,10 @@ export class StorageService {
           country_name: form.value.country
         };
         if (form.value.City === null || form.value.Lname === null || form.value.Fname === null || form.value.Street === null ||
-          form.value.buildNum === null || form.value.MobileNumber === null  ||form.value.City === ' '||form.value.Lname === ' '||
-        form.value.Fname === ' ' ||form.value.Street === ' ' || form.value.buildNum === ' '||form.value.MobileNumber === ' ') {
+          form.value.buildNum === null || form.value.MobileNumber === null  ||/\S/.test(form.value.City)===false||
+          /\S/.test(form.value.Lname)===false||
+          /\S/.test(form.value.Fname)===false ||/\S/.test(form.value.Street)===false|| /\S/.test(form.value.buildNum)===false||
+          /\S/.test(form.value.MobileNumber)===false) {
           Swal.fire('you have to complete fields', '', 'error');
           console.log(AddAddress);
         } else {
@@ -151,8 +153,10 @@ export class StorageService {
           country_name: form.value.country
         };
         if (form.value.City === null || form.value.Lname === null || form.value.Fname === null || form.value.Street === null ||
-          form.value.buildNum === null || form.value.MobileNumber === null || form.value.City === ' '||form.value.Lname === ' '||
-          form.value.Fname === ' ' ||form.value.Street === ' ' || form.value.buildNum === ' '||form.value.MobileNumber === ' ' ) {
+          form.value.buildNum === null || form.value.MobileNumber === null  ||/\S/.test(form.value.City)===false||
+          /\S/.test(form.value.Lname)===false||
+          /\S/.test(form.value.Fname)===false ||/\S/.test(form.value.Street)===false|| /\S/.test(form.value.buildNum)===false||
+          /\S/.test(form.value.MobileNumber)===false) {
           Swal.fire('you have to complete fields', '', 'error');
           console.log(AddAddress);
         } else {
@@ -172,13 +176,6 @@ export class StorageService {
 
     }
 
-  }
-
-  removeAddress(id) {
-    this.itemService.removeAddress(id).subscribe(data => {
-      console.log('remove', data);
-      console.log('id', id);
-    });
   }
 
   logIN(form) {
