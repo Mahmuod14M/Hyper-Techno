@@ -6,11 +6,11 @@
 </div>
 <div class="sec1">
 
-<!--  <div class="text">-->
-<!--    <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + UserDetails.user.profile_pic" class="img-fluid">-->
-<!--    <h2 >{{UserDetails.user.first_name}} {{UserDetails.user.last_name}}</h2>-->
+  <div class="text">
+    <img [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + userdata?.user.profile_pic" class="img-fluid">
+    <h2 >{{userdata?.user.first_name}} {{userdata?.user.last_name}}</h2>
 
-<!--  </div>-->
+  </div>
 </div>
 
 <h2 class="editText">Edit My Profile</h2>
@@ -20,17 +20,17 @@
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>First Name</label>
-        <input name="Fname" class="form-control" type="text" ngModel required [value]="UserDetails?.first_name">
+        <input name="Fname" class="form-control" type="text" ngModel required [value]="data?.first_name">
       </div>
       <div style="width: 45%">
         <label>Last Name</label>
-        <input name="Lname" class="form-control" type="text" ngModel required>
+        <input name="Lname" class="form-control" type="text" ngModel required [value]="data?.last_name">
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>E-mail</label>
-        <input name="Umail" class="form-control" type="email" ngModel required>
+        <input name="Umail" class="form-control" type="email" ngModel required [value]="data?.email">
       </div>
       <div style="width: 45%">
         <label>Current Password</label>
@@ -53,11 +53,7 @@
         <input name="phoneNum" class="form-control" type="number" ngModel required>
       </div>
       <div style="width: 45%">
-        <p>
-          <label>Add to your Accounts</label>
-          <a href="" class=""><img src="assets/img/facebook.png"> </a>
-          <a href="" class=""> <img src="assets/img/google.png"> </a>
-        </p>
+
       </div>
     </div>
 

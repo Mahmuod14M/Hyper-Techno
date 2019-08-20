@@ -47,9 +47,15 @@
   font-weight: 500;
   text-shadow: 2px 2px black;
 }
+
 .sec1 .text img{
-  width: 100px;
+  width: 175px;
+  height: 175px;
+  margin: 0 15px;
+  border: 2px solid whitesmoke ;
+  border-radius: 50%;
 }
+
 .sec1 .text h5 {
   font-size: 22px;
   font-weight: 300;

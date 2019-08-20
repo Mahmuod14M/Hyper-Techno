@@ -136,6 +136,7 @@ export class ProductListComponent implements OnInit {
     });
   };
   pageData = function(data) {
+    this.data=[];
     if (data.count=== 0) {
       this.router.navigate(['home']);
       Swal.fire('sorry we don`t have products!', '', 'error');
@@ -146,11 +147,12 @@ export class ProductListComponent implements OnInit {
         this.items.push(item);
       }
       this.data=data.filter;
-      this.isPageDataReady= true;
+      if (this.data!== []) {
+        this.isPageDataReady= true;
+      }
       if (this.isPageDataReady === true) {
         $(window).scrollTop();
-        $('#loading').fadeOut(500);
-        $('.data').show();
+        $.when($('#loading').fadeOut()).done($('.data').show());
       }
       this.disableScroll = data.product.length === 0;
       this.filter = data.filter;
@@ -189,21 +191,24 @@ export class ProductListComponent implements OnInit {
       switch (params.get('page').toLowerCase()) {
         case 'maincat':
           this.itemService.main_cat_items(id, this.pageCount).subscribe(data => {
-            $('#loading').fadeIn(2000);
+            this.isPageDataReady= false;
+            $('#loading').fadeIn();
             $('.data').hide();
             this.pageData(data);
           });
           break;
         case 'hotproduct':
           this.itemService.hotProduct(this.pageCount).subscribe(data => {
-            $('#loading').fadeIn(2000);
+            this.isPageDataReady= false;
+            $('#loading').fadeIn();
             $('.data').hide();
-            this.pageData(data);
+            this.pageData();
             this.pageTitle ='hot product';
           });
           break;
         case 'new':
           this.itemService.newArrivals(this.pageCount).subscribe(data => {
+            this.isPageDataReady= false;
             $('#loading').fadeIn(2000);
             $('.data').hide();
             this.pageData(data);
@@ -212,6 +217,7 @@ export class ProductListComponent implements OnInit {
           break;
         case 'brand':
           this.itemService.top_items_by_brand(id).subscribe(data => {
+            this.isPageDataReady= false;
             $('#loading').fadeIn(2000);
             $('.data').hide();
             this.pageData(data);
@@ -220,6 +226,7 @@ export class ProductListComponent implements OnInit {
 
         case 'subcat':
           this.itemService.get_sub_cat_items_id(id, this.pageCount).subscribe(data => {
+            this.isPageDataReady= false;
             $('#loading').fadeIn(2000);
             $('.data').hide();
             this.pageData(data);

@@ -156,7 +156,9 @@ body {
   padding-bottom: 10px;
   justify-content: space-between;
 }
-
+.offers img{
+  cursor: pointer;
+}
 .offers .hot {
   width: 49%;
 }
