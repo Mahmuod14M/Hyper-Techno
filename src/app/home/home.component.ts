@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     items: 7,
     dots: false,
     autoplay: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 2000,
     autoplayHoverPause: true,
     loop: true,
     responsive: {
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
     items: 7,
     dots: false,
     autoplay: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 2000,
     autoplayHoverPause: true,
     loop: true,
     responsive: {

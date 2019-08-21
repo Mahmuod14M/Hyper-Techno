@@ -55,11 +55,11 @@
         <img src="assets/img/icons/search.png" id="search_btn">
 
       </div>
-      <div class="form-control mr-sm-2 call ">
+      <div class="form-control mr-sm-2 call  " id="showPhone">
         <img src="assets/img/icons/phone.png">
         <span class="sales">Sales</span>
         <span class="phone">(040)3308300</span>
-        <i class="fas fa-angle-down down " id="showPhone"></i>
+        <i class="fas fa-angle-down down " ></i>
         <div class="phone2 form-control" >
           <img src="assets/img/icons/phone.png">
           <span class="sales">Sales</span>
@@ -105,11 +105,11 @@
         <img src="assets/img/icons/user.png" class="log" id="profile">
         <div style="position: relative" class="wishList">
           <span id="wishList" routerLink="/wishList"><i class="far fa-heart"></i></span>
-          <span class="counter1" style="right: 12px">{{wishList.length}}</span>
+          <span class="counter1"routerLink="/wishList" style="right: 12px">{{wishList.length}}</span>
         </div>
         <div style="position: relative">
           <img src="assets/img/icons/cart.png" id="cart">
-          <span class="counter2">{{itemlist.length}}</span>
+          <span class="counter2" id="cartNUM">{{itemlist.length}}</span>
         </div>
 
       </div>
@@ -178,8 +178,8 @@
 
 
 
-<section class="cart">
-  <div class="inner-cart" *ngIf="itemlist">
+<section class="cart" id="cartSection">
+  <div class="inner-cart" *ngIf="itemlist" id="inner-cart">
     <img src="assets/img/icons/cart.png" class="market">
 
     <span class="text">Shopping Cart</span>

@@ -37,7 +37,7 @@
 
         <div class="qty">
           <i class="fas fa-minus" (click)="minus(x)"></i>
-          <input [id]="'itemNum'+x.id" class="value" type="number"  [value]="x.orderQTY"  >
+          <input [id]="'itemNum'+x.id" class="value" type="number"  [value]="x.orderQTY"  disabled >
 <!--          <span>{{itemQTY}}</span>-->
          <i class="fas fa-plus" (click)="plus(x)"></i>
         </div>

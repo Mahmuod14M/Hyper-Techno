@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     items: 5,
     dots: false,
     autoplay: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 2000,
     autoplayHoverPause: true,
     loop: true,
     responsive: {
@@ -132,22 +132,7 @@ export class NavbarComponent implements OnInit {
     this.storageService.changeImg(id);
   }
 
-  // readURL(input) {
-  //   console.log('entered');
-  //   console.log(input);
-  //   if (input.files && input.files[0]) {
-  //     console.log(input.value());
-  //     const reader = new FileReader();
-  //     reader.onload = e => {
-  //       $('#imagePreview').css('background-image', 'url(' + reader.result + ')');
-  //       $('#imagePreview').hide();
-  //       $('#imagePreview').fadeIn(650);
-  //     };
-  //     reader.readAsDataURL(input.files[0]);
-  //   } else {
-  //     console.log('error');
-  //   }
-  // }
+
 
   ngOnInit() {
     this.storageService.getUserObservable().subscribe({
@@ -257,6 +242,24 @@ export class NavbarComponent implements OnInit {
     $('.log').click(() => {
       $('#login').toggle();
     });
+    $('body').click((evt)=> {
+      if(evt.target.id === 'login') {
+        $('#login').show();
+        return;
+      }
+      if(evt.target.id === 'profile') {
+        $('#login').show();
+        return;
+      }
+      if(evt.target.id !== 'login') {
+        $('#login').hide();
+        return;
+      }
+      if(evt.target.id !== 'profile' ) {
+        $('#login').toggle();
+        return;
+      }
+    });
 
 
 
@@ -265,7 +268,28 @@ export class NavbarComponent implements OnInit {
     });
     $('#cart').click(() => {
       $('.cart').toggle();
+    });
+    $('#cartNUM').click(() => {
+      $('.cart').toggle();
+    });
 
+    $('body').click((evt)=> {
+      if(evt.target.id === 'inner-cart') {
+        $('#cartSection').show();
+        return;
+      }
+      if(evt.target.id === 'cart') {
+        $('#cartSection').show();
+        return;
+      }
+      if(evt.target.id === 'cartNUM') {
+        $('#cartSection').show();
+        return;
+      }
+      if(evt.target.id !== 'inner-cart') {
+        $('#cartSection').hide();
+        return;
+      }
     });
     $('.click').click(() => {
       $('.links').slideToggle(100);
