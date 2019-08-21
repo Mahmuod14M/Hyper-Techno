@@ -40,11 +40,11 @@
     order: {
       amount: function () {
         //Dynamic calculation of amount
-        return this.finalPrice;
+        return localStorage.getItem('totalPrice');
       },
       currency: 'EGP',
       description: 'Ordered goods',
-      id: this.respons
+      id:localStorage.getItem('response')
     },
 
     interaction: {

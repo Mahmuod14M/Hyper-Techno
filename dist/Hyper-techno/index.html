@@ -40,11 +40,11 @@
     order: {
       amount: function () {
         //Dynamic calculation of amount
-        return this.finalPrice;
+        return localStorage.getItem('totalPrice');
       },
       currency: 'EGP',
       description: 'Ordered goods',
-      id: this.respons
+      id:localStorage.getItem('response')
     },
 
     interaction: {
@@ -60,5 +60,5 @@
 
   });
 </script>
-<script type="text/javascript" src="runtime.ecd164eb9c3f1143d1b1.js"></script><script type="text/javascript" src="es2015-polyfills.8324bb31dd8aa5f2460c.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.0504b7d6a0bf0b1b74ce.js"></script><script type="text/javascript" src="main.0cfda4304a0d9dfb7ca9.js"></script></body>
+<script type="text/javascript" src="runtime.1ab69fc285a67ede0f5b.js"></script><script type="text/javascript" src="es2015-polyfills.8324bb31dd8aa5f2460c.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.0504b7d6a0bf0b1b74ce.js"></script><script type="text/javascript" src="main.0cfda4304a0d9dfb7ca9.js"></script></body>
 </html>

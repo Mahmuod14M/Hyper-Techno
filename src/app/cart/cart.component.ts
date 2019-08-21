@@ -78,6 +78,7 @@ export class CartComponent implements OnInit {
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
         this.respons=data.response;
+        localStorage.setItem('response', JSON.stringify(data.response));
         Swal.fire('successful!', '', 'success');
         // this.router.navigate(['Account/MyOrders']);
       });
@@ -101,11 +102,12 @@ export class CartComponent implements OnInit {
         // preferred_time: time
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
-        this.respons=data.response;
         if (data.error===true) {
           Swal.fire('error!', '', 'error');
         } else {
           Swal.fire('successful!', '', 'success');
+          this.respons=data.response;
+          localStorage.setItem('response', JSON.stringify(data.response));
           // this.router.navigate(['Account/MyOrders']);
           this.storageService.removeAll();
         }
@@ -136,6 +138,7 @@ export class CartComponent implements OnInit {
       this.finalPrice +=  Number(product.price *product.orderQTY);
       this.subtotal =this.finalPrice - this.VocherPrice;
       this.totalPrice =this.subtotal+this.Shipping;
+      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     }
   }
   ngOnInit() {
