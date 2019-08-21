@@ -52,7 +52,44 @@ export class StorageService {
             localStorage.setItem('signData', JSON.stringify(data));
             this.userData = localStorage.getItem('signData');
             this.log.next(this.userData);
-            console.log(data);
+            this.router.navigate(['home']);
+          }
+        });
+      }
+    } else if (!filter.test(emailValidator)) {
+      Swal.fire('Your mail is wrong!', '', 'error');
+    } else if (!nameFilter.test(LnameValidator)) {
+      Swal.fire('Your Last Name is wrong!', '', 'error');
+    } else if (!nameFilter.test(FnameValidator)) {
+      Swal.fire('Your First Name is wrong!', '', 'error');
+    }
+  }
+  EditUserProfile(id,form) {
+    const filter = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const nameFilter = /^[a-zA-Z]{3,9}/;
+    const emailValidator = form.value.Umail;
+    const LnameValidator = form.value.Lname;
+    const FnameValidator = form.value.Fname;
+    if (filter.test(emailValidator) && nameFilter.test(LnameValidator) && nameFilter.test(FnameValidator)) {
+      const signUpData = {
+        email: form.value.Umail,
+        last_name: form.value.Lname,
+        first_name: form.value.Fname,
+        password: form.value.password,
+        user_id:id,
+        old_password:form.value.oldPassword
+      };
+      if (form.value.Umail === '' || form.value.Lname === '' || form.value.Fname === '' || form.value.password === ''||
+        form.value.password==='') {
+        Swal.fire('you have to complete fields', '', 'error');
+      } else {
+        this.itemService.EditUserProfile(signUpData).subscribe(data => {
+          if (data.message === 'wrong old password') {
+            Swal.fire('wrong old password', '', 'error');
+          } else {
+            localStorage.setItem('signData', JSON.stringify(data));
+            this.userData = localStorage.getItem('signData');
+            this.log.next(this.userData);
             this.router.navigate(['home']);
           }
         });

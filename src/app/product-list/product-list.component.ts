@@ -202,7 +202,7 @@ export class ProductListComponent implements OnInit {
             this.isPageDataReady= false;
             $('#loading').fadeIn();
             $('.data').hide();
-            this.pageData();
+            this.pageData(data);
             this.pageTitle ='hot product';
           });
           break;

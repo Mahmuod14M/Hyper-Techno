@@ -23,56 +23,36 @@ export class SiginUpComponent implements OnInit {
       }
     });
   }
-  // public facebookLogin() {
-  //   const socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-  //   this.socialAuthService.signIn(socialPlatformProvider).then(
-  //     (userData) => {
-  //       // this.sendToRestApiMethod(userData.token);
-  //       console.log(userData);
-  //       this.storageService.fbLogIn(userData);
-  //     }
-  //   );
-  // }
-  // public signinWithGoogle() {
-  //   const socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-  //
-  //   this.socialAuthService.signIn(socialPlatformProvider)
-  //     .then((userData) => {
-  //
-  //      console.log(userData);
-  //     });
-  // }
-  // sendToRestApiMethod: any;
   userdata = StorageService.getUserData();
   logIn: any;
   private user: SocialUser;
   private loggedIn: boolean;
-  signInWithGoogle(): void {
-    // this.authService.signOut();
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      console.log('google',user);
-      // if (user !== null) {
-      //   this.storageService.fbLogIn(user);
-      // }
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
-  }
-
-  signInWithFB(): void {
-    this.authService.signOut();
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      if (user !== null) {
-        this.storageService.fbLogIn(user);
-      }
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
-
-
-  }
+  // signInWithGoogle(): void {
+  //   // this.authService.signOut();
+  //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  //   this.authService.authState.subscribe((user) => {
+  //     console.log('google',user);
+  //     // if (user !== null) {
+  //     //   this.storageService.fbLogIn(user);
+  //     // }
+  //     this.user = user;
+  //     this.loggedIn = (user != null);
+  //   });
+  // }
+  //
+  // signInWithFB(): void {
+  //   this.authService.signOut();
+  //   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  //   this.authService.authState.subscribe((user) => {
+  //     if (user !== null) {
+  //       this.storageService.fbLogIn(user);
+  //     }
+  //     this.user = user;
+  //     this.loggedIn = (user != null);
+  //   });
+  //
+  //
+  // }
   register(form) {
     const password = $('#password').val();
     const rePassword = $('#rePassword').val();
@@ -91,7 +71,7 @@ export class SiginUpComponent implements OnInit {
       console.log('google',user);
     });
     if (this.userdata !== null) {
-      Swal.fire('You Are Logged in ', '', 'success');
+      Swal.fire('You have to Logged in ', '', 'error');
       this.router.navigate(['home']);
     }
     window.scrollTo(0, 0);

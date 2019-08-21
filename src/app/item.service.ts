@@ -138,6 +138,11 @@ export class ItemService {
       BASE_URL + '/api/Order/AddReview', payload,httpOptions
     );
   }
+  EditUserProfile(payload): Observable<any> {
+    return this.httpClient.post(
+      BASE_URL + '/api/User/edit_profile', payload,httpOptions
+    );
+  }
   getBroductById(payload): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/Eslam/fav_cart', payload, httpOptions

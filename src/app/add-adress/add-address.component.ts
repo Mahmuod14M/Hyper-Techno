@@ -58,13 +58,6 @@ export class AddAddressComponent implements OnInit {
       }
       this.storageService.address(this.id, form);
     } else {
-      const filter = /^[a-zA-Z0-9]{3,9}/;
-      const num = /^[0-9]{3,9}/;
-      const LnameValidator = form.value.Lname;
-      const CityValidator = form.value.City;
-      const FnameValidator = form.value.Fname;
-      const StreetValidator = form.value.Street;
-      const buildNumValidator = form.value.buildNum;
       if (form.value.City === ''||/\S/.test(form.value.City)===false) {
         $('input[name=City]').css('border','1px solid red');
       }

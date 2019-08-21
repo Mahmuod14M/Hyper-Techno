@@ -16,21 +16,21 @@
 <h2 class="editText">Edit My Profile</h2>
 
 <div class="editForm">
-  <form>
+  <form (ngSubmit)="edit(myForm)" #myForm="ngForm">
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>First Name</label>
-        <input name="Fname" class="form-control" type="text" ngModel required [value]="data?.first_name">
+        <input name="Fname" class="form-control" type="text" id="fname" ngModel required >
       </div>
       <div style="width: 45%">
         <label>Last Name</label>
-        <input name="Lname" class="form-control" type="text" ngModel required [value]="data?.last_name">
+        <input name="Lname" class="form-control" type="text" ngModel required >
       </div>
     </div>
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>E-mail</label>
-        <input name="Umail" class="form-control" type="email" ngModel required [value]="data?.email">
+        <input name="Umail" class="form-control" type="email" ngModel required >
       </div>
       <div style="width: 45%">
         <label>Current Password</label>
@@ -40,11 +40,11 @@
     <div class="name">
       <div style="width: 45%;margin-right: 30px">
         <label>New Password</label>
-        <input name="password" class="form-control" type="password" ngModel required>
+        <input name="password" class="form-control" id="password" type="password" ngModel required>
       </div>
       <div style="width: 45%">
         <label> Confirm New Password</label>
-        <input name="password" class="form-control" type="password" ngModel required>
+        <input name="rePassword" class="form-control" id="rePassword" type="password" ngModel required>
       </div>
     </div>
     <div class="name">

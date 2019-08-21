@@ -28,6 +28,7 @@ export class CartComponent implements OnInit {
   addresses: any[] = [];
   Shipping = 0;
   totalPrice = 0;
+  respons = 0;
   logIn = StorageService.getUserData();
   id = null;
 
@@ -57,16 +58,17 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    console.log(this.address);
     if (this.address === 'localShipping') {
       const addressId = $('#LocalDelivery').val();
       const itemIds = [];
       $('.productCart').each(function() {
         itemIds.push({
           item_id: parseInt($(this).attr('id')),
-          item_quantity: parseInt($(this).find('#select').val()),
+          item_quantity: parseInt($(this).find('.value').val()),
+
         });
       });
+
       // const time= this.addresses.addresses.preferred_time;
       const checkData = {
         address_id: addressId,
@@ -75,8 +77,9 @@ export class CartComponent implements OnInit {
         // preferred_time: time
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
+        this.respons=data.response;
         Swal.fire('successful!', '', 'success');
-        this.router.navigate(['Account/MyOrders']);
+        // this.router.navigate(['Account/MyOrders']);
       });
       this.storageService.removeAll();
     } else if (this.address === 'freeShipping') {
@@ -86,8 +89,9 @@ export class CartComponent implements OnInit {
       $('.productCart').each(function() {
         itemIds.push({
           item_id: parseInt($(this).attr('id')),
-          item_quantity: parseInt($(this).find('#select').val()),
+          item_quantity: parseInt($(this).find('.value').val()),
         });
+        console.log(this.item_quantity);
       });
       // const time= this.addresses.addresses.preferred_time;
       const checkData = {
@@ -97,12 +101,19 @@ export class CartComponent implements OnInit {
         // preferred_time: time
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
-        Swal.fire('successful!', '', 'success');
-        this.router.navigate(['Account/MyOrders']);
+        this.respons=data.response;
+        if (data.error===true) {
+          Swal.fire('error!', '', 'error');
+        } else {
+          Swal.fire('successful!', '', 'success');
+          // this.router.navigate(['Account/MyOrders']);
+          this.storageService.removeAll();
+        }
       });
-      this.storageService.removeAll();
+
     }
   }
+
 
   counter(i: number) {
     return new Array(i);
@@ -128,7 +139,6 @@ export class CartComponent implements OnInit {
     }
   }
   ngOnInit() {
-    //
     // function errorCallback(error) {
     //   console.log(JSON.stringify(error));
     // }

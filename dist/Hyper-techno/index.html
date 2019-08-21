@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <title>HyperTechno</title>
   <base href="/">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-
 
 
 <link rel="stylesheet" href="styles.857f54e476bd412afab9.css"></head>
@@ -16,42 +16,49 @@
 <body>
 
 
-  <app-root></app-root>
+<app-root></app-root>
 
-  <script src="https://nbe.gateway.mastercard.com/checkout/version/52/checkout.js"
-          data-error="errorCallback"
-          data-cancel="cancelCallback">
-  </script>
-  <script type="text/javascript">
-    function errorCallback(error) {
-      console.log(JSON.stringify(error));
-    }
-    function cancelCallback() {
-      console.log('Payment cancelled');
-    }
+<script src="https://nbe.gateway.mastercard.com/checkout/version/52/checkout.js"
+        data-error="errorCallback"
+        data-cancel="cancelCallback">
+</script>
+<script type="text/javascript">
 
-    Checkout.configure({
-      merchant: 'TESTNBETEST',
-      order: {
-        amount: function() {
-          //Dynamic calculation of amount
-          return 80 + 20;
-        },
-        currency: 'EGP',
-        description: 'Ordered goods',
-        id: '512'
+  function errorCallback(error) {
+    console.log(JSON.stringify(error));
+  }
+
+  function cancelCallback() {
+
+    console.log('Payment cancelled');
+  }
+  console.log('this.finalPrice',this.finalPrice);
+  console.log('this.respons',this.respons);
+
+  Checkout.configure({
+    merchant: 'TESTNBETEST',
+    order: {
+      amount: function () {
+        //Dynamic calculation of amount
+        return this.finalPrice;
       },
-      interaction: {
-        operation: 'PURCHASE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
-        merchant: {
-          name: 'NBE Test',
-          address: {
-            line1: '200 Sample St',
-            line2: '1234 Example Town'
-          }
+      currency: 'EGP',
+      description: 'Ordered goods',
+      id: this.respons
+    },
+
+    interaction: {
+      operation: 'PURCHASE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
+      merchant: {
+        name: 'NBE Test',
+        address: {
+          line1: '200 Sample St',
+          line2: '1234 Example Town'
         }
       }
-    });
-  </script>
-<script type="text/javascript" src="runtime.89e96e4f348287d23c41.js"></script><script type="text/javascript" src="es2015-polyfills.8324bb31dd8aa5f2460c.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.0504b7d6a0bf0b1b74ce.js"></script><script type="text/javascript" src="main.ab291583e8ebd341f8e4.js"></script></body>
+    }
+
+  });
+</script>
+<script type="text/javascript" src="runtime.ecd164eb9c3f1143d1b1.js"></script><script type="text/javascript" src="es2015-polyfills.8324bb31dd8aa5f2460c.js" nomodule></script><script type="text/javascript" src="polyfills.8bbb231b43165d65d357.js"></script><script type="text/javascript" src="scripts.0504b7d6a0bf0b1b74ce.js"></script><script type="text/javascript" src="main.0cfda4304a0d9dfb7ca9.js"></script></body>
 </html>
