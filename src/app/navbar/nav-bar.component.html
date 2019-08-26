@@ -130,7 +130,7 @@
           <div class="avatar-upload">
             <div class="avatar-edit">
               <form>
-                <input type='file' id="imageUpload" (change)="changeImg(logIn.user.id)" accept=".png, .jpg, .jpeg"/>
+                <input  type='file' id="imageUpload" (change)="changeImg(logIn.user.id)" accept=".png, .jpg, .jpeg"/>
                 <label for="imageUpload"></label>
               </form>
             </div>
@@ -156,9 +156,9 @@
       <form #myForm="ngForm" (ngSubmit)="logIN(myForm)" id="SINGUPFORM" class="form-group" *ngIf="!logIn">
         <h3>LOGIN NOW</h3>
         <hr>
-        <input type="email" placeholder="Your Email" name="email" class="form-control" ngModel required>
+        <input id="login" type="email" placeholder="Your Email" name="email" class="form-control" ngModel required>
 
-        <input type="password" placeholder="Password" name="password" class="form-control" ngModel required>
+        <input id="login" type="password" placeholder="Password" name="password" class="form-control" ngModel required>
 
         <button type="submit" class="btn btn-dark">LOGIN</button>
       </form>
