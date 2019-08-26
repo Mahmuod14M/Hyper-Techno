@@ -1,6 +1,6 @@
 .frist-nav{
   background-color:  #E6E7E8;
-
+  height: 40px;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
@@ -39,7 +39,7 @@ background-repeat: repeat;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: baseline;
   /* height: 350px; */
 }
 li{

@@ -25,14 +25,13 @@
         </a>
       </div>
     </div>
-    <div class="hr"></div>
     <div class="nav">
       <span> Why Choose Hyper Techno?</span>
-      <span>   <img src="assets/img/icons/truck.png"> FREE SHIPPING</span>
-      <span>  <img src="assets/img/icons/lamp.png">OUR EXPERT CAN HELP YOU</span>
-      <span> <img src="assets/img/icons/mony.png"> GREAT PROMOTION</span>
-      <span><img src="assets/img/icons/cash.png"> SECURE PAYMENT</span>
-      <span><img src="assets/img/icons/Forma.png"> LOYALTY REWARDED</span>
+      <span>   <img style="width:40px;height:22px;" src="assets/img/icons/truck.png"> FREE SHIPPING</span>
+      <span>  <img style="height:22px;" src="assets/img/icons/lamp.png">OUR EXPERT CAN HELP YOU</span>
+      <span> <img style="width:35px;height:22px;" src="assets/img/icons/mony.png"> GREAT PROMOTION</span>
+      <span><img style="width:35px;height:22px;" src="assets/img/icons/cash.png"> SECURE PAYMENT</span>
+      <span><img style="width:35px;height:22px;" src="assets/img/icons/Forma.png"> LOYALTY REWARDED</span>
     </div>
   </div>
   <!-- section2 -->
@@ -44,7 +43,7 @@
     </p>
     <div class="category">
 
-      <div class="card  m-2" *ngFor="let item of categories" style="width: 18rem;">
+      <div class="card border-0 m-2" *ngFor="let item of categories" style="width: 18rem;">
         <img class="card-img-top img-fluid" [src]="'https://arafa.000webhostapp.com/Hyper/uploads/' + item.image"
              alt="Card image cap" [routerLink]="['/product/mainCat/',item.id]"/>
         <div class="itemName ">
@@ -55,7 +54,7 @@
     </div>
   </div>
   <!-- section3 -->
-  <div class="sec33 pt-5" id="offers">
+  <div class="sec33 pt-2" id="offers">
     <h3><span>B</span>rowse Appliances By Offers</h3>
     <hr class="hr2"/>
 
@@ -123,7 +122,7 @@
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]"/>
-          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 20 }}</p>
+          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 40 }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="product.price != product.wholesale_price">
@@ -177,7 +176,7 @@
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]"/>
-          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 20 }}</p>
+          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 40 }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="product.price != product.wholesale_price">
@@ -230,7 +229,7 @@
           <img [src]="
                 'https://arafa.000webhostapp.com/Hyper/uploads/' + product.main_image
               " class="img-fluid" [routerLink]="['/item',product.id]" />
-          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 20 }}</p>
+          <p [routerLink]="['/item',product.id]">{{ product.name | seeMore: 40 }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="product.price != product.wholesale_price">

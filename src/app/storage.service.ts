@@ -332,6 +332,7 @@ export class StorageService {
         $('#cart_item_' + productID).fadeOut();
       }
     }
+    console.log( 'before',localStorage.cartID);
     this.getCartItems();
 
   }
@@ -357,6 +358,7 @@ export class StorageService {
   }
 
   getCartItems() {
+    // this.cart.next([]);
     if (localStorage.cartID) {
       const ids = JSON.parse(localStorage.cartID);
       this.itemService.getBroductById({ids}).subscribe(data => {
@@ -369,6 +371,7 @@ export class StorageService {
     } else {
       this.cart.next([]);
     }
+
   }
 
   getwishListItems() {

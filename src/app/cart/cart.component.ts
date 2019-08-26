@@ -53,7 +53,8 @@ export class CartComponent implements OnInit {
   removeItemFromCart = product => {
     this.storageService.removeFromCart(product);
     // $('#finalProduct_').hide();
-
+    this.finalPrice=0;
+    this.cartPrice();
   }
 
   checkout() {
@@ -134,14 +135,15 @@ export class CartComponent implements OnInit {
   }
   cartPrice() {
     this.totalPrice=0;
-    console.log( 'before',this.totalPrice);
+    this.finalPrice=0;
+    this.subtotal=0;
+
     for (const product of this.itemlist) {
       this.finalPrice +=  Number(product.price *product.orderQTY);
       this.subtotal =this.finalPrice - this.VocherPrice;
       this.totalPrice =this.subtotal+this.Shipping;
       localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     }
-    console.log( 'after',this.totalPrice);
   }
   ngOnInit() {
     this.storageService.getCartObservable().subscribe(data => {
@@ -150,7 +152,7 @@ export class CartComponent implements OnInit {
         this.itemlist[i].orderQTY = 1;
       }
 
-      this.totalPrice=0;
+      // this.totalPrice=0;
       this.cartPrice();
     });
     if (this.logIn == null) {

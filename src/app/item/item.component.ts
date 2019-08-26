@@ -29,7 +29,7 @@ export class ItemComponent implements OnInit {
     dots: false,
     navigation: true,
     autoplay: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 2000,
     autoplayHoverPause: true,
     loop: true,
     responsive: {

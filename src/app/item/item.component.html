@@ -31,6 +31,7 @@
   <!-- section2 -->
   <section class="sec2 my-5">
 
+    <div style="display:flex;justify-content: space-evenly;">
     <div class="item-img">
       <div class="main-img">
         <img class="frist img-fluid" (mouseenter)="imgChange()" (mouseleave)="hideImg()"
@@ -49,7 +50,7 @@
       <br>
       <h6>{{productDetails.price |currency:' '}} LE</h6>
       <br>
-      <p style="color: chocolate">{{productDetails.highlights}}</p>
+      <p style="color: black">{{productDetails.highlights}}</p>
       <br>
       <div *ngFor=" let x of productDetails.colors " >
         <div class="ItemColors" [style.background-color]="x.color.code"></div>
@@ -60,15 +61,15 @@
 
 
         <div class="bottom">
-          <h3 class="add" *ngIf="itemListIDS.includes(productDetails.id)"><span><i
-            class="fas fa-shopping-basket"></i></span>Added To Cart</h3>
+          <h3 class="add" style="background-color:green;" *ngIf="itemListIDS.includes(productDetails.id)"><span><i
+            class="fas fa-shopping-basket" ></i></span>Added To Cart</h3>
           <h3 class="add" *ngIf="!itemListIDS.includes(productDetails.id)" (click)="addToCart(productDetails)"><span><i
             class="fas fa-shopping-basket"></i></span>Add To Cart</h3>
-          <h3 class="proced"><span><i class="fas fa-shopping-basket"></i></span> Proced To Checkout</h3>
+          <h3 class="proced" (click)="addToCart(productDetails)"  routerLink="/cart"><span><i class="fas fa-shopping-basket"></i></span> Proced To Checkout</h3>
         </div>
       </div>
     </div>
-
+    </div>
 
     <div class="type">
 
@@ -155,7 +156,7 @@
   <!-- section4 -->
   <div class="sec4">
     <h3><span>B</span>rowse Related Products</h3>
-    <a [routerLink]="['/product/subCat/',productDetails.id_category]" class="view">VIEW ALL ></a>.
+    <a [routerLink]="['/product/subCat/',productDetails.id_category]" class="view">VIEW ALL ></a>
 
     <owl-carousel [options]=myCarouselOptions [items]="relatedProducts"
                   [carouselClasses]="['owl-theme', 'sliding']">

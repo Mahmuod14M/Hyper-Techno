@@ -1,6 +1,8 @@
 .nav1 {
   background-image: url(../../assets/img/header.jpg);
   height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .nav1 h6 {
@@ -95,7 +97,7 @@ h1 {
   width: 100% !important;
   height: 250px;
   position: relative;
-
+  border: 1px solid #f1f0f0;
 }
 
 .p-sec3 .card .save {
@@ -269,10 +271,8 @@ h1 {
 
 .p-sec4 {
   position: relative;
-
   width: 20%;
-  height: 800px;
-
+  margin-bottom: 40px;
 }
 
 .all {

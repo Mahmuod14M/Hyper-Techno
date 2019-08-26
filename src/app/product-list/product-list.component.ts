@@ -15,6 +15,7 @@ const Swal = require('sweetalert2');
 })
 export class ProductListComponent implements OnInit {
 
+
   constructor(private itemService: ItemService, private route: ActivatedRoute, private storageService: StorageService, private router: Router ) {}
 
   minValue: number;
@@ -29,6 +30,7 @@ export class ProductListComponent implements OnInit {
   brandsId: any[] = [];
   categoriesId: any[] = [];
   categoryAttrs: any[] = [];
+  categoryId: any[] = [];
   private text: string;
   disableScroll = false;
   pageCount = 1;
@@ -36,8 +38,10 @@ export class ProductListComponent implements OnInit {
   itemListIDS: any[] = [];
   wishListIDS: any[] = [];
   pageTitle= 'OUR PRODUCTS';
+  itemsCount= '';
 
-  filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number) {
+  // tslint:disable-next-line:variable-name
+  filterChange(event, minValue: number, maxValue: number, brandID: number, categoryID: number, subCatID: number,main_cats: number) {
     if (event.currentTarget) {
       if (event.currentTarget.checked) {
         if (brandID != null) {
@@ -46,6 +50,8 @@ export class ProductListComponent implements OnInit {
           this.categoriesId.push(categoryID);
         } else if (subCatID != null) {
           this.categoryAttrs.push(subCatID);
+        } else if (main_cats != null) {
+          this.categoryId.push(main_cats);
         }
       } else {
         if (brandID != null) {
@@ -66,16 +72,23 @@ export class ProductListComponent implements OnInit {
               this.categoryAttrs.splice(index, 1);
             }
           }
+        } else if (main_cats != null) {
+          for (let index = 0; index < this.categoryId.length; index++) {
+            if (this.categoryId[index] === main_cats) {
+              this.categoryId.splice(index, 1);
+            }
+          }
         }
       }
     }
     this.applyFilter({
       brands: this.brandsId, cats: this.categoriesId, query: this.text ? this.text : '', cat_attrs_values: this.categoryAttrs,
-      max_price: this.maxValue, min_price: this.minValue
+      max_price: this.maxValue, min_price: this.minValue,main_cats: this.categoryId
     });
   }
 
   applyFilter = function(payload) {
+
     this.itemService.search(payload, this.pageCount).subscribe(data => {
       this.items = [];
       for (const item of data.product) {
@@ -141,8 +154,8 @@ export class ProductListComponent implements OnInit {
       this.router.navigate(['home']);
       Swal.fire('sorry we don`t have products!', '', 'error');
     } else {
-      console.log('data',data);
       this.pageTitle= data.filter.brands[0].name;
+      this.itemsCount=data.count;
       for (const item of data.product) {
         this.items.push(item);
       }
@@ -173,7 +186,6 @@ export class ProductListComponent implements OnInit {
         }
       };
     }
-
   };
 
   seeMore() {
@@ -255,7 +267,6 @@ export class ProductListComponent implements OnInit {
     this.storageService.removeToWishList(id);
   };
   ngOnInit() {
-    console.log('items', this.items);
     this.storageService.getCartItems();
     this.storageService.getwishListItems();
     this.storageService.getCartObservable().subscribe(data => {

@@ -28,8 +28,9 @@
     </div>
   </section>
   <!-- section4 -->
-  <div class="text-center">
-    <h1>{{pageTitle}}</h1>
+  <div class="text-center m-3">
+    <h1 style="margin: 0;padding: 0;">{{pageTitle|uppercase}}</h1>
+    <h6 style="font-size: 12px;color:#c1c1c1;margin-top: 2px;">{{itemsCount}} products found</h6>
   </div>
 
   <div class="all">
@@ -39,7 +40,7 @@
       <div class="price">
         <h6>Filter By Price</h6>
         <hr>
-        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null)"></ng5-slider>
+        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null,null)"></ng5-slider>
       </div>
 
       <div class="filter ">
@@ -47,7 +48,7 @@
         <hr>
         <div class="check scroll" id="Check_List">
           <div *ngFor="let x of filter.brands">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null, x.id, null ,null)"> {{x.name}}
+            <h6><input type="checkbox" (change)="filterChange($event,null,null, x.id, null ,null,null)"> {{x.name}}
               ({{x.sum}}) </h6>
             <!--[routerLink]="['/product/brand/',x.id]"-->
             <div class="hr"></div>
@@ -62,7 +63,7 @@
         <hr>
         <div class="check scroll" id="offer_List">
           <div *ngFor="let x of filter?.categories">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null,null, x.id ,null)"> {{x.name}} ({{x.sum}}
+            <h6><input type="checkbox" (change)="filterChange($event,null,null,null, x.id ,null,x.main_categories?.id)"> {{x.name}} ({{x.sum}}
               )</h6>
             <div class="hr"></div>
           </div>
@@ -77,7 +78,7 @@
         <hr>
         <div class="check" [id]="'size_List'+x.id">
           <div *ngFor="let y of x.cat_attr_values">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id)"> {{y.name}} ({{y.sum}})
+            <h6><input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id,null)"> {{y.name}} ({{y.sum}})
             </h6>
             <div class="hr"></div>
           </div>
@@ -119,7 +120,7 @@
           <img [src]="
             'https://arafa.000webhostapp.com/Hyper/uploads/' + item.main_image
           " class="img-fluid" [routerLink]="['/item',item.id]"/>
-          <p [routerLink]="['/item',item.id]">{{ item.name  }}</p>
+          <p [routerLink]="['/item',item.id]">{{ item.name|slice:0:30  }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="item.price != item.wholesale_price">

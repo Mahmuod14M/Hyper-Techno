@@ -27,8 +27,10 @@
 
 .sec1 {
   width: 100%;
-  height: 30px;
+  height: 40px;
   background-image: url(../../assets/img/header.jpg);
+  display: flex;
+  align-items: center;
 
 }
 
@@ -46,7 +48,7 @@
 }
 
 .sec1 .item-name {
-  color: black;
+  color: #faea8f;
 }
 
 .sec1 .inner {
@@ -58,7 +60,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 85%;
+  width: 75%;
   margin: auto;
 }
 
@@ -238,6 +240,8 @@ hr {
   text-align: center;
   font-size: 14px;
   font-weight: 400;
+  cursor: pointer;
+  outline: none;
 }
 
 .detalis .bottom .proced span {
@@ -408,9 +412,8 @@ display: inline-block;
 
 .sec4 {
   width: 95%;
-  margin: auto;
-
-
+  margin: 25px auto;
+  margin-bottom: 50px;
   border-radius: 0px 13px;
   position: relative;
   text-align: center;
@@ -419,8 +422,8 @@ display: inline-block;
 .sec4 h3 {
   font-size: 26px;
   color: #95979A;
-  font-weight: lighter;
-  border: 1px solid rgba(0,0,0,.125);
+  font-weight: 400;
+  border: 1px solid #f1f0f0;
   margin: 0;
   padding: 10px;
 }
@@ -445,7 +448,7 @@ display: inline-block;
   right: 10px;
   color: red;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: bolder;
   text-decoration: none;
 
 }
@@ -455,7 +458,7 @@ display: inline-block;
   width: 100% !important;
   height: 250px;
   position: relative;
-
+  border: 1px solid #f1f0f0;
 }
 
 .sec4 .card .save {

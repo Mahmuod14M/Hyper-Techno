@@ -29,11 +29,9 @@
   }
 
   function cancelCallback() {
-
+    this.checkout();
     console.log('Payment cancelled');
   }
-  console.log('this.finalPrice',this.finalPrice);
-  console.log('this.respons',this.respons);
 
   Checkout.configure({
     merchant: 'TESTNBETEST',

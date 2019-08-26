@@ -15,7 +15,6 @@ import {OwlModule} from 'ngx-owl-carousel';
     OwlModule,
   ],
   declarations: [ItemComponent,
-
-  ]
+  ],
 })
 export class ItemModule { }

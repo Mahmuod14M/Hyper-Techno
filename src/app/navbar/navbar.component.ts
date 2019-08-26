@@ -173,14 +173,6 @@ export class NavbarComponent implements OnInit {
         $('.phone2').slideUp();
         return;
       }
-      if(evt.target.class === 'log') {
-        return;
-      }
-      if(evt.target.class !== 'log' ) {
-         Swal.fire('Loged out', '', 'success');
-        $('#login').hide();
-        return;
-      }
     });
 
     this.storageService.getCartObservable().subscribe({
