@@ -9,6 +9,23 @@ const httpOptions = {
     Authorization: '627562626c6520617069206b6579'
   })
 };
+const onlineOpthions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'Basic Auth',
+    Username: 'merchant.TESTNBETEST',
+    Password: '804fac154e7ef329c550072d9fd1343e'
+  })
+};
+const onlineBody = {
+  apiOperation: 'CREATE_CHECKOUT_SESSION',
+  order: {
+    currency: 'EGP',
+    id: '552'
+  },
+  interaction: {
+    returnUrl: 'https://www.google.com'
+  }
+}
 
 const BASE_URL = 'https://hyper-techno-stage.herokuapp.com';
 // const BASE_URL = 'http://hyper-testing.herokuapp.com';
@@ -156,6 +173,11 @@ export class ItemService {
   editUserImg(id): Observable<any> {
     return this.httpClient.post(
       BASE_URL + '/api/User/edit_user_image?UserID='+id, null, httpOptions
+    );
+  }
+  OnlinePayment(): Observable<any> {
+    return this.httpClient.post(
+      'https://nbe.gateway.mastercard.com/api/rest/version/52/merchant/TESTNBETEST/session', onlineBody, onlineOpthions
     );
   }
 }

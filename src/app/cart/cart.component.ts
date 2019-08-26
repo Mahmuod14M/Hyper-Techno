@@ -5,6 +5,7 @@ import {Product} from '../Models';
 import {Router} from '@angular/router';
 
 declare var $: any;
+declare var Checkout: any;
 // @ts-ignore
 const Swal = require('sweetalert2');
 
@@ -20,7 +21,7 @@ export class CartComponent implements OnInit {
 
   }
 
-
+  OnlineCheckout: any = Checkout;
   itemlist: any[] = [];
   finalPrice = 0;
   VocherPrice = 0;
@@ -78,7 +79,6 @@ export class CartComponent implements OnInit {
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
         this.respons=data.response;
-        localStorage.setItem('response', JSON.stringify(data.response));
         Swal.fire('successful!', '', 'success');
         // this.router.navigate(['Account/MyOrders']);
       });
@@ -107,13 +107,45 @@ export class CartComponent implements OnInit {
         } else {
           Swal.fire('successful!', '', 'success');
           this.respons=data.response;
-          localStorage.setItem('response', JSON.stringify(data.response));
           // this.router.navigate(['Account/MyOrders']);
           this.storageService.removeAll();
         }
       });
 
     }
+  }
+  OnlinePaymentBtn() {
+    this.itemService.OnlinePayment().subscribe( data=> {
+      console.log(data);
+
+      Checkout.configure({
+        merchant: 'TESTNBETEST',
+        session: {
+          id:data.session.id // SESSION ID
+        },
+        order: {
+          amount: function() {
+            //Dynamic calculation of amount
+            return  this.finalPrice;
+          },
+          currency: 'EGP',
+          description: 'Ordered goods',
+          id: this.respons
+        },
+
+        interaction: {
+          operation: 'PURCHASE', // set this field to 'PURCHASE' for Hosted Checkout to perform a Pay Operation.
+          merchant: {
+            name: 'NBE Test',
+            address: {
+              line1: '200 Sample St',
+              line2: '1234 Example Town'
+            }
+          }
+        }
+      });
+
+    });
   }
 
 
@@ -145,6 +177,7 @@ export class CartComponent implements OnInit {
       localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     }
   }
+
   ngOnInit() {
     this.storageService.getCartObservable().subscribe(data => {
       this.itemlist = data;
