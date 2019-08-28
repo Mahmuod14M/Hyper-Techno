@@ -1,5 +1,5 @@
 .nav1{
-  background-image: url(../../assets/img/header.jpg);
+  background-image: url(../../assets/img/header.webp);
   height: 30px;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
 .sec1 {
   height: 300px;
   position: relative;
-  background-image: url(../../assets/img/Installments.png);
+  background-image: url(../../assets/img/Installments.webp);
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;

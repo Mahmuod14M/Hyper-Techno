@@ -566,7 +566,7 @@ owl-carousel .owl_img .owl-nav .owl-next img {
 }
 
 .inner-cart button {
-  background-image: url(../../assets/img/viewCart.png);
+  background-image: url(../../assets/img/viewCart.webp);
   width: 100%;
   margin: auto;
   border: none;
@@ -737,7 +737,7 @@ $breakpoint determines at which width the media query breakpoint will take effec
     width: 75px;
     height: auto;
     z-index: 16;
-    content:url("../../assets/img/22.png");
+    content:url("../../assets/img/22.webp");
   }
 
   .login {

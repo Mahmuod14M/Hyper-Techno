@@ -1,5 +1,5 @@
 .nav{
-  background-image: url(../../assets/img/header.jpg);
+  background-image: url(../../assets/img/header.webp);
   height: 30px;
 }
 .nav h2{
@@ -23,7 +23,7 @@
 .sec1 {
   height: 300px;
   position: relative;
-  background-image: url(../../assets/img/cart.png);
+  background-image: url(../../assets/img/cart.webp);
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -116,7 +116,7 @@ select{
   border-radius: 0px 7px;
 }
 .Voucher button{
-  background-image: url(../../assets/img/viewCart.png);
+  background-image: url(../../assets/img/viewCart.webp);
   color: white;
   border-radius: 0px 7px;
 }
@@ -173,7 +173,7 @@ select{
 .proceed{
   width: 55%;
   color: white;
-  background-image: url(../../assets/img/viewCart.png);
+  background-image: url(../../assets/img/viewCart.webp);
   border-radius: 0px 7px;
 }
 .cart_totals img{

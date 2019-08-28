@@ -1,5 +1,5 @@
 .nav{
-  background-image: url(../../assets/img/header.jpg);
+  background-image: url(../../assets/img/header.webp);
   height: 30px;
 }
 .nav h2{
@@ -23,7 +23,7 @@
 .sec1 {
   height: 300px;
   position: relative;
-  background-image: url(../../assets/img/about.png);
+  background-image: url(../../assets/img/about.webp);
   background-size: cover;
   background-repeat: no-repeat;
 }

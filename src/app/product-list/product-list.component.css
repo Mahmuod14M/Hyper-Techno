@@ -1,5 +1,5 @@
 .nav1 {
-  background-image: url(../../assets/img/header.jpg);
+  background-image: url(../../assets/img/header.webp);
   height: 40px;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
   height: 300px;
   position: relative;
   background-size: cover;
-  background: url(../../assets/img/about.png);
+  background: url(../../assets/img/about.webp);
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
