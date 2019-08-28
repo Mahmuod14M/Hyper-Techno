@@ -9,23 +9,15 @@ const httpOptions = {
     Authorization: '627562626c6520617069206b6579'
   })
 };
+
 const onlineOpthions = {
   headers: new HttpHeaders({
-    'Content-Type': 'Basic Auth',
-    Username: 'merchant.TESTNBETEST',
-    Password: '804fac154e7ef329c550072d9fd1343e'
+    'Content-Type': 'application/json',
+    Authorization: 'Basic ' + btoa('merchant.TESTNBETEST:804fac154e7ef329c550072d9fd1343e')
   })
 };
-const onlineBody = {
-  apiOperation: 'CREATE_CHECKOUT_SESSION',
-  order: {
-    currency: 'EGP',
-    id: '552'
-  },
-  interaction: {
-    returnUrl: 'https://www.google.com'
-  }
-}
+
+const onlineBody = '{"apiOperation": "CREATE_CHECKOUT_SESSION","order": {"currency": "EGP","id": "552"},"interaction": {"operation": "PURCHASE","returnUrl": "https://www.google.com"}}';
 
 const BASE_URL = 'https://hyper-techno-stage.herokuapp.com';
 // const BASE_URL = 'http://hyper-testing.herokuapp.com';

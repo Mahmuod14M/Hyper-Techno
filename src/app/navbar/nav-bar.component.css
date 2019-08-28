@@ -476,12 +476,11 @@ owl-carousel .owl_img .owl-nav .owl-next img {
 }
 
 .cart {
-  width: 100%;
+  width: 400px;
   height: 100%;
-  background: rgba(0, 0, 0, 0.411);
   position: fixed;
-  top: 0px;
-
+  top: 0;
+  right: 0;
   z-index: 5555;
   display: none;
 }
@@ -547,8 +546,7 @@ owl-carousel .owl_img .owl-nav .owl-next img {
 }
 
 .cart .main-view {
-
-  display: none;
+  /*justify-content: space-evenly;*/
 }
 
 .cart .item_view {
@@ -829,6 +827,14 @@ $breakpoint determines at which width the media query breakpoint will take effec
 }
 
 .sliderBG {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  display: none;
+}
+.sliderBG2 {
   position: fixed;
   width: 100%;
   height: 100%;

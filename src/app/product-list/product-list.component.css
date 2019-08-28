@@ -23,7 +23,6 @@
   background: url(../../assets/img/about.png);
   width: 100%;
   background-size: cover;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   align-items: center;
 }

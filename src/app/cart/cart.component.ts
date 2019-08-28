@@ -59,6 +59,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    console.log(this.address);
     if (this.address === 'localShipping') {
       const addressId = $('#LocalDelivery').val();
       const itemIds = [];
@@ -79,38 +80,42 @@ export class CartComponent implements OnInit {
       };
       this.itemService.makeOrder(checkData).subscribe(data => {
         this.respons=data.response;
-        Swal.fire('successful!', '', 'success');
-        // this.router.navigate(['Account/MyOrders']);
+        this.router.navigate(['Account/MyOrders']);
       });
       this.storageService.removeAll();
     } else if (this.address === 'freeShipping') {
-      console.log('enterd');
+
       const addressId = parseInt($('#addressSelector').val());
-      const itemIds = [];
-      $('.productCart').each(function() {
-        itemIds.push({
-          item_id: parseInt($(this).attr('id')),
-          item_quantity: parseInt($(this).find('.value').val()),
+      if (isNaN(addressId)) {
+        Swal.fire('you have to enter your address', '', 'error');
+        this.router.navigate(['address']);
+      } else {
+        const itemIds = [];
+        $('.productCart').each(function() {
+          itemIds.push({
+            item_id: parseInt($(this).attr('id')),
+            item_quantity: parseInt($(this).find('.value').val()),
+          });
         });
-        console.log(this.item_quantity);
-      });
-      // const time= this.addresses.addresses.preferred_time;
-      const checkData = {
-        address_id: addressId,
-        user_id: this.id,
-        items: itemIds,
-        // preferred_time: time
-      };
-      this.itemService.makeOrder(checkData).subscribe(data => {
-        if (data.error===true) {
-          Swal.fire('error!', '', 'error');
-        } else {
-          Swal.fire('successful!', '', 'success');
-          this.respons=data.response;
-          // this.router.navigate(['Account/MyOrders']);
-          this.storageService.removeAll();
-        }
-      });
+        // const time= this.addresses.addresses.preferred_time;
+        const checkData = {
+          address_id: addressId,
+          user_id: this.id,
+          items: itemIds,
+          // preferred_time: time
+        };
+        this.itemService.makeOrder(checkData).subscribe(data => {
+          if (data.error===true) {
+            console.log(checkData);
+            Swal.fire('error!', '', 'error');
+          } else {
+            this.respons=data.response;
+            this.router.navigate(['Account/MyOrders']);
+            this.storageService.removeAll();
+          }
+        });
+      }
+
 
     }
   }
@@ -149,9 +154,6 @@ export class CartComponent implements OnInit {
   }
 
 
-  counter(i: number) {
-    return new Array(i);
-  }
 
   onItemChange(value) {
     const target = value.target.value;
@@ -184,10 +186,18 @@ export class CartComponent implements OnInit {
       for (const i in this.itemlist) {
         this.itemlist[i].orderQTY = 1;
       }
-
+      if (this.itemlist.length===0) {
+       $('.cartInfo').hide();
+       $('.noData').show();
+       $('.noData').css('display','flex');
+      } else {
+        $('.cartInfo').show();
+        $('.noData').hide();
+      }
       // this.totalPrice=0;
       this.cartPrice();
     });
+    this.storageService.getCartItems();
     if (this.logIn == null) {
       Swal.fire('You Have To Login First!', '', 'success');
       this.router.navigate(['home']);
@@ -209,7 +219,6 @@ export class CartComponent implements OnInit {
       }
     });
 
-    this.storageService.getCartItems();
     window.scrollTo(0, 0);
   }
 

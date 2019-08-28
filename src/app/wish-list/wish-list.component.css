@@ -23,7 +23,6 @@
   background: url(../../assets/img/about.png);
   width: 100%;
   background-size: cover;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   align-items: center;
 }
@@ -178,17 +177,19 @@ h1 {
   width: 16%;
 }
 
-@media only screen and (max-width: 1300px){
+@media only screen and (max-width: 1300px) {
   .p-sec3 .item {
     width: 20%;
   }
 }
-@media only screen and (max-width: 900px){
+
+@media only screen and (max-width: 900px) {
   .p-sec3 .item {
     width: 25%;
   }
 }
-@media only screen and (max-width: 700px){
+
+@media only screen and (max-width: 700px) {
   .p-sec3 .item {
     width: 50%;
   }
@@ -220,7 +221,6 @@ h1 {
   text-align: center;
   /*height: 220px;*/
 }
-
 
 
 .p-sec3 .card .hover .inner-card .one {
@@ -261,7 +261,6 @@ h1 {
   top: 217px;
   z-index: 20;
 }
-
 
 
 .all {

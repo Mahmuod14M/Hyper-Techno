@@ -10,19 +10,20 @@
   <div class="nav1">
     <h6>
       <span class="text" routerLink="/home">Home ></span>
-      <span>  Tv & Home Theaters</span>
+      <span [routerLink]="['/product/mainCat/',filter?.main_categories[0].id]" style="cursor: pointer;"> {{filter?.main_categories[0]?.name}} </span>
+      <span *ngIf="filter?.categories?.length==1">> {{filter?.categories[0].name}}</span>
     </h6>
   </div>
   <!-- section2 -->
   <section class="p-sec2">
     <div class="text">
-      <h2 *ngFor="let x of data?.filter">{{x.categories?.name}}</h2>
-      <h2>{{data.categories[0]?.name}} <span *ngIf="data.categories[1]"> & {{data.categories[1]?.name}}</span>  </h2>
-      <h5><span>{{data.brands[0].name}}</span>
-        <span  *ngIf="data.brands[1]"> & {{data.brands[1]?.name}}</span>
-        <span *ngIf="data.brands[2]"> & {{data.brands[2]?.name}}</span>
-        <span *ngIf="data.brands[3]"> & {{data.brands[3]?.name}}</span>
-        <span *ngIf="data.brands[4]"> & {{data.brands[4]?.name}}</span>
+      <h2 *ngFor="let x of data?.filter">{{x?.categories?.name}}</h2>
+      <h2>{{data?.categories[0]?.name}} <span *ngIf="data?.categories[1]"> & {{data?.categories[1]?.name}}</span></h2>
+      <h5><span>{{data?.brands[0]?.name}}</span>
+        <span *ngIf="data?.brands[1]"> & {{data?.brands[1]?.name}}</span>
+        <span *ngIf="data?.brands[2]"> & {{data?.brands[2]?.name}}</span>
+        <span *ngIf="data?.brands[3]"> & {{data?.brands[3]?.name}}</span>
+        <span *ngIf="data?.brands[4]"> & {{data?.brands[4]?.name}}</span>
 
       </h5>
     </div>
@@ -40,15 +41,19 @@
       <div class="price">
         <h6>Filter By Price</h6>
         <hr>
-        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null,null)"></ng5-slider>
+        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+                    (userChangeEnd)="filterChange($event,minValue,maxValue, null, null ,null,null)"></ng5-slider>
       </div>
 
       <div class="filter ">
-        <button class="btn " id="brands_Btn" (click)="showBrands()">Brands <i class="fas fa-angle-down  fa-rotate-270" id="icon"></i></button>
+        <button class="btn " id="brands_Btn" (click)="showBrands()">Brands <i class="fas fa-angle-down  fa-rotate-270"
+                                                                              id="icon"></i></button>
         <hr>
         <div class="check scroll" id="Check_List">
-          <div *ngFor="let x of filter.brands">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null, x.id, null ,null,null)"> {{x.name}}
+          <div *ngFor="let x of filter?.brands">
+            <h6><input type="checkbox" [id]="'brand'+x.id"
+                       [attr.checked]="filter?.brands.length === 1 ? 'checked' : null"
+                       (change)="filterChange($event,null,null, x.id, null ,null,null)"> {{x?.name}}
               ({{x.sum}}) </h6>
             <!--[routerLink]="['/product/brand/',x.id]"-->
             <div class="hr"></div>
@@ -58,12 +63,16 @@
 
       </div>
       <div class="filter ">
-        <button class="btn " id="discount_Btn" (click)="showDiscount()">categories <i class="fas fa-angle-down  fa-rotate-270" id="icon1"></i>
+        <button class="btn " id="discount_Btn" (click)="showDiscount()">categories <i
+          class="fas fa-angle-down  fa-rotate-270" id="icon1"></i>
         </button>
         <hr>
         <div class="check scroll" id="offer_List">
           <div *ngFor="let x of filter?.categories">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null,null, x.id ,null,x.main_categories?.id)"> {{x.name}} ({{x.sum}}
+            <h6><input type="checkbox"
+                       [attr.checked]="filter?.categories.length === 1 ? 'checked' : null"
+                       (change)="filterChange($event,null,null,null, x.id ,null,x.main_categories?.id)"> {{x?.name}}
+              ({{x.sum}}
               )</h6>
             <div class="hr"></div>
           </div>
@@ -72,13 +81,15 @@
 
       </div>
       <div class="filter" *ngFor="let x of filter?.category_attributes">
-        <button class="btn " id="screen_Btn" (click)="showScreen(x.id)">{{x.name}} ({{x.sum}}) <i class="fas fa-angle-down  fa-rotate-270"
-                                                                                                  [id]="'icon2'+x.id"></i>
+        <button class="btn " id="screen_Btn" (click)="showScreen(x.id)">{{x?.name}} ({{x.sum}}) <i
+          class="fas fa-angle-down  fa-rotate-270"
+          [id]="'icon2'+x.id"></i>
         </button>
         <hr>
         <div class="check" [id]="'size_List'+x.id">
           <div *ngFor="let y of x.cat_attr_values">
-            <h6><input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id,null)"> {{y.name}} ({{y.sum}})
+            <h6><input type="checkbox" (change)="filterChange($event,null,null,null,null, y.id,null)"> {{y?.name}}
+              ({{y.sum}})
             </h6>
             <div class="hr"></div>
           </div>
@@ -97,9 +108,10 @@
         <div class="card" (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
           <div class="hover" [ngStyle]="{visibility: item.hover==true  ? 'visible' : 'hidden' }">
             <div class="inner-card">
-<!--              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">-->
-              <h4 *ngIf="itemListIDS.includes(item.id)" style="background-color:#019d0a;"><img src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
-              <h4 (click)="addToCart(item)"  [id]="'addToCart'+item.id" *ngIf="!itemListIDS.includes(item.id)"><img
+              <!--              <img src="assets/img/icons/show.png" class="img-fluid one" [routerLink]="['/item',item.id]">-->
+              <h4 *ngIf="itemListIDS.includes(item.id)" style="background-color:#019d0a;"><img
+                src="assets/img/icons/cart2.png" class="img-fluid two">ADDED TO CART</h4>
+              <h4 (click)="addToCart(item)" [id]="'addToCart'+item.id" *ngIf="!itemListIDS.includes(item.id)"><img
                 src="assets/img/icons/cart2.png" class="img-fluid two">ADD TO CART
               </h4>
               <h5>
@@ -115,12 +127,14 @@
           <div class="save" *ngIf="item.reduction_percent != null">
             <span>SAVE {{item.reduction_percent}}%</span>
           </div>
-          <span class="heart" (click)="removeToWishList(item.id)" style="color: red" *ngIf="wishListIDS.includes(item.id)"><i class="fas fa-heart"></i></span>
-          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(item)" [id]="'addToWishList'+item.id" *ngIf="!wishListIDS.includes(item.id)"></i></span>
+          <span class="heart" (click)="removeToWishList(item.id)" style="color: red"
+                *ngIf="wishListIDS.includes(item.id)"><i class="fas fa-heart"></i></span>
+          <span class="heart"><i class="fas fa-heart" (click)="addToWishList(item)" [id]="'addToWishList'+item.id"
+                                 *ngIf="!wishListIDS.includes(item.id)"></i></span>
           <img [src]="
             'https://arafa.000webhostapp.com/Hyper/uploads/' + item.main_image
           " class="img-fluid" [routerLink]="['/item',item.id]"/>
-          <p [routerLink]="['/item',item.id]">{{ item.name|slice:0:30  }}</p>
+          <p [routerLink]="['/item',item.id]">{{ item?.name|slice:0:30  }}</p>
           <div class="bttom">
             <span class="stock"><i class="fas fa-circle"></i>In stock</span>
             <div class="old-price" *ngIf="item.price != item.wholesale_price">
@@ -135,14 +149,13 @@
         </div>
       </div>
 
-<br>
+      <br>
       <div class="seeMoreBtn">
         <button class="btn btn-danger" (click)="seeMore()">See More</button>
       </div>
     </section>
 
   </div>
-
 
 
 </div>
